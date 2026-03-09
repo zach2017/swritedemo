@@ -1,1017 +1,546 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Social Work Skills Lab</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            serif: ['"Source Serif 4"', 'Georgia', 'serif'],
-            sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-          },
-          colors: {
-            bark:    { 50:'#faf6f1', 100:'#f0e8db', 200:'#e0cfb5', 300:'#cdb08a', 400:'#b8905f', 500:'#a37847', 600:'#8b6340', 700:'#6f4e36', 800:'#5c4130', 900:'#4d372a' },
-            sage:    { 50:'#f4f7f4', 100:'#e6ede5', 200:'#cddacc', 300:'#a8bfa7', 400:'#7da07c', 500:'#5e8460', 600:'#4a6b4c', 700:'#3d563e', 800:'#334634', 900:'#2b3a2c' },
-            clay:    { 50:'#fdf5f3', 100:'#fce8e3', 200:'#fbd4cb', 300:'#f6b4a5', 400:'#ee8971', 500:'#e46a4e', 600:'#d04f33', 700:'#ae4129', 800:'#903926', 900:'#7b3526' },
-            parch:   { 50:'#fdfcf9', 100:'#faf7f0', 200:'#f3eddd', 300:'#e9dfc5', 400:'#d9c99d', 500:'#c9b47e', 600:'#b29a62', 700:'#95804f', 800:'#796843', 900:'#635639' },
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    [x-cloak] { display: none !important; }
-    .writing-area { min-height: 280px; }
-    .fade-in { animation: fadeIn 0.4s ease-out; }
-    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes pulse-dot { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
-    .pulse-dot { animation: pulse-dot 1.4s ease-in-out infinite; }
-    .markdown-content h2 { font-size:1.25rem; font-weight:700; margin-top:1.25rem; margin-bottom:0.5rem; color:#4d372a; }
-    .markdown-content h3 { font-size:1.1rem; font-weight:600; margin-top:1rem; margin-bottom:0.375rem; color:#5c4130; }
-    .markdown-content p  { margin-bottom:0.75rem; line-height:1.7; }
-    .markdown-content ul { list-style:disc; padding-left:1.5rem; margin-bottom:0.75rem; }
-    .markdown-content li { margin-bottom:0.25rem; line-height:1.6; }
-    .markdown-content strong { color:#4d372a; }
-    .scenario-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(77,55,42,0.12); }
-    .scenario-card { transition: all 0.2s ease; }
-    .tab-active { border-bottom: 3px solid #a37847; color: #4d372a; font-weight: 600; }
-    .tab-inactive { border-bottom: 3px solid transparent; color: #796843; }
-    .tab-inactive:hover { color: #5c4130; border-bottom-color: #e0cfb5; }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #faf7f0; }
-    ::-webkit-scrollbar-thumb { background: #cdb08a; border-radius: 3px; }
-    textarea:focus { box-shadow: 0 0 0 3px rgba(163,120,71,0.15); }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#3d3028"/>
+<title>SW Skills Lab — Social Work Writing &amp; Exam Prep</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700;9..144,800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config={theme:{extend:{
+  fontFamily:{display:['"Fraunces"','Georgia','serif'],body:['"Outfit"','system-ui','sans-serif'],mono:['"JetBrains Mono"','monospace']},
+  colors:{
+    earth:{50:'#faf8f5',100:'#f2ede5',200:'#e3d9cb',300:'#cebea8',400:'#b49e80',500:'#9a8264',600:'#7d6a52',700:'#635443',800:'#4a3f34',900:'#3d3028'},
+    fern:{50:'#f2f7f2',100:'#e0ede0',200:'#c2dbc2',300:'#95be96',400:'#669d68',500:'#4a8050',600:'#3b6641',700:'#305236',800:'#28432d',900:'#213826'},
+    terracotta:{50:'#fef5f1',100:'#fde8df',200:'#faccba',300:'#f5a68a',400:'#ed7c58',500:'#e55d34',600:'#d14424',700:'#ad361d',800:'#8c2e1c',900:'#77291c'},
+    sand:{50:'#fdfcf8',100:'#faf6ec',200:'#f3ead5',300:'#e8d8b4',400:'#d8bf8a',500:'#c9a76a',600:'#b18e52',700:'#937343',800:'#785e3b',900:'#634f34'},
+  }
+}}}
+</script>
+<style>
+*{-webkit-tap-highlight-color:transparent;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{overscroll-behavior-y:none}
+
+/* Animations */
+.fade-up{animation:fadeUp .4s cubic-bezier(.16,1,.3,1) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulseBg{0%,100%{opacity:.55}50%{opacity:1}}
+.pulse-soft{animation:pulseBg 2s ease-in-out infinite}
+
+/* Cards */
+.card{transition:transform .18s,box-shadow .18s}
+@media(hover:hover){.card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(61,48,40,.1)}}
+.card:active{transform:scale(.985)}
+
+/* Tabs */
+.tab-on{border-bottom:3px solid #9a8264;color:#3d3028;font-weight:600}
+.tab-off{border-bottom:3px solid transparent;color:#9a8264}
+
+/* Markdown */
+.md h2{font-size:1.15rem;font-weight:700;margin:1rem 0 .35rem;color:#3d3028;font-family:'Fraunces',serif}
+.md h3{font-size:1.02rem;font-weight:600;margin:.8rem 0 .3rem;color:#4a3f34}
+.md p{margin-bottom:.6rem;line-height:1.7}
+.md ul{list-style:disc;padding-left:1.3rem;margin-bottom:.6rem}
+.md ol{list-style:decimal;padding-left:1.3rem;margin-bottom:.6rem}
+.md li{margin-bottom:.15rem;line-height:1.65}
+.md strong{color:#3d3028}
+
+/* Drawer */
+.drawer{transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1)}
+.drawer.open{transform:translateX(0)}
+.drawer-bg{opacity:0;pointer-events:none;transition:opacity .25s}
+.drawer-bg.open{opacity:1;pointer-events:auto}
+
+/* Writing area */
+.wr-box{min-height:200px}
+@media(min-width:640px){.wr-box{min-height:300px}}
+textarea:focus{box-shadow:0 0 0 3px rgba(154,130,100,.16);outline:none}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:#faf8f5}
+::-webkit-scrollbar-thumb{background:#cebea8;border-radius:3px}
+
+/* Safe areas */
+@supports(padding:max(0px)){.safe-b{padding-bottom:max(.75rem,env(safe-area-inset-bottom))}.safe-t{padding-top:max(0px,env(safe-area-inset-top))}}
+
+/* Touch targets min 44px */
+.tt{min-height:44px;min-width:44px}
+</style>
 </head>
 
-<body class="bg-parch-50 text-bark-800 font-sans antialiased">
-
-<!-- ════════════════════════════════════════════════════════════════ -->
-<!--  APP SHELL                                                      -->
-<!-- ════════════════════════════════════════════════════════════════ -->
+<body class="bg-earth-50 text-earth-800 font-body antialiased">
 <div id="app" class="min-h-screen flex flex-col">
 
-  <!-- ── Header ──────────────────────────────────────────────────── -->
-  <header class="bg-bark-800 text-parch-100 sticky top-0 z-50 shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="flex items-center justify-between h-16">
-        <!-- Brand -->
-        <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
-          <div class="w-9 h-9 rounded-lg bg-sage-500 flex items-center justify-center text-white text-lg font-bold">SW</div>
-          <div>
-            <div class="font-serif font-bold text-lg leading-tight tracking-tight">Social Work Skills Lab</div>
-            <div class="text-[10px] text-bark-300 tracking-widest uppercase">Writing · Scenarios · Exam Prep</div>
-          </div>
-        </div>
-
-        <!-- Nav -->
-        <nav class="hidden md:flex items-center gap-1">
-          <button onclick="navigateTo('home')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-bark-700 transition">Home</button>
-          <button onclick="navigateTo('scenarios')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-bark-700 transition">Scenarios</button>
-          <button onclick="navigateTo('writing')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-bark-700 transition">Writing Lab</button>
-          <button onclick="navigateTo('exam')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-bark-700 transition">Exam Prep</button>
-          <button onclick="navigateTo('reference')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-bark-700 transition">Reference</button>
-          <button onclick="navigateTo('costs')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-bark-700 transition">Costs</button>
-        </nav>
-
-        <!-- Status badges -->
-        <div class="flex items-center gap-2">
-          <div id="sim-badge" class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono">
-            <span class="w-2 h-2 rounded-full pulse-dot"></span>
-            <span></span>
-          </div>
-          <select id="year-select" onchange="setYearLevel(this.value)" class="bg-bark-700 border border-bark-600 text-parch-200 text-xs rounded-md px-2 py-1.5 focus:outline-none">
-            <option value="1">Year 1 (BSW)</option>
-            <option value="2">Year 2 (MSW)</option>
-          </select>
-          <!-- Mobile menu -->
-          <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden p-2 hover:bg-bark-700 rounded-md">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-          </button>
+<!-- ═══ HEADER ═══ -->
+<header class="bg-earth-900 text-earth-100 sticky top-0 z-50 safe-t shadow-lg shadow-earth-900/20">
+  <div class="max-w-6xl mx-auto px-3 sm:px-5">
+    <div class="flex items-center justify-between h-14 sm:h-16">
+      <div class="flex items-center gap-2 cursor-pointer select-none" onclick="go('home')">
+        <div class="w-8 h-8 rounded-lg bg-fern-500 flex items-center justify-center text-white font-display font-bold text-sm">SW</div>
+        <div class="leading-tight">
+          <div class="font-display font-bold text-[15px] sm:text-lg tracking-tight">Skills Lab</div>
+          <div class="text-[8px] sm:text-[9px] text-earth-400 tracking-[.18em] uppercase hidden xs:block">Writing · Scenarios · Exams</div>
         </div>
       </div>
-      <!-- Mobile nav -->
-      <div id="mobile-menu" class="hidden md:hidden pb-3 space-y-1">
-        <button onclick="navigateTo('home');this.closest('#mobile-menu').classList.add('hidden')" class="block w-full text-left px-3 py-2 rounded-md text-sm hover:bg-bark-700">Home</button>
-        <button onclick="navigateTo('scenarios');this.closest('#mobile-menu').classList.add('hidden')" class="block w-full text-left px-3 py-2 rounded-md text-sm hover:bg-bark-700">Scenarios</button>
-        <button onclick="navigateTo('writing');this.closest('#mobile-menu').classList.add('hidden')" class="block w-full text-left px-3 py-2 rounded-md text-sm hover:bg-bark-700">Writing Lab</button>
-        <button onclick="navigateTo('exam');this.closest('#mobile-menu').classList.add('hidden')" class="block w-full text-left px-3 py-2 rounded-md text-sm hover:bg-bark-700">Exam Prep</button>
-        <button onclick="navigateTo('reference');this.closest('#mobile-menu').classList.add('hidden')" class="block w-full text-left px-3 py-2 rounded-md text-sm hover:bg-bark-700">Reference</button>
-        <button onclick="navigateTo('costs');this.closest('#mobile-menu').classList.add('hidden')" class="block w-full text-left px-3 py-2 rounded-md text-sm hover:bg-bark-700">Costs</button>
+      <!-- Desktop nav -->
+      <nav class="hidden lg:flex items-center gap-0.5" id="dnav">
+        <button onclick="go('home')" data-n="home" class="tt px-3 py-2 rounded-lg text-sm hover:bg-earth-800 transition">Home</button>
+        <button onclick="go('scenarios')" data-n="scenarios" class="tt px-3 py-2 rounded-lg text-sm hover:bg-earth-800 transition">Scenarios</button>
+        <button onclick="go('writing')" data-n="writing" class="tt px-3 py-2 rounded-lg text-sm hover:bg-earth-800 transition">Writing Lab</button>
+        <button onclick="go('exam')" data-n="exam" class="tt px-3 py-2 rounded-lg text-sm hover:bg-earth-800 transition">Exam Prep</button>
+        <button onclick="go('reference')" data-n="reference" class="tt px-3 py-2 rounded-lg text-sm hover:bg-earth-800 transition">Reference</button>
+        <button onclick="go('costs')" data-n="costs" class="tt px-3 py-2 rounded-lg text-sm hover:bg-earth-800 transition">Costs</button>
+      </nav>
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <div id="mpill" class="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-full text-[10px] font-mono bg-sand-900/30 text-sand-400"><span class="w-1.5 h-1.5 rounded-full bg-sand-500 pulse-soft"></span><span id="mpill-t">STATIC</span></div>
+        <select id="yr" onchange="S.year=+this.value" class="bg-earth-800 border border-earth-700 text-earth-200 text-xs rounded-lg px-2 py-1.5 tt focus:outline-none"><option value="1">Yr 1</option><option value="2">Yr 2</option></select>
+        <button onclick="togDraw()" class="lg:hidden tt p-2 rounded-lg hover:bg-earth-800 transition" aria-label="Menu"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
       </div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- ── Main Content Area ───────────────────────────────────────── -->
-  <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-6">
+<!-- ═══ MOBILE DRAWER ═══ -->
+<div id="dbg" class="drawer-bg fixed inset-0 bg-black/40 z-[60]" onclick="togDraw()"></div>
+<aside id="draw" class="drawer fixed top-0 right-0 bottom-0 w-[280px] bg-earth-900 text-earth-100 z-[70] flex flex-col shadow-2xl">
+  <div class="flex items-center justify-between px-5 h-14 border-b border-earth-800">
+    <span class="font-display font-bold text-base">Menu</span>
+    <button onclick="togDraw()" class="tt p-2 rounded-lg hover:bg-earth-800"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+  </div>
+  <nav class="flex-1 py-3 px-3 space-y-1 overflow-y-auto">
+    <button onclick="go('home');togDraw()" class="w-full text-left tt px-4 py-3 rounded-xl text-sm hover:bg-earth-800 transition flex items-center gap-3"><span class="text-lg w-6 text-center">🏠</span>Home</button>
+    <button onclick="go('scenarios');togDraw()" class="w-full text-left tt px-4 py-3 rounded-xl text-sm hover:bg-earth-800 transition flex items-center gap-3"><span class="text-lg w-6 text-center">📋</span>Scenarios</button>
+    <button onclick="go('writing');togDraw()" class="w-full text-left tt px-4 py-3 rounded-xl text-sm hover:bg-earth-800 transition flex items-center gap-3"><span class="text-lg w-6 text-center">✍️</span>Writing Lab</button>
+    <button onclick="go('exam');togDraw()" class="w-full text-left tt px-4 py-3 rounded-xl text-sm hover:bg-earth-800 transition flex items-center gap-3"><span class="text-lg w-6 text-center">🎓</span>Exam Prep</button>
+    <button onclick="go('reference');togDraw()" class="w-full text-left tt px-4 py-3 rounded-xl text-sm hover:bg-earth-800 transition flex items-center gap-3"><span class="text-lg w-6 text-center">📖</span>Reference</button>
+    <button onclick="go('costs');togDraw()" class="w-full text-left tt px-4 py-3 rounded-xl text-sm hover:bg-earth-800 transition flex items-center gap-3"><span class="text-lg w-6 text-center">💰</span>Costs</button>
+  </nav>
+  <div class="px-5 py-4 border-t border-earth-800 text-[10px] text-earth-500 safe-b"><div id="dm-mode" class="font-mono mb-1"></div>SW Skills Lab v1.0</div>
+</aside>
 
-    <!-- ╔═══ HOME PAGE ═══╗ -->
-    <section id="page-home" class="page fade-in">
-      <!-- Hero -->
-      <div class="bg-gradient-to-br from-bark-800 via-bark-700 to-sage-800 rounded-2xl p-8 sm:p-12 text-parch-100 mb-8 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-5" style="background-image:url('data:image/svg+xml,%3Csvg width=60 height=60 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M0 0h60v60H0z%22 fill=%22none%22/%3E%3Cpath d=%22M30 0v60M0 30h60%22 stroke=%22%23fff%22 stroke-width=%220.5%22/%3E%3C/svg%3E')"></div>
-        <div class="relative">
-          <div class="text-sage-400 text-xs font-mono tracking-widest uppercase mb-3">Practice · Prepare · Pass</div>
-          <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight">Master Social Work<br/>Writing &amp; Practice Skills</h1>
-          <p class="text-bark-200 text-lg max-w-2xl mb-8 leading-relaxed">
-            Real case scenarios, AI-powered feedback, and structured exam preparation for BSW and MSW students. 
-            Practice clinical documentation, ethical analysis, and policy writing with immediate evaluation.
-          </p>
-          <div class="flex flex-wrap gap-3">
-            <button onclick="navigateTo('scenarios')" class="px-6 py-3 bg-sage-600 hover:bg-sage-500 rounded-lg font-semibold text-white transition shadow-lg shadow-sage-900/20">
-              Browse Scenarios
-            </button>
-            <button onclick="navigateTo('writing')" class="px-6 py-3 bg-parch-100/10 hover:bg-parch-100/20 border border-parch-300/20 rounded-lg font-medium transition">
-              Start Writing
-            </button>
-            <button onclick="navigateTo('exam')" class="px-6 py-3 bg-parch-100/10 hover:bg-parch-100/20 border border-parch-300/20 rounded-lg font-medium transition">
-              Exam Prep
-            </button>
-          </div>
-        </div>
-      </div>
+<!-- ═══ MAIN CONTENT ═══ -->
+<main class="flex-1 w-full max-w-6xl mx-auto px-3 sm:px-5 py-4 sm:py-7">
 
-      <!-- Quick Stats -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div class="bg-white rounded-xl p-5 border border-parch-200 text-center">
-          <div class="text-3xl font-bold text-bark-700 font-serif" id="stat-scenarios">—</div>
-          <div class="text-xs text-bark-400 mt-1 uppercase tracking-wide">Case Scenarios</div>
-        </div>
-        <div class="bg-white rounded-xl p-5 border border-parch-200 text-center">
-          <div class="text-3xl font-bold text-sage-600 font-serif" id="stat-categories">—</div>
-          <div class="text-xs text-bark-400 mt-1 uppercase tracking-wide">Topic Areas</div>
-        </div>
-        <div class="bg-white rounded-xl p-5 border border-parch-200 text-center">
-          <div class="text-3xl font-bold text-clay-600 font-serif" id="stat-guides">—</div>
-          <div class="text-xs text-bark-400 mt-1 uppercase tracking-wide">Writing Guides</div>
-        </div>
-        <div class="bg-white rounded-xl p-5 border border-parch-200 text-center">
-          <div class="text-3xl font-bold text-parch-600 font-serif">3</div>
-          <div class="text-xs text-bark-400 mt-1 uppercase tracking-wide">ASWB Exam Levels</div>
-        </div>
-      </div>
-
-      <!-- Category Cards -->
-      <h2 class="font-serif text-2xl font-bold mb-4">Practice Areas</h2>
-      <div id="home-categories" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"></div>
-
-      <!-- How It Works -->
-      <div class="bg-white rounded-2xl border border-parch-200 p-8 mb-8">
-        <h2 class="font-serif text-2xl font-bold mb-6 text-center">How It Works</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="text-center">
-            <div class="w-14 h-14 mx-auto bg-sage-100 rounded-xl flex items-center justify-center text-2xl mb-3">1</div>
-            <h3 class="font-semibold mb-2">Choose a Scenario</h3>
-            <p class="text-sm text-bark-500">Browse real-world case scenarios organized by topic, difficulty, and exam relevance.</p>
-          </div>
-          <div class="text-center">
-            <div class="w-14 h-14 mx-auto bg-bark-100 rounded-xl flex items-center justify-center text-2xl mb-3">2</div>
-            <h3 class="font-semibold mb-2">Write Your Response</h3>
-            <p class="text-sm text-bark-500">Practice clinical documentation, ethical analyses, and policy briefs with structured prompts and rubrics.</p>
-          </div>
-          <div class="text-center">
-            <div class="w-14 h-14 mx-auto bg-clay-100 rounded-xl flex items-center justify-center text-2xl mb-3">3</div>
-            <h3 class="font-semibold mb-2">Get AI Feedback</h3>
-            <p class="text-sm text-bark-500">Receive detailed scoring against professional rubrics plus exam tips from the AI evaluator.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ╔═══ SCENARIOS PAGE ═══╗ -->
-    <section id="page-scenarios" class="page hidden fade-in">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-        <h1 class="font-serif text-2xl font-bold">Case Scenarios</h1>
-        <div class="flex flex-wrap gap-2">
-          <select id="filter-category" onchange="filterScenarios()" class="bg-white border border-parch-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-bark-300">
-            <option value="">All Categories</option>
-          </select>
-          <select id="filter-difficulty" onchange="filterScenarios()" class="bg-white border border-parch-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-bark-300">
-            <option value="">All Levels</option>
-            <option value="beginner">Beginner</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="advanced">Advanced</option>
-          </select>
-        </div>
-      </div>
-      <div id="scenarios-list" class="grid md:grid-cols-2 gap-4"></div>
-    </section>
-
-    <!-- ╔═══ SCENARIO DETAIL / WRITING PAGE ═══╗ -->
-    <section id="page-writing" class="page hidden fade-in">
-      <div id="writing-workspace">
-        <!-- Scenario selector for free writing -->
-        <div id="writing-no-scenario" class="mb-6">
-          <h1 class="font-serif text-2xl font-bold mb-2">Writing Lab</h1>
-          <p class="text-bark-500 mb-4">Choose a scenario below or write a free-form practice response.</p>
-          <div class="bg-white rounded-xl border border-parch-200 p-5 mb-4">
-            <label class="block text-sm font-semibold mb-2">Select a scenario (optional)</label>
-            <select id="writing-scenario-select" onchange="loadScenarioForWriting(this.value)" class="w-full bg-parch-50 border border-parch-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-bark-300">
-              <option value="">— Free Writing (no scenario) —</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Loaded scenario display -->
-        <div id="writing-scenario-display" class="hidden mb-6">
-          <button onclick="clearWritingScenario()" class="text-sm text-bark-400 hover:text-bark-600 mb-3 flex items-center gap-1">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-            Back to selection
-          </button>
-          <div class="bg-white rounded-2xl border border-parch-200 overflow-hidden mb-6">
-            <div id="scenario-header" class="bg-bark-50 px-6 py-4 border-b border-parch-200"></div>
-            <div id="scenario-body" class="p-6"></div>
-          </div>
-        </div>
-
-        <!-- Writing area -->
-        <div class="bg-white rounded-2xl border border-parch-200 overflow-hidden mb-6">
-          <div class="px-6 py-3 bg-parch-50 border-b border-parch-200 flex items-center justify-between">
-            <h3 class="font-semibold text-sm">Your Response</h3>
-            <div class="flex items-center gap-3 text-xs text-bark-400">
-              <span id="word-count">0 words</span>
-              <button onclick="document.getElementById('writing-input').value='';updateWordCount()" class="hover:text-clay-600 transition">Clear</button>
-            </div>
-          </div>
-          <textarea id="writing-input" class="writing-area w-full p-6 text-[15px] leading-relaxed border-0 focus:outline-none resize-y font-sans" placeholder="Write your response here. Consider the rubric criteria and key concepts as you develop your answer...&#10;&#10;Take your time — professional social work writing requires careful thought and attention to detail." oninput="updateWordCount()"></textarea>
-        </div>
-
-        <!-- Image Upload -->
-        <div class="bg-white rounded-xl border border-parch-200 p-5 mb-6">
-          <div class="flex items-center justify-between mb-3">
-            <h3 class="font-semibold text-sm">Attach Image (optional)</h3>
-            <span class="text-xs text-bark-400">PNG, JPG, PDF — Max 10MB</span>
-          </div>
-          <div class="border-2 border-dashed border-parch-300 rounded-lg p-6 text-center hover:border-bark-400 transition cursor-pointer" onclick="document.getElementById('file-input').click()">
-            <input type="file" id="file-input" class="hidden" accept="image/*,.pdf" onchange="handleFileUpload(this)" />
-            <div class="text-bark-400 text-sm" id="upload-status">Click or drag to upload an image</div>
-          </div>
-        </div>
-
-        <!-- Action buttons -->
-        <div class="flex flex-wrap gap-3 mb-6">
-          <button onclick="submitForEvaluation()" id="btn-evaluate" class="px-6 py-3 bg-sage-600 hover:bg-sage-500 text-white rounded-lg font-semibold transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
-            Evaluate My Writing
-          </button>
-          <button onclick="submitForFeedback()" class="px-6 py-3 bg-bark-600 hover:bg-bark-500 text-white rounded-lg font-semibold transition shadow-md disabled:opacity-50">
-            Get Writing Feedback
-          </button>
-          <button onclick="generatePracticeQuestion()" class="px-5 py-3 bg-white border border-parch-300 hover:bg-parch-50 rounded-lg font-medium transition text-sm">
-            Generate Practice Question
-          </button>
-        </div>
-
-        <!-- Results area -->
-        <div id="evaluation-results" class="hidden">
-          <div class="bg-white rounded-2xl border border-parch-200 overflow-hidden">
-            <div class="px-6 py-3 bg-sage-50 border-b border-sage-200 flex items-center justify-between">
-              <h3 class="font-semibold text-sage-800">AI Evaluation</h3>
-              <div id="result-badge" class="text-xs font-mono px-2 py-0.5 rounded-full"></div>
-            </div>
-            <div id="evaluation-content" class="p-6 markdown-content text-[15px] leading-relaxed"></div>
-            <div id="result-cost" class="px-6 py-3 bg-parch-50 border-t border-parch-200 text-xs text-bark-400 font-mono"></div>
-          </div>
-        </div>
-
-        <!-- Loading spinner -->
-        <div id="loading-indicator" class="hidden text-center py-12">
-          <div class="inline-flex items-center gap-3 text-bark-500">
-            <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
-            <span class="text-sm">Analyzing your writing...</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ╔═══ EXAM PREP PAGE ═══╗ -->
-    <section id="page-exam" class="page hidden fade-in">
-      <h1 class="font-serif text-2xl font-bold mb-2">ASWB Exam Preparation</h1>
-      <p class="text-bark-500 mb-6">Understand exam structure, practice with targeted questions, and build confidence for your licensing exam.</p>
-
-      <!-- Exam Info Cards -->
-      <div id="exam-info-cards" class="grid md:grid-cols-3 gap-4 mb-8"></div>
-
-      <!-- Practice Question Generator -->
-      <div class="bg-white rounded-2xl border border-parch-200 p-6 mb-6">
-        <h2 class="font-serif text-xl font-bold mb-4">Practice Question Generator</h2>
-        <div class="grid sm:grid-cols-3 gap-4 mb-4">
-          <div>
-            <label class="block text-xs font-semibold text-bark-500 mb-1 uppercase tracking-wide">Category</label>
-            <select id="pq-category" class="w-full bg-parch-50 border border-parch-300 rounded-lg px-3 py-2 text-sm">
-              <option value="ethics">Ethics & Professional Conduct</option>
-              <option value="case_management">Case Management</option>
-              <option value="crisis">Crisis Intervention</option>
-              <option value="human_behavior">Human Behavior (HBSE)</option>
-              <option value="diversity">Diversity & Inclusion</option>
-              <option value="clinical">Clinical Practice</option>
-              <option value="policy">Social Welfare Policy</option>
-              <option value="research">Research Methods</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-bark-500 mb-1 uppercase tracking-wide">Difficulty</label>
-            <select id="pq-difficulty" class="w-full bg-parch-50 border border-parch-300 rounded-lg px-3 py-2 text-sm">
-              <option value="beginner">Beginner</option>
-              <option value="intermediate" selected>Intermediate</option>
-              <option value="advanced">Advanced</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-bark-500 mb-1 uppercase tracking-wide">Exam Level</label>
-            <select id="pq-exam" class="w-full bg-parch-50 border border-parch-300 rounded-lg px-3 py-2 text-sm">
-              <option value="aswb_bachelors">ASWB Bachelors</option>
-              <option value="aswb_masters">ASWB Masters</option>
-              <option value="aswb_clinical">ASWB Clinical</option>
-            </select>
-          </div>
-        </div>
-        <button onclick="fetchPracticeQuestion()" class="px-6 py-3 bg-bark-700 hover:bg-bark-600 text-white rounded-lg font-semibold transition">
-          Generate Question
-        </button>
-        <div id="practice-question-result" class="mt-6 hidden">
-          <div class="p-5 bg-parch-50 rounded-xl border border-parch-200 markdown-content text-[15px]" id="pq-content"></div>
-          <div id="pq-cost" class="mt-2 text-xs text-bark-400 font-mono"></div>
-        </div>
-        <div id="pq-loading" class="hidden text-center py-8">
-          <div class="inline-flex items-center gap-3 text-bark-500">
-            <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
-            <span class="text-sm">Generating question...</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Exam-relevant scenarios -->
-      <h2 class="font-serif text-xl font-bold mb-4">Exam-Relevant Scenarios</h2>
-      <div id="exam-scenarios" class="grid md:grid-cols-2 gap-4"></div>
-    </section>
-
-    <!-- ╔═══ REFERENCE PAGE ═══╗ -->
-    <section id="page-reference" class="page hidden fade-in">
-      <h1 class="font-serif text-2xl font-bold mb-2">Quick Reference</h1>
-      <p class="text-bark-500 mb-6">Writing guides, NASW Code of Ethics, defense mechanisms, and key concepts for study.</p>
-
-      <!-- Tabs -->
-      <div class="flex gap-1 border-b border-parch-300 mb-6 overflow-x-auto">
-        <button onclick="switchRefTab('guides')" id="ref-tab-guides" class="px-4 py-2.5 text-sm whitespace-nowrap tab-active transition">Writing Guides</button>
-        <button onclick="switchRefTab('nasw')" id="ref-tab-nasw" class="px-4 py-2.5 text-sm whitespace-nowrap tab-inactive transition">NASW Code</button>
-        <button onclick="switchRefTab('defense')" id="ref-tab-defense" class="px-4 py-2.5 text-sm whitespace-nowrap tab-inactive transition">Defense Mechanisms</button>
-      </div>
-
-      <div id="ref-content-guides" class="ref-tab-content">
-        <div id="writing-guides-list" class="grid md:grid-cols-2 gap-4"></div>
-      </div>
-      <div id="ref-content-nasw" class="ref-tab-content hidden">
-        <div id="nasw-list" class="space-y-3"></div>
-      </div>
-      <div id="ref-content-defense" class="ref-tab-content hidden">
-        <div id="defense-list" class="space-y-3"></div>
-      </div>
-    </section>
-
-    <!-- ╔═══ COSTS PAGE ═══╗ -->
-    <section id="page-costs" class="page hidden fade-in">
-      <div class="flex items-center justify-between mb-6">
-        <div>
-          <h1 class="font-serif text-2xl font-bold">Cost Tracking</h1>
-          <p class="text-bark-500 text-sm">Monitor API usage and costs for each AI interaction.</p>
-        </div>
-        <button onclick="resetCosts()" class="px-4 py-2 bg-clay-100 hover:bg-clay-200 text-clay-700 rounded-lg text-sm font-medium transition">Reset</button>
-      </div>
-
-      <!-- Summary -->
-      <div class="grid sm:grid-cols-3 gap-4 mb-6">
-        <div class="bg-white rounded-xl border border-parch-200 p-5">
-          <div class="text-xs text-bark-400 uppercase tracking-wide mb-1">Total Cost</div>
-          <div class="text-2xl font-bold font-mono text-bark-700" id="cost-total">$0.000000</div>
-        </div>
-        <div class="bg-white rounded-xl border border-parch-200 p-5">
-          <div class="text-xs text-bark-400 uppercase tracking-wide mb-1">Total Requests</div>
-          <div class="text-2xl font-bold font-mono text-bark-700" id="cost-requests">0</div>
-        </div>
-        <div class="bg-white rounded-xl border border-parch-200 p-5">
-          <div class="text-xs text-bark-400 uppercase tracking-wide mb-1">Mode</div>
-          <div class="text-2xl font-bold font-mono" id="cost-mode">—</div>
-        </div>
-      </div>
-
-      <!-- Toggle simulation -->
-      <div class="bg-white rounded-xl border border-parch-200 p-5 mb-6 flex items-center justify-between">
-        <div>
-          <div class="font-semibold text-sm">Simulation Mode</div>
-          <div class="text-xs text-bark-400 mt-0.5">When enabled, API calls return mock responses (no real cost incurred).</div>
-        </div>
-        <button onclick="toggleSimulation()" id="sim-toggle-btn" class="px-4 py-2 rounded-lg text-sm font-medium transition"></button>
-      </div>
-
-      <!-- Ledger -->
-      <div class="bg-white rounded-2xl border border-parch-200 overflow-hidden">
-        <div class="px-6 py-3 bg-parch-50 border-b border-parch-200">
-          <h3 class="font-semibold text-sm">Recent Activity</h3>
-        </div>
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm">
-            <thead class="bg-parch-50 text-bark-500 text-xs uppercase tracking-wide">
-              <tr>
-                <th class="px-4 py-2.5 text-left">Time</th>
-                <th class="px-4 py-2.5 text-left">Action</th>
-                <th class="px-4 py-2.5 text-right">Input</th>
-                <th class="px-4 py-2.5 text-right">Output</th>
-                <th class="px-4 py-2.5 text-right">Cost</th>
-              </tr>
-            </thead>
-            <tbody id="cost-table-body" class="divide-y divide-parch-100">
-              <tr><td colspan="5" class="px-4 py-8 text-center text-bark-400 text-sm">No activity yet</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ── Footer ──────────────────────────────────────────────────── -->
-  <footer class="bg-bark-800 text-bark-300 py-6 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-      <div>Social Work Skills Lab — Educational Platform for BSW &amp; MSW Students</div>
-      <div class="flex items-center gap-4">
-        <span id="footer-mode" class="font-mono"></span>
-        <span>Docker Compose · Flask · Tailwind CSS</span>
+<!-- ── HOME ────────────────────────────────────────── -->
+<section id="pg-home" class="page fade-up">
+  <div class="relative rounded-2xl overflow-hidden mb-5 sm:mb-7">
+    <div class="absolute inset-0 bg-gradient-to-br from-earth-900 via-earth-800 to-fern-900"></div>
+    <div class="absolute inset-0 opacity-[.03]" style="background-image:radial-gradient(circle at 1px 1px,white 1px,transparent 0);background-size:22px 22px"></div>
+    <div class="relative px-5 py-7 sm:px-10 sm:py-12 text-earth-100">
+      <div class="text-fern-400 text-[9px] sm:text-[10px] font-mono tracking-[.25em] uppercase mb-2">Practice · Prepare · Pass</div>
+      <h1 class="font-display font-800 text-[22px] sm:text-3xl lg:text-4xl mb-2.5 sm:mb-4 leading-[1.18] tracking-tight">Master Social Work<br/>Writing &amp; Practice</h1>
+      <p class="text-earth-300 text-[13px] sm:text-sm max-w-xl mb-5 sm:mb-7 leading-relaxed">Real case scenarios, AI-powered feedback, and structured exam prep for BSW &amp; MSW students.</p>
+      <div class="flex flex-wrap gap-2">
+        <button onclick="go('scenarios')" class="tt px-4 sm:px-5 py-2.5 sm:py-3 bg-fern-600 hover:bg-fern-500 active:bg-fern-700 rounded-xl font-semibold text-white text-sm transition shadow-lg shadow-fern-900/30">Browse Scenarios</button>
+        <button onclick="go('writing')" class="tt px-4 sm:px-5 py-2.5 sm:py-3 bg-white/10 hover:bg-white/15 active:bg-white/5 border border-white/15 rounded-xl font-medium text-sm transition">Writing Lab</button>
+        <button onclick="go('exam')" class="tt px-4 sm:px-5 py-2.5 sm:py-3 bg-white/10 hover:bg-white/15 active:bg-white/5 border border-white/15 rounded-xl font-medium text-sm transition">Exam Prep</button>
       </div>
     </div>
-  </footer>
+  </div>
+  <!-- Stats -->
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 mb-5 sm:mb-7">
+    <div class="bg-white rounded-xl p-3.5 sm:p-4 border border-earth-200 text-center"><div class="text-xl sm:text-2xl font-display font-bold text-earth-700" id="st-s">—</div><div class="text-[9px] sm:text-[10px] text-earth-400 mt-0.5 uppercase tracking-wider">Scenarios</div></div>
+    <div class="bg-white rounded-xl p-3.5 sm:p-4 border border-earth-200 text-center"><div class="text-xl sm:text-2xl font-display font-bold text-fern-600" id="st-c">—</div><div class="text-[9px] sm:text-[10px] text-earth-400 mt-0.5 uppercase tracking-wider">Topics</div></div>
+    <div class="bg-white rounded-xl p-3.5 sm:p-4 border border-earth-200 text-center"><div class="text-xl sm:text-2xl font-display font-bold text-terracotta-600" id="st-g">—</div><div class="text-[9px] sm:text-[10px] text-earth-400 mt-0.5 uppercase tracking-wider">Writing Guides</div></div>
+    <div class="bg-white rounded-xl p-3.5 sm:p-4 border border-earth-200 text-center"><div class="text-xl sm:text-2xl font-display font-bold text-sand-600">3</div><div class="text-[9px] sm:text-[10px] text-earth-400 mt-0.5 uppercase tracking-wider">ASWB Levels</div></div>
+  </div>
+  <h2 class="font-display font-bold text-lg sm:text-xl mb-3">Practice Areas</h2>
+  <div id="hcats" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3 mb-6"></div>
+  <!-- How it works -->
+  <div class="bg-white rounded-2xl border border-earth-200 p-5 sm:p-7">
+    <h2 class="font-display font-bold text-lg sm:text-xl mb-4 text-center">How It Works</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-7">
+      <div class="text-center"><div class="w-11 h-11 mx-auto bg-fern-100 rounded-xl flex items-center justify-center font-display font-bold text-fern-700 mb-2">1</div><h3 class="font-semibold text-sm mb-1">Pick a Scenario</h3><p class="text-xs text-earth-400 leading-relaxed">Real case studies by topic and difficulty.</p></div>
+      <div class="text-center"><div class="w-11 h-11 mx-auto bg-earth-100 rounded-xl flex items-center justify-center font-display font-bold text-earth-700 mb-2">2</div><h3 class="font-semibold text-sm mb-1">Write Your Response</h3><p class="text-xs text-earth-400 leading-relaxed">Structured prompts with professional rubrics.</p></div>
+      <div class="text-center"><div class="w-11 h-11 mx-auto bg-terracotta-100 rounded-xl flex items-center justify-center font-display font-bold text-terracotta-700 mb-2">3</div><h3 class="font-semibold text-sm mb-1">Get Feedback</h3><p class="text-xs text-earth-400 leading-relaxed">AI scoring and exam tips or model answers.</p></div>
+    </div>
+  </div>
+</section>
 
+<!-- ── SCENARIOS ───────────────────────────────────── -->
+<section id="pg-scenarios" class="page hidden">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-4">
+    <h1 class="font-display font-bold text-lg sm:text-xl">Case Scenarios</h1>
+    <div class="flex gap-2 overflow-x-auto">
+      <select id="fc" onchange="renderScn()" class="bg-white border border-earth-200 rounded-xl px-3 py-2.5 text-sm tt focus:outline-none"><option value="">All Categories</option></select>
+      <select id="fd" onchange="renderScn()" class="bg-white border border-earth-200 rounded-xl px-3 py-2.5 text-sm tt focus:outline-none"><option value="">All Levels</option><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select>
+    </div>
+  </div>
+  <div id="sgrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+</section>
+
+<!-- ── WRITING LAB ────────────────────────────────── -->
+<section id="pg-writing" class="page hidden">
+  <div id="wp" class="mb-4">
+    <h1 class="font-display font-bold text-lg sm:text-xl mb-1">Writing Lab</h1>
+    <p class="text-earth-400 text-sm mb-3">Select a scenario or free-write.</p>
+    <select id="ws" onchange="pickWS(this.value)" class="w-full bg-white border border-earth-200 rounded-xl px-3 py-3 text-sm tt focus:outline-none"><option value="">— Free Writing —</option></select>
+  </div>
+  <div id="wsd" class="hidden mb-4 fade-up">
+    <button onclick="clearS()" class="text-xs text-earth-400 hover:text-earth-600 mb-2 flex items-center gap-1 tt py-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>Back</button>
+    <div class="bg-white rounded-2xl border border-earth-200 overflow-hidden">
+      <div id="wh" class="bg-earth-50 px-4 sm:px-5 py-3 border-b border-earth-200 text-sm"></div>
+      <div id="wb" class="px-4 sm:px-5 py-4 text-sm leading-relaxed"></div>
+    </div>
+  </div>
+  <!-- Editor -->
+  <div class="bg-white rounded-2xl border border-earth-200 overflow-hidden mb-3">
+    <div class="px-4 py-2 bg-earth-50 border-b border-earth-200 flex items-center justify-between">
+      <span class="font-semibold text-[11px] text-earth-500">Your Response</span>
+      <div class="flex items-center gap-3 text-[11px] text-earth-400"><span id="wc">0 words</span><button onclick="$('wta').value='';doWc()" class="hover:text-terracotta-600">Clear</button></div>
+    </div>
+    <textarea id="wta" class="wr-box w-full px-4 py-3 text-[15px] leading-relaxed border-0 focus:outline-none resize-y" placeholder="Write your response here…" oninput="doWc()"></textarea>
+  </div>
+  <!-- Upload -->
+  <div class="bg-white rounded-xl border border-earth-200 p-3.5 mb-3">
+    <div class="flex items-center justify-between mb-1.5"><span class="font-semibold text-[11px]">Attach Image</span><span class="text-[9px] text-earth-400">PNG, JPG, PDF</span></div>
+    <div class="border-2 border-dashed border-earth-200 rounded-xl p-4 text-center cursor-pointer hover:border-earth-400 active:bg-earth-50 transition" onclick="$('fi').click()">
+      <input type="file" id="fi" class="hidden" accept="image/*,.pdf" onchange="doUpl(this)"/>
+      <div class="text-earth-400 text-sm" id="um">Tap to upload</div>
+    </div>
+  </div>
+  <!-- Actions -->
+  <div class="flex flex-wrap gap-2 mb-4">
+    <button onclick="aiEval()" class="tt px-4 py-2.5 bg-fern-600 hover:bg-fern-500 active:bg-fern-700 text-white rounded-xl font-semibold text-sm transition shadow-md">Evaluate</button>
+    <button onclick="aiFb()" class="tt px-4 py-2.5 bg-earth-700 hover:bg-earth-600 active:bg-earth-800 text-white rounded-xl font-semibold text-sm transition shadow-md">Feedback</button>
+    <button onclick="aiQ()" class="tt px-4 py-2.5 bg-white border border-earth-200 hover:bg-earth-50 active:bg-earth-100 rounded-xl font-medium text-sm transition">Practice Q</button>
+  </div>
+  <div id="wl" class="hidden text-center py-8"><svg class="animate-spin w-6 h-6 mx-auto text-earth-400 mb-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg><div class="text-sm text-earth-400">Analyzing…</div></div>
+  <div id="wr" class="hidden fade-up">
+    <div class="bg-white rounded-2xl border border-earth-200 overflow-hidden">
+      <div class="px-4 py-2.5 bg-fern-50 border-b border-fern-200 flex items-center justify-between"><span class="font-semibold text-fern-800 text-sm">AI Response</span><span id="wrb" class="text-[10px] font-mono px-2 py-0.5 rounded-full"></span></div>
+      <div id="wrc" class="px-4 sm:px-5 py-4 md text-[14px] sm:text-[15px]"></div>
+      <div id="wrk" class="px-4 py-2 bg-earth-50 border-t border-earth-200 text-[10px] text-earth-400 font-mono"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXAM PREP ──────────────────────────────────── -->
+<section id="pg-exam" class="page hidden">
+  <h1 class="font-display font-bold text-lg sm:text-xl mb-1">ASWB Exam Prep</h1>
+  <p class="text-earth-400 text-sm mb-4">Exam structure, practice questions, targeted study.</p>
+  <div id="exc" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-5"></div>
+  <div class="bg-white rounded-2xl border border-earth-200 p-4 sm:p-5 mb-5">
+    <h2 class="font-display font-bold text-base sm:text-lg mb-3">Practice Question Generator</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-3">
+      <div><label class="block text-[9px] font-semibold text-earth-400 uppercase tracking-wider mb-1">Category</label><select id="pc" class="w-full bg-earth-50 border border-earth-200 rounded-xl px-3 py-2.5 text-sm tt"><option value="ethics">Ethics</option><option value="case_management">Case Mgmt</option><option value="crisis">Crisis</option><option value="human_behavior">HBSE</option><option value="diversity">Diversity</option><option value="clinical">Clinical</option><option value="policy">Policy</option><option value="research">Research</option></select></div>
+      <div><label class="block text-[9px] font-semibold text-earth-400 uppercase tracking-wider mb-1">Difficulty</label><select id="pd" class="w-full bg-earth-50 border border-earth-200 rounded-xl px-3 py-2.5 text-sm tt"><option value="beginner">Beginner</option><option value="intermediate" selected>Intermediate</option><option value="advanced">Advanced</option></select></div>
+      <div><label class="block text-[9px] font-semibold text-earth-400 uppercase tracking-wider mb-1">Exam</label><select id="pe" class="w-full bg-earth-50 border border-earth-200 rounded-xl px-3 py-2.5 text-sm tt"><option value="aswb_bachelors">Bachelors</option><option value="aswb_masters">Masters</option><option value="aswb_clinical">Clinical</option></select></div>
+    </div>
+    <button onclick="doPQ()" class="tt px-5 py-2.5 bg-earth-800 hover:bg-earth-700 active:bg-earth-900 text-white rounded-xl font-semibold text-sm transition">Generate</button>
+    <div id="pql" class="hidden text-center py-6"><svg class="animate-spin w-5 h-5 mx-auto text-earth-400" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg></div>
+    <div id="pqr" class="mt-4 hidden"><div class="p-4 bg-earth-50 rounded-xl border border-earth-200 md text-sm" id="pqb"></div><div id="pqk" class="mt-1.5 text-[10px] text-earth-400 font-mono"></div></div>
+  </div>
+  <h2 class="font-display font-bold text-base sm:text-lg mb-3">Exam-Relevant Scenarios</h2>
+  <div id="exs" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+</section>
+
+<!-- ── REFERENCE ──────────────────────────────────── -->
+<section id="pg-reference" class="page hidden">
+  <h1 class="font-display font-bold text-lg sm:text-xl mb-1">Quick Reference</h1>
+  <p class="text-earth-400 text-sm mb-3">Writing guides, NASW Code, key concepts.</p>
+  <div class="flex gap-1 border-b border-earth-200 mb-4 overflow-x-auto -mx-1 px-1">
+    <button onclick="rt('guides')" id="rt-guides" class="px-3 py-2.5 text-sm whitespace-nowrap tab-on transition tt">Guides</button>
+    <button onclick="rt('nasw')" id="rt-nasw" class="px-3 py-2.5 text-sm whitespace-nowrap tab-off transition tt">NASW Code</button>
+    <button onclick="rt('defense')" id="rt-defense" class="px-3 py-2.5 text-sm whitespace-nowrap tab-off transition tt">Defense Mech.</button>
+  </div>
+  <div id="rtc-guides" class="rtab"><div id="rg" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div></div>
+  <div id="rtc-nasw" class="rtab hidden"><div id="rn" class="space-y-2"></div></div>
+  <div id="rtc-defense" class="rtab hidden"><div id="rd" class="space-y-2"></div></div>
+</section>
+
+<!-- ── COSTS ──────────────────────────────────────── -->
+<section id="pg-costs" class="page hidden">
+  <div class="flex items-center justify-between mb-4">
+    <div><h1 class="font-display font-bold text-lg sm:text-xl">Cost Tracking</h1><p class="text-earth-400 text-[11px]">API usage per interaction.</p></div>
+    <button onclick="rstC()" class="tt px-3 py-2 bg-terracotta-100 hover:bg-terracotta-200 text-terracotta-700 rounded-xl text-xs font-medium transition">Reset</button>
+  </div>
+  <div class="grid grid-cols-3 gap-2.5 mb-4">
+    <div class="bg-white rounded-xl border border-earth-200 p-3 sm:p-4"><div class="text-[9px] text-earth-400 uppercase tracking-wider mb-0.5">Total</div><div class="text-base sm:text-lg font-bold font-mono text-earth-700" id="ct">$0.00</div></div>
+    <div class="bg-white rounded-xl border border-earth-200 p-3 sm:p-4"><div class="text-[9px] text-earth-400 uppercase tracking-wider mb-0.5">Requests</div><div class="text-base sm:text-lg font-bold font-mono text-earth-700" id="cr">0</div></div>
+    <div class="bg-white rounded-xl border border-earth-200 p-3 sm:p-4"><div class="text-[9px] text-earth-400 uppercase tracking-wider mb-0.5">Mode</div><div class="text-base sm:text-lg font-bold font-mono" id="cm">—</div></div>
+  </div>
+  <div class="bg-white rounded-xl border border-earth-200 p-4 mb-4 flex items-center justify-between">
+    <div><div class="font-semibold text-sm">Simulation Mode</div><div class="text-[10px] text-earth-400 mt-0.5">Mock responses — no cost.</div></div>
+    <button onclick="togSim()" id="sb" class="tt px-3 py-2 rounded-xl text-xs font-semibold transition"></button>
+  </div>
+  <div class="bg-white rounded-2xl border border-earth-200 overflow-hidden">
+    <div class="px-4 py-2.5 bg-earth-50 border-b border-earth-200 font-semibold text-xs">Activity</div>
+    <div class="overflow-x-auto"><table class="w-full text-xs"><thead class="bg-earth-50 text-earth-400 text-[9px] uppercase tracking-wider"><tr><th class="px-3 py-2 text-left">Time</th><th class="px-3 py-2 text-left">Action</th><th class="px-3 py-2 text-right">In</th><th class="px-3 py-2 text-right">Out</th><th class="px-3 py-2 text-right">Cost</th></tr></thead><tbody id="ctb"><tr><td colspan="5" class="px-3 py-8 text-center text-earth-400 text-sm">No activity yet</td></tr></tbody></table></div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="bg-earth-900 text-earth-500 py-4 mt-auto safe-b">
+  <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-1.5 text-[10px]">
+    <span>SW Skills Lab — BSW &amp; MSW Education</span>
+    <span id="ft" class="font-mono"></span>
+  </div>
+</footer>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════════ -->
-<!--  JAVASCRIPT                                                       -->
-<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--  JAVASCRIPT: CONFIG + EMBEDDED DATA + APP LOGIC                -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
 <script>
-const API = '';  // Same origin
-let state = {
-  currentPage: 'home',
-  yearLevel: 1,
-  simulationMode: true,
-  scenarios: [],
-  categories: [],
-  currentScenario: null,
+/* ┌──────────────────────────────────────────────────────────────┐
+ * │  SWITCH FROM STATIC → API: CHANGE THESE 2 LINES             │
+ * │                                                              │
+ * │  Static (default):   USE_API = false;  API_URL = '';         │
+ * │  With backend:       USE_API = true;   API_URL = 'http://localhost:5000'; │
+ * │  Production:         USE_API = true;   API_URL = 'https://your-domain.com'; │
+ * └──────────────────────────────────────────────────────────────┘ */
+const USE_API = false;
+const API_URL = '';
+
+const $=id=>document.getElementById(id);
+const S={page:'home',year:1,scn:null,sim:true,costs:[]};
+
+// ════════════════════════════════════════════════════════════════
+//  EMBEDDED DATA (all scenarios, guides, exam info, references)
+// ════════════════════════════════════════════════════════════════
+const D={
+categories:[
+  {id:"ethics",name:"Ethics & Professional Conduct",icon:"⚖️",year:[1,2],description:"NASW Code of Ethics, ethical dilemmas, professional boundaries"},
+  {id:"case_management",name:"Case Management & Documentation",icon:"📋",year:[1,2],description:"Intake, assessment, progress notes, treatment planning"},
+  {id:"crisis",name:"Crisis Intervention",icon:"🚨",year:[2],description:"Emergency response, suicide assessment, safety planning"},
+  {id:"human_behavior",name:"Human Behavior & Social Environment",icon:"🧠",year:[1],description:"HBSE theories, developmental stages, systems theory"},
+  {id:"diversity",name:"Diversity, Equity & Inclusion",icon:"🌍",year:[1,2],description:"Cultural competency, anti-oppressive practice, social justice"},
+  {id:"policy",name:"Social Welfare Policy",icon:"🏛️",year:[2],description:"Policy analysis, advocacy, legislative impact"},
+  {id:"research",name:"Research Methods",icon:"📊",year:[2],description:"Evidence-based practice, program evaluation, research ethics"},
+  {id:"clinical",name:"Clinical Practice & Assessment",icon:"🩺",year:[2],description:"DSM-5, biopsychosocial assessments, treatment modalities"}
+],
+scenarios:[
+  {id:"eth-001",category:"ethics",title:"Dual Relationship Dilemma",difficulty:"intermediate",year:1,exam_relevant:true,exam_topics:["ASWB Bachelors","ASWB Masters"],scenario:"You are a social worker at a community mental health center in a small rural town. Your new client, Maria (age 34), arrives for her intake appointment. You recognize her as the parent of a child in your daughter's soccer team. Maria discloses she is experiencing severe depression and marital conflict. She specifically requested you because she heard you are 'the best therapist in town.' The nearest alternative provider is 45 miles away, and Maria lacks reliable transportation.",key_concepts:["Dual relationships","Rural practice","NASW 1.06","Boundary management","Client self-determination"],writing_prompt:"Write a comprehensive ethical analysis: (1) Identify the ethical dilemma and relevant NASW sections, (2) Discuss risks and benefits, (3) Propose an action plan with rationale, (4) Document how you would address boundaries.",rubric:{identification:{points:25,criteria:"Identifies dual relationship, cites NASW 1.06(c), rural practice considerations"},analysis:{points:25,criteria:"Weighs benefits vs risks"},action_plan:{points:30,criteria:"Concrete steps: consultation, informed consent, boundary agreement, supervision"},documentation:{points:20,criteria:"Professional writing, social work terminology, boundary monitoring"}},model_response_key_points:["Acknowledge tension between self-determination and boundaries","Reference NASW 1.06(c)","Consider rural practice challenges","Discuss informed consent","Outline boundary strategies","Include supervision plan"],tips:"Rural practice scenarios test balancing competing principles. Not all dual relationships are prohibited — the key is whether harm could result."},
+  {id:"eth-002",category:"ethics",title:"Confidentiality and Duty to Warn",difficulty:"advanced",year:2,exam_relevant:true,exam_topics:["ASWB Masters","ASWB Clinical"],scenario:"During a session, your client James (age 28) becomes agitated: 'If my ex-girlfriend doesn't stop seeing that guy, something bad is going to happen. I've been watching their apartment. I know his schedule.' He adds, 'I'm not going to do anything stupid, I just want to scare him.' James has dismissed assault charges and was mandated for anger management.",key_concepts:["Duty to warn/protect","Tarasoff decision","Confidentiality limits","Risk assessment","Documentation"],writing_prompt:"Write a clinical response: (1) Risk assessment, (2) Legal/ethical obligations, (3) Specific steps, (4) Documentation plan, (5) Therapeutic approach.",rubric:{risk_assessment:{points:20,criteria:"Violence history, surveillance, identified victim, escalating language"},legal_ethical:{points:25,criteria:"Tarasoff, state duty-to-warn, NASW 1.07(c)"},action_steps:{points:25,criteria:"Safety assessment, supervisor, notify victim/police, safety plan"},documentation:{points:15,criteria:"Progress note with quotes, rationale, actions"},therapeutic:{points:15,criteria:"Maintain alliance, transparency about limits"}},model_response_key_points:["Structured risk assessment","Reference Tarasoff","Duty to warn under state law","Consult supervisor","Notify victim/law enforcement","Document with quotes"],tips:"Duty-to-warn is almost always on the exam. Threat must be specific, credible, with identifiable victim."},
+  {id:"cm-001",category:"case_management",title:"Biopsychosocial Assessment — Adolescent in Foster Care",difficulty:"intermediate",year:1,exam_relevant:true,exam_topics:["ASWB Bachelors"],scenario:"Jaylen (15, African American) has been in foster care 3 years following removal for parental substance abuse. In his 4th placement. Foster parents report truancy, defiance, suspected marijuana use. School: grades dropped from B to failing, fights, withdrawal. Jaylen says he 'doesn't care anymore' and 'nobody wants me.' ADHD diagnosed at 8, stopped Adderall after 3rd placement. Enjoys basketball and drawing but stopped both. Bio mother in residential treatment, begun supervised visits.",key_concepts:["Biopsychosocial assessment","Trauma-informed care","Foster care","Adolescent development","Racial identity"],writing_prompt:"Complete a biopsychosocial assessment: (1) Biological factors, (2) Psychological, (3) Social/environmental, (4) Strengths, (5) DSM-5 considerations, (6) Treatment recommendations, (7) Case plan goals.",rubric:{biological:{points:15,criteria:"ADHD, medication, substance screening, development"},psychological:{points:20,criteria:"Trauma, attachment, grief, identity, depression"},social:{points:20,criteria:"Placements, school, peers, racial identity, family"},strengths:{points:10,criteria:"Basketball, art, academics, mother's engagement"},diagnostic:{points:15,criteria:"ADHD, rule out MDD/PTSD, trauma lens"},treatment:{points:20,criteria:"Safety first, trauma processing, medication, school supports"}},model_response_key_points:["Trauma-informed lens","Address each domain","Identify strengths","Consider racial identity","Avoid over-pathologizing","Prioritize stability","Measurable goals"],tips:"Biopsychosocial assessments test systemic thinking — consider interactions between domains."},
+  {id:"cm-002",category:"case_management",title:"SOAP Note — Substance Abuse Session",difficulty:"beginner",year:1,exam_relevant:true,exam_topics:["ASWB Bachelors"],scenario:"Session with David (42), 6th week of alcohol use disorder treatment. Attended 5/7 AA meetings but had a 'slip' Saturday — 2 beers at a family BBQ under brother's pressure. Expresses guilt: 'I ruined six weeks of sobriety.' Tearful during session. Worked on cognitive restructuring for all-or-nothing thinking. Developed relapse prevention plan for family events. Agreed to call sponsor before gatherings and practice refusal skills. More hopeful by end.",key_concepts:["SOAP documentation","Substance abuse","Relapse prevention","CBT","Motivational interviewing"],writing_prompt:"Write a SOAP note: Subjective (self-report), Objective (observations), Assessment (clinical analysis), Plan (next steps).",rubric:{subjective:{points:25,criteria:"Client's words about the week, lapse, feelings, pressure"},objective:{points:25,criteria:"Affect, attendance, meetings (5/7), lapse details"},assessment:{points:25,criteria:"Lapse vs relapse, cognitive distortions, progress, triggers"},plan:{points:25,criteria:"Sessions, sponsor contact, refusal skills, family dynamics"}},model_response_key_points:["Distinguish lapse from relapse","Use client language in Subjective","Measurable data in Objective","Clinical reasoning in Assessment","Specific Plan"],tips:"Keep SOAP sections distinct. Assessment shows clinical reasoning, not summary."},
+  {id:"cr-001",category:"crisis",title:"Suicide Risk Assessment",difficulty:"advanced",year:2,exam_relevant:true,exam_topics:["ASWB Masters","ASWB Clinical"],scenario:"Walk-in Sarah (22, college senior), disheveled, tearful. Fiancé ended engagement via text last night. 'I can't do this anymore. There's no point.' About suicidal thoughts: 'I thought about driving into a bridge abutment on the way here, but I came here instead.' No food/sleep 24hrs. History: suicide attempt at 17 (overdose), BPD diagnosis, on Prozac but stopped weeks ago. Lives alone, family 'not an option,' has one close friend who doesn't know.",key_concepts:["Suicide risk assessment","Safety planning","Columbia Scale","Protective factors","Lethal means"],writing_prompt:"Write: (1) Structured risk assessment, (2) Risk level determination, (3) Safety plan, (4) Immediate interventions, (5) Documentation, (6) Follow-up plan.",rubric:{risk_assessment:{points:25,criteria:"Ideation with plan, ambivalence (came for help), prior attempt, meds stopped, BPD, loss, isolation"},risk_level:{points:15,criteria:"High risk with rationale; discuss hospitalization"},safety_plan:{points:25,criteria:"Stanley-Brown: warning signs, coping, contacts, means restriction, reasons for living"},intervention:{points:20,criteria:"Safety, medical needs, prescriber, engage friend, level of care"},documentation:{points:15,criteria:"Assessment, rationale, quotes, timeline"}},model_response_key_points:["Use structured tool","Risk AND protective factors","Help-seeking is protective","Address medication","Specific safety plan","Lethal means","Engage supports","24-48hr follow-up"],tips:"Suicide assessment is MOST tested. Assess: ideation, plan, intent, means, timeline, protective factors."},
+  {id:"hb-001",category:"human_behavior",title:"Applying Erikson's Theory",difficulty:"beginner",year:1,exam_relevant:true,exam_topics:["ASWB Bachelors"],scenario:"Margaret (72), retired teacher, referred by physician. Since husband's death 18 months ago: isolated, stopped volunteering, rarely sees grandchildren, watches TV all day. 'I look back at my life and wonder if any of it mattered. I was just a teacher.' Regrets not traveling, not reconciling with estranged sister (deceased). But mentions proud moments — former student became a doctor, 45-year marriage, raised three successful children.",key_concepts:["Erikson's stages","Integrity vs. Despair","Grief","Life review therapy","Strengths perspective"],writing_prompt:"Write: (1) Psychosocial stage and relevance, (2) How grief affects developmental task, (3) Apply 2+ additional theories, (4) Theory-grounded intervention plan, (5) Strengths perspective.",rubric:{erikson:{points:25,criteria:"Integrity vs. Despair, connects her statements to stage"},grief_analysis:{points:20,criteria:"Grief complicating developmental task"},additional_theories:{points:20,criteria:"2+ theories with specific connections"},intervention:{points:20,criteria:"Life review, grief counseling, reengagement"},strengths:{points:15,criteria:"Teaching legacy, marriage, children, community involvement"}},model_response_key_points:["Integrity vs. Despair (Stage 8)","Reflecting on life with acceptance or regret","Connect statements to despair","Proud moments → integrity potential","Grief impact","Life review therapy","Reframe narrative with strengths"],tips:"Know each Erikson stage, age, conflict, resolution. Focus on Stages 5-8."},
+  {id:"div-001",category:"diversity",title:"Cultural Competence in Practice",difficulty:"intermediate",year:1,exam_relevant:true,exam_topics:["ASWB Bachelors","ASWB Masters"],scenario:"The Nguyen family (Vietnam, 5 years ago). Parents Thanh (48) and Linh (44) worry about daughter Mai (16) 'acting American' — dating, refusing Vietnamese at home, wanting college over family restaurant. Thanh speaks through 12-year-old son Bao as interpreter. Mai privately: feels torn, has panic attacks, questioning sexual orientation — begs you not to tell parents: 'they would disown me.'",key_concepts:["Acculturation","Cultural competence","Intersectionality","Interpreter ethics","LGBTQ+ youth","Confidentiality with minors"],writing_prompt:"Write: (1) Cultural dynamics, (2) Child interpreter ethics, (3) Navigate Mai's confidentiality, (4) Culturally responsive interventions, (5) Your cultural humility.",rubric:{cultural_dynamics:{points:20,criteria:"Acculturation gap, individualist vs collectivist, intersectionality"},interpreter:{points:15,criteria:"Child interpreter problem, propose professional interpreter"},confidentiality:{points:25,criteria:"Mai's rights, safety, family values, state law"},interventions:{points:25,criteria:"Respect hierarchy, support Mai, immigration experience, resources"},self_awareness:{points:15,criteria:"Cultural humility, Western bias, own positionality"}},model_response_key_points:["Never use child interpreter","Respect family + support Mai","Acculturation stress is normative","Confidentiality — safety decides","Intersectional lens","Explore own positionality","Culturally specific resources"],tips:"Balance cultural respect with professional ethics. Rarely 'impose values' OR 'defer entirely to culture.'"},
+  {id:"pol-001",category:"policy",title:"Policy Analysis — Housing First",difficulty:"advanced",year:2,exam_relevant:true,exam_topics:["ASWB Masters"],scenario:"Agency testifies to city council on Housing First for chronic homelessness. Council divided between shelter-based (sobriety/compliance required) and Housing First. Agency serves ~200 chronically homeless, 65% with co-occurring disorders. Current shelter: 23% permanent housing rate. Budget: $2M next year.",key_concepts:["Policy analysis","Housing First","Evidence-based policy","Advocacy","Cost-benefit","Macro social work"],writing_prompt:"Write a policy brief: (1) Problem statement, (2) Both options with framework, (3) Evidence base, (4) Cost-benefit, (5) Equity implications, (6) Recommendation with implementation.",rubric:{problem_statement:{points:15,criteria:"Define chronic homelessness, data, limitations"},policy_analysis:{points:25,criteria:"Framework, adequacy, equity, efficiency"},evidence:{points:20,criteria:"Housing First research, outcomes, costs"},cost_benefit:{points:15,criteria:"Compare costs, indirect costs, ROI"},equity:{points:10,criteria:"Racial disparities, dignity"},recommendation:{points:15,criteria:"Phased plan, measurable outcomes"}},model_response_key_points:["Recognized policy framework","Fair presentation","Research citations","Cost-effectiveness","Equity and disparities","Social work values","Realistic implementation","Evaluation plan"],tips:"Policy questions test macro thinking. Know programs, analysis from SW perspective."},
+  {id:"res-001",category:"research",title:"Program Evaluation Design",difficulty:"intermediate",year:2,exam_relevant:true,exam_topics:["ASWB Masters"],scenario:"Agency's 12-week DV survivors group (psychoed, CBT coping, safety planning, peer support), 2 years running. Need effectiveness evidence for federal grant. Serves ~40/year across 4 groups. Have un-analyzed pre/post assessments, attendance, satisfaction surveys.",key_concepts:["Program evaluation","Research design","Outcome measurement","Evidence-based practice","IRB"],writing_prompt:"Design evaluation: (1) Logic model, (2) Research questions, (3) Design & methodology, (4) Outcome measures, (5) Analysis plan, (6) Ethics, (7) Limitations.",rubric:{logic_model:{points:15,criteria:"Inputs, activities, outputs, outcomes"},research_questions:{points:10,criteria:"Specific, measurable"},design:{points:20,criteria:"Pre-post or quasi-experimental, validity, comparison"},measures:{points:20,criteria:"Valid tools, process measures, cultural appropriateness"},analysis:{points:15,criteria:"Appropriate stats, qualitative, effect sizes"},ethics:{points:10,criteria:"IRB, consent with vulnerable population"},limitations:{points:10,criteria:"Small sample, no randomization, attrition"}},model_response_key_points:["Clear logic model","Validated measures","Ethics with DV survivors","Mixed methods","Honest limitations","Evidence-based practice connection"],tips:"Know designs, validity, ethics, qualitative vs quantitative."},
+  {id:"cl-001",category:"clinical",title:"Differential Diagnosis & Treatment Planning",difficulty:"advanced",year:2,exam_relevant:true,exam_topics:["ASWB Clinical"],scenario:"Aisha (35): 3 months of sadness, insomnia (waking 3 AM), appetite loss (12-lb), concentration difficulty, withdrawal. 4 months ago witnessed violent robbery at work. Since then: nightmares 3-4x/week, avoids the area, startles at noises, 'constantly on edge.' Always been 'a worrier' with periodic panic attacks (heart racing, breathlessness, dizziness ~10 min) since early 20s. Drinks 2-3 glasses wine nightly 'to calm down,' up from occasional social drinking.",key_concepts:["Differential diagnosis","PTSD","MDD","Panic Disorder","GAD","Substance use","Comorbidity","DSM-5"],writing_prompt:"Write: (1) Differential diagnosis with DSM-5 criteria, (2) Recommended diagnoses, (3) Rule-outs, (4) Evidence-based treatment plan, (5) Substance use risk assessment.",rubric:{differential:{points:25,criteria:"Systematically evaluate PTSD, MDD, Panic, GAD, AUD with DSM-5"},diagnoses:{points:20,criteria:"Primary PTSD, comorbid MDD, Panic (pre-existing), assess AUD"},rule_outs:{points:10,criteria:"Medical, substance-induced, adjustment, acute stress"},treatment:{points:30,criteria:"Trauma-focused CBT/CPT/PE, substance use, medication, goals"},risk:{points:15,criteria:"Alcohol pattern, self-medication, escalation, screening"}},model_response_key_points:["DSM-5 criteria systematically","Distinguish PTSD from depression","Panic pre-dates trauma","Alcohol: AUD vs coping","Evidence-based treatment","Treatment sequencing","Safety/stabilization first","Measurable goals"],tips:"Clinical exam tests differential diagnosis heavily. Timelines matter. Comorbidity is the norm."},
+  {id:"eth-003",category:"ethics",title:"Social Media & Professional Boundaries",difficulty:"beginner",year:1,exam_relevant:true,exam_topics:["ASWB Bachelors"],scenario:"You're a school social worker. Client Tyler (17) sends an Instagram friend request. You decline, but his public profile shows drug use, parties, and 'not being here much longer.' Posts include other student clients. Your supervisor suggests screening all student clients' social media 'for safety.'",key_concepts:["Digital ethics","Social media boundaries","Privacy","Supervision","Minor clients"],writing_prompt:"Analyze: (1) Ethics of the friend request, (2) Ethics of viewing the public profile, (3) Whether/how to address content, (4) Response to supervisor, (5) Social media policy proposal.",rubric:{friend_request:{points:15,criteria:"Inappropriate: dual relationship, boundary, power with minor"},viewing:{points:25,criteria:"Public vs privacy, surveillance, consent, therapeutic impact"},clinical:{points:25,criteria:"Safety duty, raise without revealing source, therapeutic approach"},supervisor:{points:15,criteria:"Push back respectfully, systematic screening = surveillance"},policy:{points:20,criteria:"No connecting, discovery guidelines, documentation, consent, training"}},model_response_key_points:["Declining was correct","Viewing is ethically gray","Safety may justify action","Address therapeutically","Surveillance is problematic","Transparent policies","Adolescent development online","Document reasoning"],tips:"Apply traditional ethics (boundaries, confidentiality, dual relationships) to digital contexts."},
+  {id:"cm-003",category:"case_management",title:"Termination & Transfer Summary",difficulty:"intermediate",year:2,exam_relevant:true,exam_topics:["ASWB Masters"],scenario:"8 months with Rosa (38) for depression and PTSD after DV. Progress: protective order, safe housing, part-time work, reconnected with sister, PHQ-9: 24→8. You're leaving the agency. Rosa: 'You're the only one who believed me. I don't want to start over.'",key_concepts:["Termination","Transfer of care","Therapeutic relationship","Attachment","Documentation","Continuity"],writing_prompt:"Write: (1) Transfer summary for receiving clinician, (2) Termination session plan, (3) Ethical considerations analysis.",rubric:{transfer:{points:35,criteria:"Problem, treatment history, diagnosis, interventions, progress, functioning, needs, meds, safety, recommendations"},session:{points:35,criteria:"Process feelings, review progress, normalize anxiety, introduce new clinician, closure, coping, timeline"},ethics:{points:30,criteria:"NASW 1.16, abandonment vs appropriate termination, dependency, attachment, documentation"}},model_response_key_points:["Validate Rosa's feelings","Frame termination therapeutically","Highlight her growth","Thorough transfer summary","Graduated transition","Address attachment dynamics","Documentation","Connect to healing narrative"],tips:"Planned termination: gradual, collaborative, clinically processed."}
+],
+exam_prep:{
+  aswb_bachelors:{name:"ASWB Bachelors (BSW)",description:"BSW graduates — initial licensure",content_areas:[{area:"Human Development & HBSE",percentage:28},{area:"Assessment & Intervention Planning",percentage:24},{area:"Interventions with Clients",percentage:27},{area:"Professional Values & Ethics",percentage:21}],total_questions:170,scored_questions:150,time_limit_minutes:240},
+  aswb_masters:{name:"ASWB Masters (MSW)",description:"MSW graduates — advanced licensure",content_areas:[{area:"Human Development & HBSE",percentage:24},{area:"Assessment & Intervention Planning",percentage:30},{area:"Interventions with Clients",percentage:21},{area:"Professional Values & Ethics",percentage:25}],total_questions:170,scored_questions:150,time_limit_minutes:240},
+  aswb_clinical:{name:"ASWB Clinical (LCSW)",description:"Licensed clinical social workers",content_areas:[{area:"Human Development & HBSE",percentage:21},{area:"Assessment & Diagnosis",percentage:27},{area:"Psychotherapy & Interventions",percentage:27},{area:"Professional Values & Ethics",percentage:25}],total_questions:170,scored_questions:150,time_limit_minutes:240}
+},
+writing_guides:{
+  soap_note:{name:"SOAP Note",sections:["Subjective","Objective","Assessment","Plan"],description:"Standard clinical progress note format"},
+  biopsychosocial:{name:"Biopsychosocial Assessment",sections:["Identifying Info","Presenting Problem","Biological","Psychological","Social","Strengths","Impressions","Recommendations"],description:"Comprehensive bio-psycho-social assessment"},
+  treatment_plan:{name:"Treatment Plan",sections:["Problem ID","Long-term Goals","Measurable Objectives","Interventions","Timeline","Evaluation"],description:"Structured treatment planning"},
+  process_recording:{name:"Process Recording",sections:["Setting","Dialogue (Verbatim)","Worker's Feelings","Interaction Analysis","Supervisor Feedback","Learning Points"],description:"Detailed recording for supervision"},
+  policy_brief:{name:"Policy Brief",sections:["Executive Summary","Problem","Background","Options","Analysis","Recommendation","Implementation"],description:"Formal policy analysis for advocacy"},
+  case_presentation:{name:"Case Presentation",sections:["Demographics","Referral","Presenting Problem","History","Assessment","Diagnosis","Treatment Plan","Progress","Consultation Questions"],description:"Structured case presentation for teams"}
+},
+quick_reference:{
+  nasw:[
+    {s:"1.01",t:"Commitment to Clients",d:"Primary responsibility: promote client well-being"},
+    {s:"1.02",t:"Self-Determination",d:"Respect clients' right to self-determination"},
+    {s:"1.03",t:"Informed Consent",d:"Provide services with valid informed consent"},
+    {s:"1.06",t:"Conflicts of Interest",d:"Be alert to and avoid conflicts"},
+    {s:"1.07",t:"Privacy & Confidentiality",d:"Respect clients' right to privacy"},
+    {s:"1.16",t:"Termination",d:"Terminate when no longer needed or serving needs"},
+    {s:"2.01",t:"Respect for Colleagues",d:"Treat colleagues with respect"},
+    {s:"4.01",t:"Competence",d:"Practice within areas of competence"},
+    {s:"6.01",t:"Social Welfare",d:"Promote general welfare of society"},
+    {s:"6.04",t:"Social & Political Action",d:"Engage in social and political action"}
+  ],
+  defense:[
+    {n:"Denial",d:"Refusing to accept reality",e:"AUD client: 'I can stop anytime'"},
+    {n:"Projection",d:"Attributing feelings to others",e:"Angry client accuses SW of hostility"},
+    {n:"Displacement",d:"Redirecting emotions to safer target",e:"Angry at boss → yells at children"},
+    {n:"Rationalization",d:"Logical explanations for irrational behavior",e:"'I turned out fine' to justify hitting child"},
+    {n:"Sublimation",d:"Channeling impulses into acceptable activities",e:"Aggression → competitive sports"},
+    {n:"Regression",d:"Reverting to earlier behavior",e:"Adult tantrum when frustrated"},
+    {n:"Intellectualization",d:"Abstract thinking to avoid emotions",e:"Discussing 'stages of grief' without feeling"}
+  ]
+}
 };
 
-// ── Navigation ──────────────────────────────────────────────────────
-function navigateTo(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
-  const el = document.getElementById(`page-${page}`);
-  if (el) { el.classList.remove('hidden'); el.classList.add('fade-in'); }
-  state.currentPage = page;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+// ── Simulated AI responses ──────────────────────────────────────
+const SIM={
+eval:`## Writing Evaluation\n\n**Overall Score: 78/100**\n\n### Strengths\n- Solid understanding of the ethical principles involved\n- Good use of the NASW Code of Ethics to support reasoning\n- Practical, client-centered action plan\n\n### Areas for Improvement\n- Expand analysis of competing ethical obligations\n- Include more specific theoretical references\n- Documentation needs more concrete boundary-setting language\n\n### Exam Tip\nOn the ASWB exam, look for the answer that prioritizes client safety while maintaining professional boundaries. The 'best' answer usually involves consultation and follows agency protocol.\n\n### Key Points Addressed\n- Identification of the ethical dilemma ✓\n- Reference to relevant NASW sections ✓\n- Client self-determination ✓\n\n### Points to Add\n- Role of supervision\n- Cultural factors\n- Ongoing boundary monitoring plan`,
+fb:`## Writing Feedback\n\nYour writing shows developing understanding of social work documentation.\n\n**Structure:** Logical progression. Use your program's framework more explicitly.\n\n**Professional Language:** Good clinical terminology. Avoid colloquial expressions in formal documentation.\n\n**Critical Thinking:** Surface issues identified well. Push to explore underlying systemic factors.\n\n**Exam Relevance:** This scenario type appears on the ASWB exam. Practice identifying the 'best' answer — usually most comprehensive AND prioritizes safety.`,
+q:`## Practice Question\n\n**Question:** A social worker discovers a client's insurance is terminated mid-treatment for trauma-focused therapy. The client is progressing well but can't pay out-of-pocket. What should the social worker do FIRST?\n\nA) Terminate services immediately per policy\nB) Continue pro bono indefinitely\nC) Discuss the situation with the client and explore options\nD) Refer to a free clinic without discussion\n\n**Correct Answer: C**\n\n**Rationale:** NASW 1.16 requires careful termination. First step: discuss openly, explore options (sliding scale, payment plans, insurance advocacy, referrals, pro bono). A and D exclude the client. B isn't sustainable.\n\n**Study Tip:** When asked "FIRST" — look for the answer that gathers info or involves the client before acting.`
+};
 
-  // Load page-specific data
-  if (page === 'home') loadHomePage();
-  if (page === 'scenarios') loadScenarios();
-  if (page === 'writing') loadWritingPage();
-  if (page === 'exam') loadExamPage();
-  if (page === 'reference') loadReferencePage();
-  if (page === 'costs') loadCosts();
-}
-
-function setYearLevel(val) {
-  state.yearLevel = parseInt(val);
-  if (state.currentPage === 'scenarios') loadScenarios();
-  if (state.currentPage === 'exam') loadExamPage();
-}
-
-// ── API helpers ─────────────────────────────────────────────────────
-async function api(path, opts = {}) {
-  try {
-    const res = await fetch(`${API}${path}`, {
-      headers: { 'Content-Type': 'application/json' },
-      ...opts,
-    });
-    return await res.json();
-  } catch (e) {
-    console.error('API error:', e);
-    return { error: e.message };
+// ════════════════════════════════════════════════════════════════
+//  DATA LAYER — auto-switches between embedded data and API
+// ════════════════════════════════════════════════════════════════
+async function GET(path){
+  if(!USE_API){
+    const m={'/api/scenarios':()=>({scenarios:D.scenarios,total:D.scenarios.length}),'/api/categories':()=>D.categories,'/api/exam-info':()=>D.exam_prep,'/api/writing-guides':()=>D.writing_guides,'/api/quick-reference':()=>D.quick_reference,'/api/health':()=>({status:'ok',simulation_mode:true,api_key_set:false}),'/api/costs':()=>({entries:S.costs,total_cost_usd:S.costs.reduce((a,c)=>a+c.cost_usd,0),total_requests:S.costs.length,simulation_mode:true})};
+    const sm=path.match(/^\/api\/scenarios\/(.+)$/);
+    if(sm)return D.scenarios.find(s=>s.id===sm[1])||{error:'Not found'};
+    return m[path]?m[path]():{error:'Unknown route'};
   }
+  try{const r=await fetch(API_URL+path);return await r.json()}catch(e){return{error:e.message}}
 }
 
-// ── Markdown-ish renderer (simple) ──────────────────────────────────
-function renderMarkdown(text) {
-  if (!text) return '';
-  return text
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-    .replace(/^# (.+)$/gm, '<h2>$1</h2>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/^- (.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>\n?)+/g, (m) => `<ul>${m}</ul>`)
-    .replace(/\n{2,}/g, '</p><p>')
-    .replace(/\n/g, '<br/>')
-    .replace(/^/, '<p>').replace(/$/, '</p>')
-    .replace(/<p><h/g, '<h').replace(/<\/h(\d)><\/p>/g, '</h$1>')
-    .replace(/<p><ul>/g, '<ul>').replace(/<\/ul><\/p>/g, '</ul>');
-}
-
-// ── Difficulty badge ────────────────────────────────────────────────
-function diffBadge(d) {
-  const map = {
-    beginner: 'bg-sage-100 text-sage-700',
-    intermediate: 'bg-bark-100 text-bark-700',
-    advanced: 'bg-clay-100 text-clay-700',
-  };
-  return `<span class="px-2 py-0.5 rounded-full text-xs font-medium ${map[d] || ''}">${d}</span>`;
-}
-
-// ══════════════════════════════════════════════════════════════════════
-//  HOME PAGE
-// ══════════════════════════════════════════════════════════════════════
-async function loadHomePage() {
-  const [scenData, catData, guideData] = await Promise.all([
-    api('/api/scenarios'),
-    api('/api/categories'),
-    api('/api/writing-guides'),
-  ]);
-
-  state.scenarios = scenData.scenarios || [];
-  state.categories = catData || [];
-
-  document.getElementById('stat-scenarios').textContent = state.scenarios.length;
-  document.getElementById('stat-categories').textContent = state.categories.length;
-  document.getElementById('stat-guides').textContent = Object.keys(guideData || {}).length;
-
-  const catEl = document.getElementById('home-categories');
-  catEl.innerHTML = state.categories.map(c => `
-    <div class="scenario-card bg-white rounded-xl border border-parch-200 p-5 cursor-pointer" onclick="navigateTo('scenarios');document.getElementById('filter-category').value='${c.id}';filterScenarios()">
-      <div class="text-2xl mb-2">${c.icon}</div>
-      <h3 class="font-semibold text-sm mb-1">${c.name}</h3>
-      <p class="text-xs text-bark-400 leading-relaxed">${c.description}</p>
-      <div class="mt-3 text-xs text-bark-300">Year ${c.year.join(' & ')}</div>
-    </div>
-  `).join('');
-}
-
-// ══════════════════════════════════════════════════════════════════════
-//  SCENARIOS PAGE
-// ══════════════════════════════════════════════════════════════════════
-async function loadScenarios() {
-  const [scenData, catData] = await Promise.all([
-    api('/api/scenarios'),
-    api('/api/categories'),
-  ]);
-  state.scenarios = scenData.scenarios || [];
-  state.categories = catData || [];
-
-  // Populate category filter
-  const catSel = document.getElementById('filter-category');
-  if (catSel.options.length <= 1) {
-    state.categories.forEach(c => {
-      const opt = document.createElement('option');
-      opt.value = c.id; opt.textContent = c.name;
-      catSel.appendChild(opt);
-    });
+async function POST(path,body){
+  if(!USE_API){
+    await new Promise(r=>setTimeout(r,500));
+    const tk=((body.writing||body.category||'').length)||80;
+    const c={id:Math.random().toString(36).slice(2,8),timestamp:new Date().toISOString(),action:path.replace('/api/',''),model:'static',input_tokens:tk,output_tokens:420,cost_usd:0};
+    S.costs.push(c);
+    if(path==='/api/evaluate')return{response:SIM.eval,cost:c,simulated:true};
+    if(path==='/api/feedback')return{response:SIM.fb,cost:c,simulated:true};
+    if(path==='/api/practice-question')return{response:SIM.q,cost:c,simulated:true};
+    if(path==='/api/costs/reset'){S.costs=[];return{ok:1}}
+    return{response:'Static mode.',simulated:true};
   }
-  filterScenarios();
+  try{const r=await fetch(API_URL+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});return await r.json()}catch(e){return{error:e.message}}
 }
 
-function filterScenarios() {
-  const cat = document.getElementById('filter-category').value;
-  const diff = document.getElementById('filter-difficulty').value;
-  let list = state.scenarios;
-  if (cat) list = list.filter(s => s.category === cat);
-  if (diff) list = list.filter(s => s.difficulty === diff);
+// ════════════════════════════════════════════════════════════════
+//  NAVIGATION + DRAWER
+// ════════════════════════════════════════════════════════════════
+function go(p){
+  document.querySelectorAll('.page').forEach(el=>{el.classList.add('hidden');el.classList.remove('fade-up')});
+  const el=$(`pg-${p}`);if(el){el.classList.remove('hidden');void el.offsetWidth;el.classList.add('fade-up')}
+  S.page=p;window.scrollTo({top:0,behavior:'smooth'});
+  document.querySelectorAll('[data-n]').forEach(b=>b.classList.toggle('bg-earth-800',b.dataset.n===p));
+  ({home:ldHome,scenarios:ldScn,writing:ldWr,exam:ldEx,reference:ldRef,costs:ldCost})[p]?.();
+}
+function togDraw(){$('draw').classList.toggle('open');$('dbg').classList.toggle('open')}
 
-  const el = document.getElementById('scenarios-list');
-  if (!list.length) {
-    el.innerHTML = '<div class="col-span-2 text-center py-12 text-bark-400">No scenarios match your filters.</div>';
-    return;
-  }
+// ════════════════════════════════════════════════════════════════
+//  HELPERS
+// ════════════════════════════════════════════════════════════════
+function db(d){const m={beginner:'bg-fern-100 text-fern-700',intermediate:'bg-earth-100 text-earth-700',advanced:'bg-terracotta-100 text-terracotta-700'};return`<span class="px-2 py-0.5 rounded-full text-[10px] font-medium ${m[d]||''}">${d}</span>`}
 
-  el.innerHTML = list.map(s => {
-    const catObj = state.categories.find(c => c.id === s.category);
-    return `
-    <div class="scenario-card bg-white rounded-xl border border-parch-200 p-5 cursor-pointer" onclick="openScenario('${s.id}')">
-      <div class="flex items-start justify-between mb-2">
-        <span class="text-lg">${catObj ? catObj.icon : '📄'}</span>
-        <div class="flex gap-1.5">${diffBadge(s.difficulty)}${s.exam_relevant ? '<span class="px-2 py-0.5 rounded-full text-xs font-medium bg-parch-200 text-parch-700">Exam</span>' : ''}</div>
-      </div>
-      <h3 class="font-semibold mb-1">${s.title}</h3>
-      <p class="text-xs text-bark-400 line-clamp-2 mb-3">${s.scenario.substring(0, 150)}...</p>
-      <div class="flex items-center justify-between text-xs text-bark-300">
-        <span>Year ${s.year}</span>
-        <span>${s.key_concepts.slice(0, 2).join(' · ')}</span>
-      </div>
-    </div>`;
+function md(t){
+  if(!t)return'';
+  return t.replace(/^### (.+)$/gm,'<h3>$1</h3>').replace(/^## (.+)$/gm,'<h2>$1</h2>').replace(/^# (.+)$/gm,'<h2>$1</h2>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/^- (.+)$/gm,'<li>$1</li>').replace(/(<li>.*<\/li>\n?)+/g,m=>`<ul>${m}</ul>`)
+    .replace(/\n{2,}/g,'</p><p>').replace(/\n/g,'<br/>')
+    .replace(/^/,'<p>').replace(/$/,'</p>')
+    .replace(/<p><h/g,'<h').replace(/<\/h(\d)><\/p>/g,'</h$1>')
+    .replace(/<p><ul>/g,'<ul>').replace(/<\/ul><\/p>/g,'</ul>');
+}
+function doWc(){const t=$('wta').value.trim();const w=t?t.split(/\s+/).length:0;$('wc').textContent=`${w} word${w!==1?'s':''}`}
+
+// ════════════════════════════════════════════════════════════════
+//  HOME
+// ════════════════════════════════════════════════════════════════
+function ldHome(){
+  $('st-s').textContent=D.scenarios.length;$('st-c').textContent=D.categories.length;$('st-g').textContent=Object.keys(D.writing_guides).length;
+  $('hcats').innerHTML=D.categories.map(c=>`<div class="card bg-white rounded-xl border border-earth-200 p-3.5 sm:p-4 cursor-pointer" onclick="go('scenarios');$('fc').value='${c.id}';renderScn()"><div class="text-lg sm:text-xl mb-1">${c.icon}</div><h3 class="font-semibold text-xs sm:text-sm leading-snug mb-0.5">${c.name}</h3><p class="text-[10px] text-earth-400 leading-relaxed line-clamp-2">${c.description}</p><div class="mt-1.5 text-[9px] text-earth-300">Year ${c.year.join(' & ')}</div></div>`).join('');
+}
+
+// ════════════════════════════════════════════════════════════════
+//  SCENARIOS
+// ════════════════════════════════════════════════════════════════
+function ldScn(){
+  const s=$('fc');if(s.options.length<=1)D.categories.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=c.name;s.appendChild(o)});
+  renderScn();
+}
+function renderScn(){
+  const cat=$('fc').value,dif=$('fd').value;
+  let l=D.scenarios;if(cat)l=l.filter(s=>s.category===cat);if(dif)l=l.filter(s=>s.difficulty===dif);
+  $('sgrid').innerHTML=l.length?l.map(s=>{const c=D.categories.find(x=>x.id===s.category);return`<div class="card bg-white rounded-xl border border-earth-200 p-4 cursor-pointer" onclick="openS('${s.id}')"><div class="flex items-start justify-between mb-1.5"><span class="text-base">${c?c.icon:'📄'}</span><div class="flex gap-1">${db(s.difficulty)}${s.exam_relevant?'<span class="px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-sand-100 text-sand-700">Exam</span>':''}</div></div><h3 class="font-semibold text-sm mb-1 leading-snug">${s.title}</h3><p class="text-[11px] text-earth-400 line-clamp-2 mb-2">${s.scenario.substring(0,120)}…</p><div class="flex items-center justify-between text-[10px] text-earth-300"><span>Year ${s.year}</span><span class="truncate ml-2">${s.key_concepts.slice(0,2).join(' · ')}</span></div></div>`}).join(''):'<div class="col-span-2 text-center py-10 text-earth-400 text-sm">No matching scenarios.</div>';
+}
+function openS(id){S.scn=D.scenarios.find(s=>s.id===id);go('writing')}
+
+// ════════════════════════════════════════════════════════════════
+//  WRITING
+// ════════════════════════════════════════════════════════════════
+function ldWr(){
+  const s=$('ws');if(s.options.length<=1)D.scenarios.forEach(sc=>{const o=document.createElement('option');o.value=sc.id;o.textContent=`${sc.title} (${sc.difficulty})`;s.appendChild(o)});
+  if(S.scn)showS(S.scn);
+}
+function pickWS(v){if(!v){clearS();return}S.scn=D.scenarios.find(s=>s.id===v);if(S.scn)showS(S.scn)}
+function showS(s){
+  $('wp').classList.add('hidden');$('wsd').classList.remove('hidden');$('ws').value=s.id;
+  const c=D.categories.find(x=>x.id===s.category);
+  $('wh').innerHTML=`<div class="flex items-center justify-between flex-wrap gap-2"><h2 class="font-display font-bold text-[15px] sm:text-base">${c?c.icon:''} ${s.title}</h2><div class="flex gap-1">${db(s.difficulty)}${s.exam_relevant?'<span class="px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-sand-100 text-sand-700">Exam</span>':''}</div></div><div class="text-[10px] text-earth-400 mt-0.5 line-clamp-1">${s.key_concepts.join(' · ')}</div>`;
+  let rb='';if(s.rubric)rb=`<div class="mt-3 p-3 bg-earth-50 rounded-xl border border-earth-200"><h4 class="font-semibold text-[11px] mb-1.5">Rubric</h4><div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">${Object.entries(s.rubric).map(([k,v])=>`<div class="text-[10px]"><span class="font-semibold text-earth-600">${k.replace(/_/g,' ')} (${v.points}pts):</span> <span class="text-earth-400">${v.criteria}</span></div>`).join('')}</div></div>`;
+  let tp=s.tips?`<div class="mt-3 p-3 bg-fern-50 rounded-xl border border-fern-200"><h4 class="font-semibold text-[11px] text-fern-800 mb-0.5">Exam Tip</h4><p class="text-[11px] text-fern-700 leading-relaxed">${s.tips}</p></div>`:'';
+  let kp='';if(s.model_response_key_points)kp=`<details class="mt-3"><summary class="text-[11px] font-semibold text-earth-500 cursor-pointer">Model Response Key Points</summary><ul class="mt-1.5 space-y-0.5 pl-4 list-disc">${s.model_response_key_points.map(p=>`<li class="text-[11px] text-earth-400 leading-relaxed">${p}</li>`).join('')}</ul></details>`;
+  $('wb').innerHTML=`<div class="mb-3"><h4 class="font-semibold text-[11px] text-earth-400 uppercase tracking-wider mb-1.5">Case Scenario</h4><p class="text-[13px] sm:text-sm leading-relaxed">${s.scenario}</p></div><div class="p-3 bg-earth-800/[.03] rounded-xl border border-earth-200"><h4 class="font-semibold text-[11px] mb-1">Writing Prompt</h4><p class="text-[12px] sm:text-sm leading-relaxed">${s.writing_prompt}</p></div>${rb}${tp}${kp}`;
+}
+function clearS(){S.scn=null;$('wp').classList.remove('hidden');$('wsd').classList.add('hidden');$('ws').value=''}
+
+// AI actions
+async function aiEval(){const w=$('wta').value.trim();if(!w){alert('Write a response first.');return}sL(1);const r=await POST('/api/evaluate',{scenario_id:S.scn?.id||'',writing:w,year_level:S.year});sL(0);sR(r)}
+async function aiFb(){const w=$('wta').value.trim();if(!w){alert('Write something first.');return}sL(1);const r=await POST('/api/feedback',{writing:w,focus_area:S.scn?.category||'general',year_level:S.year});sL(0);sR(r)}
+async function aiQ(){sL(1);const r=await POST('/api/practice-question',{category:S.scn?.category||'ethics',difficulty:S.scn?.difficulty||'intermediate',year_level:S.year});sL(0);sR(r)}
+function sL(on){$('wl').classList.toggle('hidden',!on);$('wr').classList.add('hidden')}
+function sR(r){
+  if(!r||r.error){alert('Error: '+(r?.error||'Unknown'));return}
+  $('wr').classList.remove('hidden');$('wrc').innerHTML=md(r.response);
+  const b=$('wrb');b.textContent=r.simulated?'STATIC':'LIVE';b.className=`text-[10px] font-mono px-2 py-0.5 rounded-full ${r.simulated?'bg-sand-100 text-sand-700':'bg-fern-100 text-fern-700'}`;
+  $('wrk').textContent=r.cost?`${r.cost.input_tokens} in / ${r.cost.output_tokens} out · ${r.cost.model}`:'';
+  $('wr').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function doUpl(inp){
+  const f=inp.files[0];if(!f)return;
+  $('um').innerHTML=USE_API?`Uploading…`:`<span class="text-fern-600 font-medium">Selected:</span> ${f.name} <span class="text-earth-300">·</span> <span class="text-[10px] text-earth-400">Upload available in API mode</span>`;
+  if(!USE_API)return;
+  const fd=new FormData();fd.append('file',f);
+  fetch(API_URL+'/api/upload',{method:'POST',body:fd}).then(r=>r.json()).then(d=>{$('um').innerHTML=d.error?`Error: ${d.error}`:`<span class="text-fern-600 font-medium">✓</span> ${d.filename}`}).catch(e=>{$('um').textContent=`Failed: ${e.message}`});
+}
+
+// ════════════════════════════════════════════════════════════════
+//  EXAM PREP
+// ════════════════════════════════════════════════════════════════
+function ldEx(){
+  $('exc').innerHTML=Object.values(D.exam_prep).map(ex=>{
+    const bars=ex.content_areas.map(a=>`<div class="flex items-center justify-between text-[10px] mb-0.5"><span class="text-earth-500 truncate mr-2 flex-1">${a.area}</span><div class="flex items-center gap-1 shrink-0"><div class="w-10 sm:w-14 bg-earth-200 rounded-full h-1.5"><div class="h-1.5 rounded-full bg-earth-600" style="width:${a.percentage}%"></div></div><span class="text-earth-400 font-mono w-7 text-right">${a.percentage}%</span></div></div>`).join('');
+    return`<div class="bg-white rounded-xl border border-earth-200 p-4"><h3 class="font-display font-bold text-sm mb-0.5">${ex.name}</h3><p class="text-[10px] text-earth-400 mb-2">${ex.description}</p><div class="text-[10px] text-earth-300 mb-2">${ex.total_questions}q · ${ex.time_limit_minutes}min</div>${bars}</div>`
   }).join('');
+  $('exs').innerHTML=D.scenarios.filter(s=>s.exam_relevant).map(s=>{const c=D.categories.find(x=>x.id===s.category);return`<div class="card bg-white rounded-xl border border-earth-200 p-3.5 cursor-pointer" onclick="openS('${s.id}')"><div class="flex items-center justify-between mb-1"><span class="text-sm">${c?c.icon:''} <span class="font-semibold text-xs sm:text-sm">${s.title}</span></span>${db(s.difficulty)}</div><p class="text-[10px] text-earth-400 mb-1.5 line-clamp-2">${s.scenario.substring(0,90)}…</p><div class="flex flex-wrap gap-0.5">${(s.exam_topics||[]).map(t=>`<span class="px-1.5 py-0.5 bg-earth-100 text-earth-500 rounded text-[9px]">${t}</span>`).join('')}</div></div>`}).join('');
+}
+async function doPQ(){$('pql').classList.remove('hidden');$('pqr').classList.add('hidden');const r=await POST('/api/practice-question',{category:$('pc').value,difficulty:$('pd').value,year_level:S.year,exam_type:$('pe').value});$('pql').classList.add('hidden');if(r&&!r.error){$('pqr').classList.remove('hidden');$('pqb').innerHTML=md(r.response);$('pqk').textContent=r.cost?`${r.simulated?'Static':'Live'} · ${r.cost.model}`:''}}
+
+// ════════════════════════════════════════════════════════════════
+//  REFERENCE
+// ════════════════════════════════════════════════════════════════
+function ldRef(){
+  $('rg').innerHTML=Object.values(D.writing_guides).map(g=>`<div class="bg-white rounded-xl border border-earth-200 p-4"><h3 class="font-semibold text-sm mb-0.5">${g.name}</h3><p class="text-[10px] text-earth-400 mb-2">${g.description}</p><div class="space-y-1">${g.sections.map((s,i)=>`<div class="flex items-center gap-2 text-[11px]"><span class="w-4 h-4 rounded-full bg-earth-100 text-earth-500 flex items-center justify-center font-mono text-[8px] shrink-0">${i+1}</span>${s}</div>`).join('')}</div></div>`).join('');
+  $('rn').innerHTML=D.quick_reference.nasw.map(n=>`<div class="bg-white rounded-xl border border-earth-200 p-3 flex gap-3 items-start"><div class="font-mono text-[11px] font-bold text-earth-500 bg-earth-100 px-1.5 py-0.5 rounded shrink-0">${n.s}</div><div><div class="font-semibold text-sm">${n.t}</div><div class="text-[10px] text-earth-400 mt-0.5">${n.d}</div></div></div>`).join('');
+  $('rd').innerHTML=D.quick_reference.defense.map(d=>`<div class="bg-white rounded-xl border border-earth-200 p-3"><h4 class="font-semibold text-sm">${d.n}</h4><p class="text-[10px] text-earth-400 mt-0.5">${d.d}</p><p class="text-[10px] text-earth-300 mt-0.5 italic">Ex: ${d.e}</p></div>`).join('');
+}
+function rt(t){document.querySelectorAll('.rtab').forEach(el=>el.classList.add('hidden'));document.querySelectorAll('[id^="rt-"]').forEach(b=>{b.className=b.className.replace('tab-on','tab-off')});$(`rtc-${t}`).classList.remove('hidden');$(`rt-${t}`).className=$(`rt-${t}`).className.replace('tab-off','tab-on')}
+
+// ════════════════════════════════════════════════════════════════
+//  COSTS
+// ════════════════════════════════════════════════════════════════
+function ldCost(){
+  const d={entries:S.costs,total_cost_usd:S.costs.reduce((a,c)=>a+c.cost_usd,0),total_requests:S.costs.length,simulation_mode:true};
+  $('ct').textContent=`$${(d.total_cost_usd||0).toFixed(4)}`;$('cr').textContent=d.total_requests;
+  $('cm').textContent=USE_API?'API':'Static';$('cm').className=`text-base sm:text-lg font-bold font-mono ${USE_API?'text-fern-600':'text-sand-600'}`;
+  const b=$('sb');if(!USE_API){b.textContent='Static Mode';b.className='tt px-3 py-2 rounded-xl text-xs font-semibold bg-earth-100 text-earth-400 cursor-default';b.disabled=true}else{b.textContent='Toggle';b.className='tt px-3 py-2 rounded-xl text-xs font-semibold bg-fern-600 text-white'}
+  const es=d.entries.slice().reverse();$('ctb').innerHTML=es.length?es.map(e=>`<tr class="hover:bg-earth-50"><td class="px-3 py-2 font-mono text-[10px] text-earth-400">${new Date(e.timestamp).toLocaleTimeString()}</td><td class="px-3 py-2 text-[11px]">${e.action}</td><td class="px-3 py-2 text-[10px] text-right font-mono">${e.input_tokens}</td><td class="px-3 py-2 text-[10px] text-right font-mono">${e.output_tokens}</td><td class="px-3 py-2 text-[10px] text-right font-mono font-semibold">$${e.cost_usd.toFixed(4)}</td></tr>`).join(''):'<tr><td colspan="5" class="px-3 py-8 text-center text-earth-400 text-sm">No activity yet</td></tr>';
+}
+async function rstC(){if(!confirm('Reset?'))return;S.costs=[];if(USE_API)await POST('/api/costs/reset',{});ldCost()}
+async function togSim(){if(!USE_API)return;await POST('/api/simulation/toggle',{});ldCost()}
+
+// ── Mode display ────────────────────────────────────────────────
+function updMode(){
+  const s=!USE_API;
+  $('mpill').className=`hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-full text-[10px] font-mono ${s?'bg-sand-900/30 text-sand-400':'bg-fern-900/30 text-fern-400'}`;
+  $('mpill-t').textContent=s?'STATIC':'API';
+  $('ft').textContent=s?'Static Mode — open index.html directly':'API Mode · '+API_URL;
+  $('dm-mode').textContent=s?'Mode: Static':'Mode: API';
 }
 
-function openScenario(id) {
-  const s = state.scenarios.find(sc => sc.id === id);
-  if (!s) return;
-  state.currentScenario = s;
-  navigateTo('writing');
-  loadScenarioIntoWriting(s);
-}
-
-// ══════════════════════════════════════════════════════════════════════
-//  WRITING PAGE
-// ══════════════════════════════════════════════════════════════════════
-async function loadWritingPage() {
-  // Populate scenario selector
-  if (!state.scenarios.length) {
-    const data = await api('/api/scenarios');
-    state.scenarios = data.scenarios || [];
-  }
-  const sel = document.getElementById('writing-scenario-select');
-  if (sel.options.length <= 1) {
-    state.scenarios.forEach(s => {
-      const opt = document.createElement('option');
-      opt.value = s.id;
-      opt.textContent = `${s.title} (${s.difficulty}, Year ${s.year})`;
-      sel.appendChild(opt);
-    });
-  }
-  // If we have a current scenario, load it
-  if (state.currentScenario) {
-    loadScenarioIntoWriting(state.currentScenario);
-  }
-}
-
-function loadScenarioForWriting(id) {
-  if (!id) { clearWritingScenario(); return; }
-  const s = state.scenarios.find(sc => sc.id === id);
-  if (s) { state.currentScenario = s; loadScenarioIntoWriting(s); }
-}
-
-function loadScenarioIntoWriting(s) {
-  document.getElementById('writing-no-scenario').classList.add('hidden');
-  document.getElementById('writing-scenario-display').classList.remove('hidden');
-
-  const catObj = state.categories.find(c => c.id === s.category);
-  document.getElementById('scenario-header').innerHTML = `
-    <div class="flex items-center justify-between flex-wrap gap-2">
-      <h2 class="font-serif text-xl font-bold">${catObj ? catObj.icon : ''} ${s.title}</h2>
-      <div class="flex gap-2">${diffBadge(s.difficulty)}${s.exam_relevant ? '<span class="px-2 py-0.5 rounded-full text-xs font-medium bg-parch-200 text-parch-700">Exam Relevant</span>' : ''}</div>
-    </div>
-    <div class="text-xs text-bark-400 mt-1">Year ${s.year} · ${s.key_concepts.join(' · ')}</div>
-  `;
-
-  let rubricHtml = '';
-  if (s.rubric) {
-    rubricHtml = `<div class="mt-4 p-4 bg-parch-50 rounded-lg border border-parch-200">
-      <h4 class="font-semibold text-sm mb-2">Scoring Rubric</h4>
-      <div class="grid sm:grid-cols-2 gap-2">
-        ${Object.entries(s.rubric).map(([k, v]) => `
-          <div class="text-xs"><span class="font-semibold text-bark-600">${k.replace(/_/g, ' ')} (${v.points}pts):</span> <span class="text-bark-400">${v.criteria}</span></div>
-        `).join('')}
-      </div>
-    </div>`;
-  }
-
-  let tipsHtml = s.tips ? `<div class="mt-4 p-4 bg-sage-50 rounded-lg border border-sage-200">
-    <h4 class="font-semibold text-sm text-sage-800 mb-1">Exam Tip</h4>
-    <p class="text-sm text-sage-700">${s.tips}</p>
-  </div>` : '';
-
-  document.getElementById('scenario-body').innerHTML = `
-    <div class="mb-4">
-      <h4 class="font-semibold text-sm text-bark-500 uppercase tracking-wide mb-2">Case Scenario</h4>
-      <p class="text-[15px] leading-relaxed text-bark-700">${s.scenario}</p>
-    </div>
-    <div class="p-4 bg-bark-50 rounded-lg border border-bark-200">
-      <h4 class="font-semibold text-sm mb-2">Writing Prompt</h4>
-      <p class="text-sm leading-relaxed">${s.writing_prompt}</p>
-    </div>
-    ${rubricHtml}
-    ${tipsHtml}
-  `;
-
-  document.getElementById('writing-scenario-select').value = s.id;
-}
-
-function clearWritingScenario() {
-  state.currentScenario = null;
-  document.getElementById('writing-no-scenario').classList.remove('hidden');
-  document.getElementById('writing-scenario-display').classList.add('hidden');
-  document.getElementById('writing-scenario-select').value = '';
-}
-
-function updateWordCount() {
-  const text = document.getElementById('writing-input').value.trim();
-  const words = text ? text.split(/\s+/).length : 0;
-  document.getElementById('word-count').textContent = `${words} word${words !== 1 ? 's' : ''}`;
-}
-
-// ── Submit for evaluation ───────────────────────────────────────────
-async function submitForEvaluation() {
-  const writing = document.getElementById('writing-input').value.trim();
-  if (!writing) { alert('Please write a response before submitting for evaluation.'); return; }
-
-  showLoading(true);
-  const result = await api('/api/evaluate', {
-    method: 'POST',
-    body: JSON.stringify({
-      scenario_id: state.currentScenario?.id || '',
-      writing,
-      year_level: state.yearLevel,
-    }),
-  });
-  showLoading(false);
-  displayResult(result);
-}
-
-async function submitForFeedback() {
-  const writing = document.getElementById('writing-input').value.trim();
-  if (!writing) { alert('Please write something first.'); return; }
-
-  showLoading(true);
-  const result = await api('/api/feedback', {
-    method: 'POST',
-    body: JSON.stringify({
-      writing,
-      focus_area: state.currentScenario?.category || 'general',
-      year_level: state.yearLevel,
-    }),
-  });
-  showLoading(false);
-  displayResult(result);
-}
-
-async function generatePracticeQuestion() {
-  showLoading(true);
-  const result = await api('/api/practice-question', {
-    method: 'POST',
-    body: JSON.stringify({
-      category: state.currentScenario?.category || 'ethics',
-      difficulty: state.currentScenario?.difficulty || 'intermediate',
-      year_level: state.yearLevel,
-    }),
-  });
-  showLoading(false);
-  displayResult(result);
-}
-
-function showLoading(show) {
-  document.getElementById('loading-indicator').classList.toggle('hidden', !show);
-  document.getElementById('evaluation-results').classList.add('hidden');
-}
-
-function displayResult(result) {
-  if (!result || result.error) {
-    alert('Error: ' + (result?.error || 'Unknown error'));
-    return;
-  }
-  const el = document.getElementById('evaluation-results');
-  el.classList.remove('hidden');
-  document.getElementById('evaluation-content').innerHTML = renderMarkdown(result.response);
-
-  const badge = document.getElementById('result-badge');
-  if (result.simulated) {
-    badge.textContent = 'SIMULATED';
-    badge.className = 'text-xs font-mono px-2 py-0.5 rounded-full bg-parch-200 text-parch-700';
-  } else {
-    badge.textContent = 'LIVE API';
-    badge.className = 'text-xs font-mono px-2 py-0.5 rounded-full bg-sage-200 text-sage-700';
-  }
-
-  const costEl = document.getElementById('result-cost');
-  if (result.cost) {
-    costEl.textContent = `Cost: $${result.cost.cost_usd.toFixed(6)} | Tokens: ${result.cost.input_tokens} in / ${result.cost.output_tokens} out | ${result.cost.model}`;
-  } else {
-    costEl.textContent = '';
-  }
-
-  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// ── File upload ─────────────────────────────────────────────────────
-async function handleFileUpload(input) {
-  const file = input.files[0];
-  if (!file) return;
-  const statusEl = document.getElementById('upload-status');
-  statusEl.textContent = `Uploading ${file.name}...`;
-
-  const formData = new FormData();
-  formData.append('file', file);
-
-  try {
-    const res = await fetch(`${API}/api/upload`, { method: 'POST', body: formData });
-    const data = await res.json();
-    if (data.error) {
-      statusEl.textContent = `Error: ${data.error}`;
-    } else {
-      statusEl.innerHTML = `<span class="text-sage-600 font-medium">Uploaded:</span> ${data.filename} <span class="text-bark-300">•</span> <span class="text-xs text-bark-400">${data.message}</span>`;
-    }
-  } catch (e) {
-    statusEl.textContent = `Upload failed: ${e.message}`;
-  }
-}
-
-// ══════════════════════════════════════════════════════════════════════
-//  EXAM PREP PAGE
-// ══════════════════════════════════════════════════════════════════════
-async function loadExamPage() {
-  const [examInfo, scenData] = await Promise.all([
-    api('/api/exam-info'),
-    api('/api/scenarios'),
-  ]);
-  state.scenarios = scenData.scenarios || [];
-
-  // Exam cards
-  const cardsEl = document.getElementById('exam-info-cards');
-  cardsEl.innerHTML = Object.entries(examInfo || {}).map(([key, exam]) => {
-    const areasHtml = exam.content_areas.map(a => `
-      <div class="flex items-center justify-between text-xs mb-1">
-        <span class="text-bark-500 truncate mr-2">${a.area}</span>
-        <div class="flex items-center gap-2">
-          <div class="w-16 bg-parch-200 rounded-full h-1.5"><div class="h-1.5 rounded-full bg-bark-500" style="width:${a.percentage}%"></div></div>
-          <span class="text-bark-400 font-mono w-8 text-right">${a.percentage}%</span>
-        </div>
-      </div>
-    `).join('');
-    return `
-    <div class="bg-white rounded-xl border border-parch-200 p-5">
-      <h3 class="font-serif font-bold mb-1">${exam.name}</h3>
-      <p class="text-xs text-bark-400 mb-3">${exam.description}</p>
-      <div class="text-xs text-bark-300 mb-3">${exam.total_questions} questions · ${exam.time_limit_minutes} min · ${exam.scored_questions} scored</div>
-      <div class="space-y-1">${areasHtml}</div>
-    </div>`;
-  }).join('');
-
-  // Exam-relevant scenarios
-  const examScenarios = state.scenarios.filter(s => s.exam_relevant);
-  document.getElementById('exam-scenarios').innerHTML = examScenarios.map(s => {
-    const catObj = state.categories.find(c => c.id === s.category);
-    return `
-    <div class="scenario-card bg-white rounded-xl border border-parch-200 p-5 cursor-pointer" onclick="openScenario('${s.id}')">
-      <div class="flex items-center justify-between mb-2">
-        <span>${catObj ? catObj.icon : '📄'} <span class="font-semibold text-sm">${s.title}</span></span>
-        ${diffBadge(s.difficulty)}
-      </div>
-      <p class="text-xs text-bark-400 mb-2 line-clamp-2">${s.scenario.substring(0, 120)}...</p>
-      <div class="flex flex-wrap gap-1">${(s.exam_topics || []).map(t => `<span class="px-1.5 py-0.5 bg-parch-100 text-bark-500 rounded text-[10px]">${t}</span>`).join('')}</div>
-    </div>`;
-  }).join('');
-}
-
-async function fetchPracticeQuestion() {
-  const cat = document.getElementById('pq-category').value;
-  const diff = document.getElementById('pq-difficulty').value;
-  const exam = document.getElementById('pq-exam').value;
-
-  document.getElementById('pq-loading').classList.remove('hidden');
-  document.getElementById('practice-question-result').classList.add('hidden');
-
-  const result = await api('/api/practice-question', {
-    method: 'POST',
-    body: JSON.stringify({ category: cat, difficulty: diff, year_level: state.yearLevel, exam_type: exam }),
-  });
-
-  document.getElementById('pq-loading').classList.add('hidden');
-  if (result && !result.error) {
-    document.getElementById('practice-question-result').classList.remove('hidden');
-    document.getElementById('pq-content').innerHTML = renderMarkdown(result.response);
-    document.getElementById('pq-cost').textContent = result.cost ? `Cost: $${result.cost.cost_usd.toFixed(6)} | ${result.simulated ? 'Simulated' : 'Live'}` : '';
-  }
-}
-
-// ══════════════════════════════════════════════════════════════════════
-//  REFERENCE PAGE
-// ══════════════════════════════════════════════════════════════════════
-async function loadReferencePage() {
-  const [guides, ref] = await Promise.all([
-    api('/api/writing-guides'),
-    api('/api/quick-reference'),
-  ]);
-
-  // Writing guides
-  document.getElementById('writing-guides-list').innerHTML = Object.entries(guides || {}).map(([key, g]) => `
-    <div class="bg-white rounded-xl border border-parch-200 p-5">
-      <h3 class="font-semibold mb-1">${g.name}</h3>
-      <p class="text-xs text-bark-400 mb-3">${g.description}</p>
-      <div class="space-y-1">
-        ${g.sections.map((s, i) => `<div class="flex items-center gap-2 text-xs"><span class="w-5 h-5 rounded-full bg-parch-100 text-bark-500 flex items-center justify-center font-mono text-[10px]">${i + 1}</span> <span>${s}</span></div>`).join('')}
-      </div>
-    </div>
-  `).join('');
-
-  // NASW codes
-  document.getElementById('nasw-list').innerHTML = (ref?.nasw_code_sections || []).map(n => `
-    <div class="bg-white rounded-lg border border-parch-200 p-4 flex gap-4 items-start">
-      <div class="font-mono text-sm font-bold text-bark-500 bg-parch-100 px-2 py-1 rounded shrink-0">${n.section}</div>
-      <div>
-        <div class="font-semibold text-sm">${n.topic}</div>
-        <div class="text-xs text-bark-400 mt-0.5">${n.summary}</div>
-      </div>
-    </div>
-  `).join('');
-
-  // Defense mechanisms
-  document.getElementById('defense-list').innerHTML = (ref?.defense_mechanisms || []).map(d => `
-    <div class="bg-white rounded-lg border border-parch-200 p-4">
-      <h4 class="font-semibold text-sm">${d.name}</h4>
-      <p class="text-xs text-bark-400 mt-0.5">${d.description}</p>
-      <p class="text-xs text-bark-300 mt-1 italic">Example: ${d.example}</p>
-    </div>
-  `).join('');
-}
-
-function switchRefTab(tab) {
-  document.querySelectorAll('.ref-tab-content').forEach(el => el.classList.add('hidden'));
-  document.querySelectorAll('[id^="ref-tab-"]').forEach(btn => { btn.className = btn.className.replace('tab-active', 'tab-inactive'); });
-  document.getElementById(`ref-content-${tab}`).classList.remove('hidden');
-  document.getElementById(`ref-tab-${tab}`).className = document.getElementById(`ref-tab-${tab}`).className.replace('tab-inactive', 'tab-active');
-}
-
-// ══════════════════════════════════════════════════════════════════════
-//  COSTS PAGE
-// ══════════════════════════════════════════════════════════════════════
-async function loadCosts() {
-  const data = await api('/api/costs');
-  if (!data || data.error) return;
-
-  document.getElementById('cost-total').textContent = `$${(data.total_cost_usd || 0).toFixed(6)}`;
-  document.getElementById('cost-requests').textContent = data.total_requests || 0;
-  document.getElementById('cost-mode').textContent = data.simulation_mode ? 'Simulation' : 'Live API';
-  document.getElementById('cost-mode').className = `text-2xl font-bold font-mono ${data.simulation_mode ? 'text-parch-600' : 'text-sage-600'}`;
-
-  updateSimToggle(data.simulation_mode);
-
-  const tbody = document.getElementById('cost-table-body');
-  const entries = (data.entries || []).reverse();
-  if (!entries.length) {
-    tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-bark-400 text-sm">No activity yet</td></tr>';
-    return;
-  }
-  tbody.innerHTML = entries.map(e => `
-    <tr class="hover:bg-parch-50">
-      <td class="px-4 py-2.5 font-mono text-xs text-bark-400">${new Date(e.timestamp).toLocaleTimeString()}</td>
-      <td class="px-4 py-2.5 text-xs">${e.action}</td>
-      <td class="px-4 py-2.5 text-xs text-right font-mono">${e.input_tokens}</td>
-      <td class="px-4 py-2.5 text-xs text-right font-mono">${e.output_tokens}</td>
-      <td class="px-4 py-2.5 text-xs text-right font-mono font-semibold">$${e.cost_usd.toFixed(6)}</td>
-    </tr>
-  `).join('');
-}
-
-async function resetCosts() {
-  if (!confirm('Reset all cost tracking data?')) return;
-  await api('/api/costs/reset', { method: 'POST' });
-  loadCosts();
-}
-
-async function toggleSimulation() {
-  const data = await api('/api/simulation/toggle', { method: 'POST' });
-  state.simulationMode = data.simulation_mode;
-  updateSimToggle(data.simulation_mode);
-  updateSimBadge();
-}
-
-function updateSimToggle(simMode) {
-  const btn = document.getElementById('sim-toggle-btn');
-  if (simMode) {
-    btn.textContent = 'Switch to Live API';
-    btn.className = 'px-4 py-2 bg-sage-600 hover:bg-sage-500 text-white rounded-lg text-sm font-medium transition';
-  } else {
-    btn.textContent = 'Switch to Simulation';
-    btn.className = 'px-4 py-2 bg-parch-200 hover:bg-parch-300 text-bark-700 rounded-lg text-sm font-medium transition';
-  }
-}
-
-// ── Global status badge ─────────────────────────────────────────────
-async function updateSimBadge() {
-  const data = await api('/api/health');
-  if (!data || data.error) return;
-  state.simulationMode = data.simulation_mode;
-
-  const badge = document.getElementById('sim-badge');
-  const dot = badge.querySelector('span:first-child');
-  const label = badge.querySelector('span:last-child');
-  const footer = document.getElementById('footer-mode');
-
-  if (data.simulation_mode) {
-    badge.className = 'hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono bg-parch-200/50 text-parch-600';
-    dot.className = 'w-2 h-2 rounded-full bg-parch-500 pulse-dot';
-    label.textContent = 'SIM MODE';
-    footer.textContent = 'Simulation Mode Active';
-  } else {
-    badge.className = 'hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono bg-sage-200/50 text-sage-600';
-    dot.className = 'w-2 h-2 rounded-full bg-sage-500 pulse-dot';
-    label.textContent = 'LIVE API';
-    footer.textContent = 'Live API · Key: ' + (data.api_key_set ? 'Set' : 'Missing');
-  }
-}
-
-// ── Initialize ──────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  updateSimBadge();
-  loadHomePage();
-});
+// ── INIT ────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{updMode();go('home')});
 </script>
 </body>
 </html>
