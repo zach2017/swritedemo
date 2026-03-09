@@ -6,1051 +6,387 @@
 <title>Capstone Mentor — Social Work Excellence Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #1b2a22;
-    --forest: #2a4637;
-    --sage: #5b7a65;
-    --fern: #8aab94;
-    --sand: #d4c5a0;
-    --gold: #c9a84c;
-    --gold-light: #e6d48a;
-    --cream: #f6f2ea;
-    --parchment: #ede8dc;
-    --white: #ffffff;
-    --success: #3a7d53;
-    --error: #9e4a3a;
-    --radius: 14px;
-    --shadow-sm: 0 2px 8px rgba(27,42,34,0.06);
-    --shadow-md: 0 8px 30px rgba(27,42,34,0.1);
-    --shadow-lg: 0 16px 50px rgba(27,42,34,0.14);
-  }
+:root{--ink:#1b2a22;--forest:#2a4637;--sage:#5b7a65;--fern:#8aab94;--sand:#d4c5a0;--gold:#c9a84c;--gold-light:#e6d48a;--cream:#f6f2ea;--parch:#ede8dc;--wh:#fff;--ok:#3a7d53;--err:#9e4a3a;--r:14px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--sand);border-radius:3px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes dotBounce{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 8px rgba(201,168,76,.2)}50%{box-shadow:0 0 20px rgba(201,168,76,.45)}}
+.fade-up{animation:fadeUp .5s ease both}.s1{animation-delay:.08s}.s2{animation-delay:.16s}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* NAV */
+#topnav{position:sticky;top:0;z-index:100;background:linear-gradient(135deg,var(--ink),var(--forest));border-bottom:3px solid var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.ni{max-width:1280px;margin:auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:62px}
+.nb{display:flex;align-items:center;gap:11px}
+.nl{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:var(--ink);font-family:'Cormorant Garamond',serif;box-shadow:0 2px 10px rgba(201,168,76,.35)}
+.nt{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--gold-light)}
+.ns{font-size:10px;color:var(--fern);letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.nls{display:flex;gap:1px;align-items:center}
+.nlk{padding:6px 13px;border-radius:7px;font-size:12.5px;font-weight:500;color:var(--fern);background:0;border:0;cursor:pointer;transition:.25s;font-family:'Outfit',sans-serif;white-space:nowrap}
+.nlk:hover{color:var(--gold-light);background:rgba(201,168,76,.1)}.nlk.a{color:var(--gold-light);background:rgba(201,168,76,.18);font-weight:700}
+.ls{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);border-radius:7px;padding:5px 9px;color:var(--gold-light);font-size:12px;font-family:'Outfit',sans-serif;cursor:pointer;outline:0}
+.ls option{background:var(--ink);color:var(--gold-light)}
+#mt{display:none;background:0;border:0;color:var(--gold-light);font-size:24px;cursor:pointer}
+#mm{display:none;flex-wrap:wrap;gap:5px;padding:0 20px 12px}#mm.open{display:flex}
+@media(max-width:1023px){.nls{display:none}#mt{display:block}}
 
-  body {
-    font-family: 'Outfit', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+.page{display:none}.page.v{display:block}
+.sh{max-width:1080px;margin:0 auto;padding:44px 20px 0}
+.sh h2{font-size:clamp(26px,4vw,38px);font-weight:700;color:var(--ink);margin-bottom:5px}
+.rl{width:54px;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:2px;margin-bottom:24px}
+.sb{max-width:1080px;margin:0 auto;padding:0 20px 52px}
 
-  h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }
+/* HERO */
+.hero{background:linear-gradient(160deg,var(--ink),var(--forest) 40%,#3b5c4a);padding:68px 20px 60px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;opacity:.05;background-image:radial-gradient(circle at 25% 45%,var(--gold) 1.2px,transparent 1.2px),radial-gradient(circle at 75% 25%,var(--gold) .8px,transparent .8px);background-size:52px 52px,36px 36px}
+.hero::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:55px;background:linear-gradient(to top,var(--cream),transparent)}
+.hero h1{font-size:clamp(28px,5.5vw,50px);font-weight:700;color:var(--gold-light);margin-bottom:14px;position:relative;line-height:1.15}
+.hero p{font-size:clamp(13px,2vw,17px);color:var(--fern);max-width:600px;margin:0 auto 32px;line-height:1.65;position:relative}
+.stb{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;position:relative}
+.stc{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.22);border-radius:8px;padding:9px 20px;color:var(--gold);font-size:13px;font-weight:600}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:24px}
+.pc{background:var(--wh);border:1px solid #e2dace;border-radius:var(--r);padding:26px;cursor:pointer;transition:.3s;box-shadow:0 2px 8px rgba(27,42,34,.06);position:relative;overflow:hidden}
+.pc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.pc:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(27,42,34,.1);border-color:var(--sand)}.pc:hover::after{transform:scaleX(1)}
+.pc .ic{font-size:32px;margin-bottom:12px;display:block}.pc h3{font-size:21px;font-weight:700;color:var(--ink);margin-bottom:5px}.pc p{font-size:13.5px;color:var(--sage);line-height:1.5}
 
-  ::-webkit-scrollbar { width: 7px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--sand); border-radius: 4px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+.tb{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:24px}
+.tbtn{padding:8px 18px;border-radius:22px;font-size:13px;font-weight:600;border:0;cursor:pointer;transition:.25s;font-family:'Outfit',sans-serif;background:var(--parch);color:var(--sage)}
+.tbtn.a{background:linear-gradient(135deg,var(--ink),var(--forest));color:var(--gold-light);box-shadow:0 4px 14px rgba(27,42,34,.15)}
+.pn{background:var(--wh);border-radius:var(--r);border:1px solid #e2dace;overflow:hidden;box-shadow:0 2px 8px rgba(27,42,34,.06)}
+.ph{background:linear-gradient(135deg,#faf6ee,var(--parch));padding:22px 26px;border-bottom:1px solid #e2dace}
+.ph h3{font-size:22px;font-weight:700;color:var(--ink)}
+.pb{padding:22px 26px;font-size:14.5px;color:var(--forest);line-height:1.75}
 
-  /* ---- ANIMATIONS ---- */
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
-  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
-  @keyframes dotBounce {
-    0%,80%,100% { transform: scale(0); }
-    40% { transform: scale(1); }
-  }
-  .fade-up { animation: fadeUp .6s ease both; }
-  .fade-in { animation: fadeIn .5s ease both; }
-  .stagger-1 { animation-delay: .08s; }
-  .stagger-2 { animation-delay: .16s; }
-  .stagger-3 { animation-delay: .24s; }
-  .stagger-4 { animation-delay: .32s; }
+/* AI HELP WIDGET */
+.aw{margin-top:28px;background:linear-gradient(135deg,rgba(42,70,55,.03),rgba(201,168,76,.05));border:1px solid rgba(201,168,76,.2);border-radius:var(--r);overflow:hidden}
+.at{width:100%;padding:16px 22px;background:0;border:0;cursor:pointer;display:flex;align-items:center;gap:12px;transition:.2s}
+.at:hover{background:rgba(201,168,76,.06)}
+.ag{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:18px;animation:glowPulse 2.5s infinite;flex-shrink:0}
+.at .al{font-size:14px;font-weight:600;color:var(--forest)}.at .ah{font-size:12px;color:var(--fern);font-weight:400}
+.at .aa{margin-left:auto;font-size:16px;color:var(--gold);transition:transform .3s;flex-shrink:0}
+.ab{display:none;border-top:1px solid rgba(201,168,76,.15);padding:18px 22px}
+.aw.open .ab{display:block}.aw.open .aa{transform:rotate(180deg)}
+.ap{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.apb{background:var(--parch);border:1px solid #e2dace;border-radius:20px;padding:8px 16px;font-size:12px;color:var(--sage);cursor:pointer;font-family:'Outfit',sans-serif;font-weight:500;transition:.25s}
+.apb:hover{border-color:var(--gold);background:rgba(201,168,76,.12);color:var(--forest)}.apb.u{opacity:.45;pointer-events:none}
+.aca{max-height:420px;overflow-y:auto;margin-bottom:14px;display:flex;flex-direction:column;gap:10px}
+.am{display:flex}.am.usr{justify-content:flex-end}.am.bot{justify-content:flex-start}
+.abl{max-width:85%;padding:14px 18px;font-size:13.5px;line-height:1.7;white-space:pre-wrap;word-break:break-word;border-radius:14px}
+.am.usr .abl{background:linear-gradient(135deg,var(--ink),var(--forest));color:var(--gold-light);border-bottom-right-radius:4px}
+.am.bot .abl{background:var(--parch);color:var(--forest);border-bottom-left-radius:4px}
+.ti span{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--fern);margin-right:4px;animation:dotBounce 1.4s infinite ease-in-out both}
+.ti span:nth-child(1){animation-delay:-.32s}.ti span:nth-child(2){animation-delay:-.16s}
+.air{display:flex;gap:8px}
+.ain{flex:1;padding:12px 16px;border-radius:12px;border:2px solid #e2dace;font-family:'Outfit',sans-serif;font-size:13px;color:var(--ink);outline:0;transition:border-color .25s;background:var(--wh)}
+.ain::placeholder{color:var(--fern)}.ain:focus{border-color:var(--gold)}
+.asnd{background:linear-gradient(135deg,var(--ink),var(--forest));color:var(--gold-light);border:0;border-radius:12px;padding:12px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;white-space:nowrap}
 
-  /* ---- NAV ---- */
-  #topnav {
-    position: sticky; top: 0; z-index: 100;
-    background: linear-gradient(135deg, var(--ink) 0%, var(--forest) 100%);
-    border-bottom: 3px solid var(--gold);
-    box-shadow: 0 4px 20px rgba(0,0,0,.2);
-  }
-  #topnav .inner { max-width: 1260px; margin: auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  .nav-brand { display: flex; align-items: center; gap: 12px; }
-  .nav-logo {
-    width: 44px; height: 44px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 17px; font-weight: 800; color: var(--ink);
-    font-family: 'Cormorant Garamond', serif;
-    box-shadow: 0 2px 10px rgba(201,168,76,.35);
-  }
-  .nav-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--gold-light); letter-spacing: .01em; }
-  .nav-subtitle { font-size: 10px; color: var(--fern); letter-spacing: .1em; text-transform: uppercase; font-weight: 500; }
-  .nav-links { display: flex; gap: 2px; align-items: center; }
-  .nav-link {
-    padding: 7px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
-    color: var(--fern); background: transparent; border: none; cursor: pointer;
-    transition: all .25s ease; font-family: 'Outfit', sans-serif; white-space: nowrap;
-  }
-  .nav-link:hover { color: var(--gold-light); background: rgba(201,168,76,.1); }
-  .nav-link.active { color: var(--gold-light); background: rgba(201,168,76,.18); font-weight: 700; }
-  .lang-select {
-    background: rgba(201,168,76,.12); border: 1px solid rgba(201,168,76,.3);
-    border-radius: 8px; padding: 6px 10px; color: var(--gold-light); font-size: 12px;
-    font-family: 'Outfit', sans-serif; cursor: pointer; outline: none;
-  }
-  .lang-select option { background: var(--ink); color: var(--gold-light); }
-  #mobileToggle { display: none; background: none; border: none; color: var(--gold-light); font-size: 26px; cursor: pointer; padding: 4px; }
-  #mobileMenu { display: none; flex-wrap: wrap; gap: 6px; padding: 0 20px 14px; }
-  #mobileMenu.open { display: flex; }
+/* ETHICS */
+.vc{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.vch{background:linear-gradient(135deg,rgba(42,70,55,.07),rgba(90,122,101,.07));border-radius:20px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--forest)}
+.scc{background:var(--wh);border-radius:var(--r);border:1px solid #e2dace;overflow:hidden;margin-bottom:14px;transition:.3s}
+.scc.o{border-color:var(--gold);border-width:2px}
+.sct{width:100%;padding:18px 22px;background:0;border:0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.sct h3{font-size:18px;font-weight:700;color:var(--ink);text-align:left}
+.sar{font-size:17px;color:var(--gold);transition:transform .3s;flex-shrink:0}.scc.o .sar{transform:rotate(180deg)}
+.scb{display:none;padding:0 22px 22px}.scc.o .scb{display:block}
+.sit{background:var(--parch);border-radius:10px;padding:16px;margin-bottom:12px}
+.sit p{font-size:14px;color:var(--forest);line-height:1.6}.sit .q{font-weight:700;color:var(--ink);font-style:italic;margin-top:9px}
+.rvb{background:linear-gradient(135deg,var(--ink),var(--forest));color:var(--gold-light);border:0;border-radius:9px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif}
+.gdb{background:linear-gradient(135deg,rgba(42,70,55,.04),rgba(201,168,76,.06));border-radius:10px;padding:16px;border-left:4px solid var(--gold);font-size:14px;color:var(--forest);line-height:1.7;margin-top:12px;white-space:pre-wrap}
 
-  @media(max-width: 1023px) {
-    .nav-links { display: none; }
-    #mobileToggle { display: block; }
-  }
+/* THEORY */
+.tsl{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px;margin-bottom:24px}
+.tsb{padding:16px 12px;border-radius:11px;border:1px solid #e2dace;cursor:pointer;text-align:center;transition:.25s;background:var(--wh)}
+.tsb.a{background:linear-gradient(135deg,var(--ink),var(--forest));border-color:var(--gold);box-shadow:0 4px 14px rgba(27,42,34,.15)}
+.tsb .k{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.11em;margin-bottom:3px}
+.tsb.a .k{color:var(--gold)}.tsb:not(.a) .k{color:var(--fern)}
+.tsb .n{font-size:13px;font-weight:700}.tsb.a .n{color:var(--gold-light)}.tsb:not(.a) .n{color:var(--ink)}
+.thd{background:linear-gradient(135deg,var(--ink),var(--forest));padding:28px 26px;border-radius:var(--r) var(--r) 0 0}
+.thd .k{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:5px}
+.thd h3{font-size:25px;font-weight:700;color:var(--gold-light);margin-bottom:7px}
+.thd p{font-size:14px;color:var(--fern);line-height:1.6}
+.tap{padding:26px;display:grid;grid-template-columns:1fr 1fr;gap:9px}
+@media(max-width:600px){.tap{grid-template-columns:1fr}}
+.tai{display:flex;align-items:center;gap:11px;background:var(--parch);border-radius:9px;padding:13px 15px}
+.tad{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0}.tai span{font-size:13.5px;color:var(--forest)}
+.tcs{padding:0 26px 26px}
+.tc{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:10px;padding:18px;margin-bottom:10px}
+.tc h4{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px}.tc p{font-size:13px;color:var(--forest);line-height:1.6}
 
-  /* ---- PAGE CONTAINER ---- */
-  .page { display: none; }
-  .page.visible { display: block; }
-  .section-head { max-width: 1060px; margin: 0 auto; padding: 48px 20px 0; }
-  .section-head h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 700; color: var(--ink); margin-bottom: 6px; }
-  .section-head .rule { width: 56px; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 2px; margin-bottom: 28px; }
-  .section-body { max-width: 1060px; margin: 0 auto; padding: 0 20px 56px; }
+/* EXAM */
+.ep{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.ec{font-size:13px;color:var(--fern);font-weight:600}
+.pt{width:200px;height:8px;background:var(--parch);border-radius:4px;overflow:hidden}
+.pf{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:4px;transition:width .4s}
+.qt{font-size:16px;font-weight:600;color:var(--ink);line-height:1.6;margin-bottom:22px;font-family:'Outfit',sans-serif}
+.ob{width:100%;padding:14px 16px;border-radius:11px;background:var(--parch);border:2px solid transparent;text-align:left;cursor:pointer;font-family:'Outfit',sans-serif;font-size:13.5px;color:var(--forest);font-weight:500;transition:.2s;display:flex;align-items:center;gap:13px;margin-bottom:9px}
+.ob:hover:not(:disabled){border-color:var(--sand)}.ob.sl{border-color:var(--gold);background:rgba(201,168,76,.12)}
+.ob.ok{border-color:var(--ok);background:rgba(58,125,83,.1);color:#1a4f2a}.ob.no{border-color:var(--err);background:rgba(158,74,58,.08);color:var(--err)}
+.ol{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;background:rgba(42,70,55,.08);color:var(--sage)}
+.ob.sl .ol{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--ink)}
+.eb{margin-top:16px;padding:15px 17px;border-radius:10px;font-size:13.5px;line-height:1.65}
+.eb.eok{background:rgba(58,125,83,.06);border-left:4px solid var(--ok);color:var(--forest)}
+.eb.eno{background:rgba(158,74,58,.06);border-left:4px solid var(--err);color:var(--forest)}
+.eb .v{font-weight:700;margin-bottom:5px}
+.ea{margin-top:18px;display:flex;justify-content:flex-end}
+.bp{background:linear-gradient(135deg,var(--ink),var(--forest));color:var(--gold-light);border:0;border-radius:9px;padding:11px 24px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif}.bp:disabled{opacity:.4;cursor:default}
+.bg{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--ink);border:0;border-radius:9px;padding:11px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif}
+.scr{width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:24px auto;font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:700;color:#fff}
+.shi{background:linear-gradient(135deg,var(--ink),#2d6a3e)}.smi{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--ink)!important}.slo{background:linear-gradient(135deg,#7a3e30,var(--err))}
 
-  /* ---- HERO ---- */
-  .hero {
-    background: linear-gradient(160deg, var(--ink) 0%, var(--forest) 40%, #3b5c4a 100%);
-    padding: 72px 20px 64px; text-align: center; position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: ''; position: absolute; inset: 0; opacity: .06;
-    background-image: radial-gradient(circle at 25% 45%, var(--gold) 1.2px, transparent 1.2px),
-      radial-gradient(circle at 75% 25%, var(--gold) .8px, transparent .8px);
-    background-size: 54px 54px, 38px 38px;
-  }
-  .hero::after {
-    content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 60px;
-    background: linear-gradient(to top, var(--cream), transparent);
-  }
-  .hero h1 { font-size: clamp(30px, 5.5vw, 52px); font-weight: 700; color: var(--gold-light); margin-bottom: 16px; position: relative; line-height: 1.15; }
-  .hero p { font-size: clamp(14px, 2vw, 18px); color: var(--fern); max-width: 620px; margin: 0 auto 36px; line-height: 1.65; position: relative; }
-  .stat-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; position: relative; }
-  .stat-chip {
-    background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.22);
-    border-radius: 8px; padding: 10px 22px; color: var(--gold);
-    font-size: 14px; font-weight: 600; letter-spacing: .01em;
-  }
+/* MILESTONES */
+.mc{background:var(--wh);border-radius:var(--r);border:1px solid #e2dace;overflow:hidden;margin-bottom:16px}
+.mh{padding:18px 22px;border-bottom:1px solid #e8e2d4;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.mh h3{font-size:19px;font-weight:700;color:var(--ink)}.mh .wk{font-size:12px;color:var(--fern);font-weight:600}
+.mp{display:flex;align-items:center;gap:9px}
+.mb{width:100px;height:8px;background:var(--parch);border-radius:4px;overflow:hidden}
+.mf{height:100%;border-radius:4px;transition:width .35s}
+.mpct{font-size:12px;font-weight:700;min-width:34px;text-align:right}
+.mts{padding:4px 22px 14px}
+.tr{display:flex;align-items:flex-start;gap:13px;padding:11px 0;border-bottom:1px solid #f2eddf;cursor:pointer;user-select:none}
+.tr:last-child{border-bottom:0}
+.tck{width:21px;height:21px;border-radius:5px;border:2px solid var(--sand);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:.25s;font-size:12px;color:transparent}
+.tr.d .tck{background:var(--gold);border-color:var(--gold);color:var(--wh)}
+.tl{font-size:13.5px;color:var(--forest);line-height:1.5;transition:.25s}.tr.d .tl{color:var(--fern);text-decoration:line-through}
+.tipb{background:linear-gradient(135deg,#faf6ee,var(--parch));border-radius:11px;padding:16px 20px;border-left:4px solid var(--gold);margin-top:8px;font-size:14px;color:var(--forest);font-weight:600}
 
-  /* ---- CARDS ---- */
-  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 28px; }
-  .path-card {
-    background: var(--white); border: 1px solid #e2dace; border-radius: var(--radius);
-    padding: 28px; cursor: pointer; transition: all .3s ease; box-shadow: var(--shadow-sm);
-    position: relative; overflow: hidden;
-  }
-  .path-card::after {
-    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--gold), var(--gold-light)); transform: scaleX(0);
-    transform-origin: left; transition: transform .35s ease;
-  }
-  .path-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--sand); }
-  .path-card:hover::after { transform: scaleX(1); }
-  .path-card .icon { font-size: 34px; margin-bottom: 14px; display: block; }
-  .path-card h3 { font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
-  .path-card p { font-size: 14px; color: var(--sage); line-height: 1.55; }
+/* ACCESS */
+.acg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.acc{background:var(--wh);border-radius:var(--r);border:1px solid #e2dace;overflow:hidden}
+.achd{background:linear-gradient(135deg,var(--ink),var(--forest));padding:20px}
+.achd h3{font-size:17px;font-weight:700;color:var(--gold-light);margin-bottom:5px}.achd p{font-size:13px;color:var(--fern);line-height:1.5}
+.acbd{padding:14px 20px}
+.aci{display:flex;align-items:center;gap:11px;padding:8px 0;border-bottom:1px solid #f2eddf}.aci:last-child{border-bottom:0}
+.acd{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0}.aci span{font-size:13px;color:var(--forest);line-height:1.4}
 
-  /* ---- TABS ---- */
-  .tab-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; }
-  .tab-btn {
-    padding: 9px 20px; border-radius: 24px; font-size: 13px; font-weight: 600;
-    border: none; cursor: pointer; transition: all .25s; font-family: 'Outfit', sans-serif;
-    background: var(--parchment); color: var(--sage);
-  }
-  .tab-btn.active { background: linear-gradient(135deg, var(--ink), var(--forest)); color: var(--gold-light); box-shadow: 0 4px 14px rgba(27,42,34,.15); }
-  .tab-btn:hover:not(.active) { background: #e0d9ca; }
-
-  /* ---- CONTENT PANEL ---- */
-  .content-panel {
-    background: var(--white); border-radius: var(--radius); border: 1px solid #e2dace;
-    overflow: hidden; box-shadow: var(--shadow-sm);
-  }
-  .panel-header {
-    background: linear-gradient(135deg, #faf6ee, var(--parchment));
-    padding: 24px 28px; border-bottom: 1px solid #e2dace;
-  }
-  .panel-header h3 { font-size: 24px; font-weight: 700; color: var(--ink); }
-  .panel-body { padding: 24px 28px; font-size: 15px; color: var(--forest); line-height: 1.78; }
-
-  /* ---- ETHICS ---- */
-  .value-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-  .value-chip {
-    background: linear-gradient(135deg, rgba(42,70,55,.07), rgba(90,122,101,.07));
-    border-radius: 22px; padding: 9px 18px; font-size: 13px; font-weight: 600; color: var(--forest);
-  }
-  .scenario-card {
-    background: var(--white); border-radius: var(--radius); border: 1px solid #e2dace;
-    overflow: hidden; margin-bottom: 16px; transition: border-color .3s;
-  }
-  .scenario-card.open { border-color: var(--gold); border-width: 2px; }
-  .scenario-toggle {
-    width: 100%; padding: 20px 24px; background: none; border: none; cursor: pointer;
-    display: flex; justify-content: space-between; align-items: center; gap: 12px;
-  }
-  .scenario-toggle h3 { font-size: 19px; font-weight: 700; color: var(--ink); text-align: left; }
-  .scenario-arrow { font-size: 18px; color: var(--gold); transition: transform .3s; flex-shrink: 0; }
-  .scenario-card.open .scenario-arrow { transform: rotate(180deg); }
-  .scenario-body { display: none; padding: 0 24px 24px; }
-  .scenario-card.open .scenario-body { display: block; }
-  .scenario-situation { background: var(--parchment); border-radius: 10px; padding: 18px; margin-bottom: 14px; }
-  .scenario-situation p { font-size: 14px; color: var(--forest); line-height: 1.6; }
-  .scenario-situation .question { font-weight: 700; color: var(--ink); font-style: italic; margin-top: 10px; }
-  .reveal-btn {
-    background: linear-gradient(135deg, var(--ink), var(--forest)); color: var(--gold-light);
-    border: none; border-radius: 10px; padding: 11px 22px; font-size: 13px; font-weight: 600;
-    cursor: pointer; font-family: 'Outfit', sans-serif; transition: box-shadow .3s;
-  }
-  .reveal-btn:hover { box-shadow: 0 4px 16px rgba(27,42,34,.2); }
-  .guidance-box {
-    background: linear-gradient(135deg, rgba(42,70,55,.04), rgba(201,168,76,.06));
-    border-radius: 10px; padding: 18px; border-left: 4px solid var(--gold);
-    font-size: 14px; color: var(--forest); line-height: 1.7; margin-top: 14px;
-  }
-
-  /* ---- THEORY ---- */
-  .theory-selector { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-bottom: 28px; }
-  .theory-btn {
-    padding: 18px 14px; border-radius: 12px; border: 1px solid #e2dace; cursor: pointer;
-    text-align: center; transition: all .25s; background: var(--white);
-  }
-  .theory-btn.active { background: linear-gradient(135deg, var(--ink), var(--forest)); border-color: var(--gold); box-shadow: 0 4px 16px rgba(27,42,34,.15); }
-  .theory-btn .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 4px; }
-  .theory-btn.active .label { color: var(--gold); }
-  .theory-btn:not(.active) .label { color: var(--fern); }
-  .theory-btn .name { font-size: 13px; font-weight: 700; }
-  .theory-btn.active .name { color: var(--gold-light); }
-  .theory-btn:not(.active) .name { color: var(--ink); }
-  .theory-detail-head {
-    background: linear-gradient(135deg, var(--ink), var(--forest));
-    padding: 30px 28px; border-radius: var(--radius) var(--radius) 0 0;
-  }
-  .theory-detail-head .key { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .13em; color: var(--gold); margin-bottom: 6px; }
-  .theory-detail-head h3 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: var(--gold-light); margin-bottom: 8px; }
-  .theory-detail-head p { font-size: 14px; color: var(--fern); line-height: 1.6; }
-  .theory-apps { padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  @media(max-width: 600px) { .theory-apps { grid-template-columns: 1fr; } }
-  .theory-app-item {
-    display: flex; align-items: center; gap: 12px;
-    background: var(--parchment); border-radius: 10px; padding: 14px 16px;
-  }
-  .theory-app-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
-  .theory-app-item span { font-size: 14px; color: var(--forest); }
-
-  /* ---- EXAM ---- */
-  .exam-progress { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
-  .exam-counter { font-size: 13px; color: var(--fern); font-weight: 600; }
-  .progress-track { width: 200px; height: 8px; background: var(--parchment); border-radius: 4px; overflow: hidden; }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 4px; transition: width .4s ease; }
-  .question-text { font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.6; margin-bottom: 24px; font-family: 'Outfit', sans-serif; }
-  .option-btn {
-    width: 100%; padding: 15px 18px; border-radius: 12px; background: var(--parchment);
-    border: 2px solid transparent; text-align: left; cursor: pointer; font-family: 'Outfit', sans-serif;
-    font-size: 14px; color: var(--forest); font-weight: 500; transition: all .2s;
-    display: flex; align-items: center; gap: 14px; margin-bottom: 10px;
-  }
-  .option-btn:hover:not(:disabled) { border-color: var(--sand); background: #f0ebdf; }
-  .option-btn.selected { border-color: var(--gold); background: rgba(201,168,76,.12); }
-  .option-btn.correct { border-color: var(--success); background: rgba(58,125,83,.1); color: #1a4f2a; }
-  .option-btn.wrong { border-color: var(--error); background: rgba(158,74,58,.08); color: var(--error); }
-  .option-letter {
-    width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center;
-    justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0;
-    background: rgba(42,70,55,.08); color: var(--sage);
-  }
-  .option-btn.selected .option-letter { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--ink); }
-  .explanation-box { margin-top: 18px; padding: 16px 18px; border-radius: 10px; font-size: 14px; line-height: 1.65; }
-  .explanation-box.correct-exp { background: rgba(58,125,83,.06); border-left: 4px solid var(--success); color: var(--forest); }
-  .explanation-box.wrong-exp { background: rgba(158,74,58,.06); border-left: 4px solid var(--error); color: var(--forest); }
-  .explanation-box .verdict { font-weight: 700; margin-bottom: 6px; }
-  .exam-actions { margin-top: 20px; display: flex; justify-content: flex-end; }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--ink), var(--forest)); color: var(--gold-light);
-    border: none; border-radius: 10px; padding: 12px 26px; font-size: 14px; font-weight: 600;
-    cursor: pointer; font-family: 'Outfit', sans-serif; transition: box-shadow .3s;
-  }
-  .btn-primary:hover { box-shadow: 0 4px 16px rgba(27,42,34,.18); }
-  .btn-primary:disabled { opacity: .4; cursor: default; box-shadow: none; }
-  .btn-gold {
-    background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--ink);
-    border: none; border-radius: 10px; padding: 12px 26px; font-size: 14px; font-weight: 700;
-    cursor: pointer; font-family: 'Outfit', sans-serif;
-  }
-  .score-circle {
-    width: 150px; height: 150px; border-radius: 50%; display: flex; align-items: center;
-    justify-content: center; margin: 28px auto;
-    font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 700; color: #fff;
-  }
-  .score-high { background: linear-gradient(135deg, var(--ink), #2d6a3e); }
-  .score-mid { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--ink) !important; }
-  .score-low { background: linear-gradient(135deg, #7a3e30, var(--error)); }
-
-  /* ---- MILESTONES ---- */
-  .phase-card { background: var(--white); border-radius: var(--radius); border: 1px solid #e2dace; overflow: hidden; margin-bottom: 18px; }
-  .phase-header { padding: 20px 24px; border-bottom: 1px solid #e8e2d4; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-  .phase-header h3 { font-size: 20px; font-weight: 700; color: var(--ink); }
-  .phase-header .weeks { font-size: 12px; color: var(--fern); font-weight: 600; }
-  .phase-progress-wrap { display: flex; align-items: center; gap: 10px; }
-  .phase-progress-bar { width: 110px; height: 8px; background: var(--parchment); border-radius: 4px; overflow: hidden; }
-  .phase-progress-fill { height: 100%; border-radius: 4px; transition: width .35s ease; }
-  .phase-pct { font-size: 12px; font-weight: 700; min-width: 36px; text-align: right; }
-  .phase-tasks { padding: 4px 24px 16px; }
-  .task-row {
-    display: flex; align-items: flex-start; gap: 14px; padding: 12px 0;
-    border-bottom: 1px solid #f2eddf; cursor: pointer; user-select: none;
-  }
-  .task-row:last-child { border-bottom: none; }
-  .task-check {
-    width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--sand);
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    margin-top: 1px; transition: all .25s; font-size: 13px; color: transparent;
-  }
-  .task-row.done .task-check { background: var(--gold); border-color: var(--gold); color: var(--white); }
-  .task-label { font-size: 14px; color: var(--forest); line-height: 1.5; transition: all .25s; }
-  .task-row.done .task-label { color: var(--fern); text-decoration: line-through; }
-  .tip-box {
-    background: linear-gradient(135deg, #faf6ee, var(--parchment)); border-radius: 12px;
-    padding: 18px 22px; border-left: 4px solid var(--gold); margin-top: 8px;
-    font-size: 14px; color: var(--forest); font-weight: 600;
-  }
-
-  /* ---- ACCESSIBILITY ---- */
-  .access-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
-  .access-card { background: var(--white); border-radius: var(--radius); border: 1px solid #e2dace; overflow: hidden; }
-  .access-card-head { background: linear-gradient(135deg, var(--ink), var(--forest)); padding: 22px; }
-  .access-card-head h3 { font-size: 18px; font-weight: 700; color: var(--gold-light); margin-bottom: 6px; }
-  .access-card-head p { font-size: 13px; color: var(--fern); line-height: 1.5; }
-  .access-card-body { padding: 16px 22px; }
-  .access-item { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid #f2eddf; }
-  .access-item:last-child { border-bottom: none; }
-  .access-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
-  .access-item span { font-size: 13px; color: var(--forest); line-height: 1.45; }
-
-  /* ---- AI CHAT ---- */
-  .chat-wrap { display: flex; flex-direction: column; min-height: 520px; }
-  .example-prompts { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-  .example-btn {
-    background: var(--parchment); border: 1px solid #e2dace; border-radius: 22px;
-    padding: 9px 18px; font-size: 12px; color: var(--sage); cursor: pointer;
-    font-family: 'Outfit', sans-serif; font-weight: 500; transition: all .25s;
-  }
-  .example-btn:hover { border-color: var(--gold); background: rgba(201,168,76,.12); color: var(--forest); }
-  .chat-messages {
-    flex: 1; overflow-y: auto; background: var(--white); border-radius: var(--radius);
-    border: 1px solid #e2dace; padding: 22px; margin-bottom: 16px; min-height: 300px;
-  }
-  .chat-msg { display: flex; margin-bottom: 14px; }
-  .chat-msg.user { justify-content: flex-end; }
-  .chat-msg.ai { justify-content: flex-start; }
-  .chat-bubble {
-    max-width: 82%; padding: 16px 20px; font-size: 14px; line-height: 1.7;
-    white-space: pre-wrap; word-break: break-word;
-  }
-  .chat-msg.user .chat-bubble {
-    background: linear-gradient(135deg, var(--ink), var(--forest));
-    color: var(--gold-light); border-radius: 16px 16px 4px 16px;
-  }
-  .chat-msg.ai .chat-bubble {
-    background: var(--parchment); color: var(--forest);
-    border-radius: 16px 16px 16px 4px;
-  }
-  .typing-dots span {
-    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
-    background: var(--fern); margin-right: 4px;
-    animation: dotBounce 1.4s infinite ease-in-out both;
-  }
-  .typing-dots span:nth-child(1) { animation-delay: -.32s; }
-  .typing-dots span:nth-child(2) { animation-delay: -.16s; }
-  .chat-input-row { display: flex; gap: 10px; }
-  .chat-input {
-    flex: 1; padding: 14px 20px; border-radius: 14px; border: 2px solid #e2dace;
-    font-family: 'Outfit', sans-serif; font-size: 14px; color: var(--ink); outline: none;
-    transition: border-color .25s; background: var(--white);
-  }
-  .chat-input::placeholder { color: var(--fern); }
-  .chat-input:focus { border-color: var(--gold); }
-  .chat-send {
-    background: linear-gradient(135deg, var(--ink), var(--forest)); color: var(--gold-light);
-    border: none; border-radius: 14px; padding: 14px 26px; font-size: 14px; font-weight: 700;
-    cursor: pointer; font-family: 'Outfit', sans-serif; white-space: nowrap; transition: box-shadow .3s;
-  }
-  .chat-send:hover { box-shadow: 0 4px 16px rgba(27,42,34,.2); }
-
-  /* ---- FOOTER ---- */
-  footer {
-    background: linear-gradient(135deg, var(--ink), var(--forest));
-    padding: 22px 20px; text-align: center; border-top: 3px solid var(--gold);
-  }
-  footer p { font-size: 12px; color: var(--fern); }
+.gcw{display:flex;flex-direction:column;min-height:500px}
+.gcm{flex:1;overflow-y:auto;background:var(--wh);border-radius:var(--r);border:1px solid #e2dace;padding:20px;margin-bottom:14px;min-height:280px}
+footer{background:linear-gradient(135deg,var(--ink),var(--forest));padding:20px;text-align:center;border-top:3px solid var(--gold)}
+footer p{font-size:12px;color:var(--fern)}
 </style>
 </head>
 <body>
-
-<!-- ====== NAV ====== -->
-<nav id="topnav">
-  <div class="inner">
-    <div class="nav-brand">
-      <div class="nav-logo">SW</div>
-      <div>
-        <div class="nav-title" id="navTitle">Capstone Mentor</div>
-        <div class="nav-subtitle" id="navSubtitle">Social Work Excellence Hub</div>
-      </div>
-    </div>
-    <div class="nav-links" id="navLinks"></div>
-    <div style="display:flex;align-items:center;gap:10px;">
-      <select class="lang-select" id="langSelect" onchange="switchLang(this.value)">
-        <option value="en">English</option>
-        <option value="es">Español</option>
-        <option value="fr">Français</option>
-      </select>
-      <button id="mobileToggle" onclick="toggleMobile()">☰</button>
-    </div>
-  </div>
-  <div id="mobileMenu"></div>
-</nav>
-
-<!-- ====== PAGES ====== -->
-<main>
-  <!-- HOME -->
-  <div class="page visible" id="page-home">
-    <div class="hero">
-      <h1 class="fade-up" id="heroTitle"></h1>
-      <p class="fade-up stagger-1" id="heroSub"></p>
-      <div class="stat-bar fade-up stagger-2" id="statBar"></div>
-    </div>
-    <div class="section-body" style="padding-top:40px;">
-      <h2 style="text-align:center;font-size:30px;margin-bottom:6px;" id="quickStartTitle"></h2>
-      <div style="width:56px;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:2px;margin:0 auto 24px;"></div>
-      <div class="card-grid" id="pathCards"></div>
-    </div>
-  </div>
-
-  <!-- WRITING -->
-  <div class="page" id="page-writing">
-    <div class="section-head"><h2 id="writingTitle"></h2><div class="rule"></div></div>
-    <div class="section-body">
-      <div class="tab-bar" id="writingTabs"></div>
-      <div class="content-panel">
-        <div class="panel-header"><h3 id="writingPanelHead"></h3></div>
-        <div class="panel-body" id="writingPanelBody"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ETHICS -->
-  <div class="page" id="page-ethics">
-    <div class="section-head"><h2 id="ethicsTitle"></h2><div class="rule"></div></div>
-    <div class="section-body">
-      <div class="content-panel" style="padding:24px;margin-bottom:24px;">
-        <h3 style="font-size:20px;font-weight:700;margin-bottom:14px;" id="ethicsCodeTitle"></h3>
-        <div class="value-chips" id="ethicsValues"></div>
-      </div>
-      <div id="ethicsScenarios"></div>
-    </div>
-  </div>
-
-  <!-- THEORY -->
-  <div class="page" id="page-theory">
-    <div class="section-head"><h2 id="theoryTitle"></h2><div class="rule"></div></div>
-    <div class="section-body">
-      <div class="theory-selector" id="theorySelector"></div>
-      <div class="content-panel" style="border:none;">
-        <div class="theory-detail-head" id="theoryHead"></div>
-        <div class="theory-apps" id="theoryApps"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- EXAM -->
-  <div class="page" id="page-exam">
-    <div class="section-head"><h2 id="examTitle"></h2><div class="rule"></div></div>
-    <div class="section-body">
-      <div id="examContent"></div>
-    </div>
-  </div>
-
-  <!-- MILESTONES -->
-  <div class="page" id="page-milestones">
-    <div class="section-head"><h2 id="milestonesTitle"></h2><div class="rule"></div></div>
-    <div class="section-body">
-      <div id="milestonesContent"></div>
-      <div class="tip-box" id="milestonesTip"></div>
-    </div>
-  </div>
-
-  <!-- ACCESSIBILITY -->
-  <div class="page" id="page-access">
-    <div class="section-head"><h2 id="accessTitle"></h2><div class="rule"></div></div>
-    <div class="section-body">
-      <div class="access-grid" id="accessGrid"></div>
-    </div>
-  </div>
-
-  <!-- AI ASSISTANT -->
-  <div class="page" id="page-ai">
-    <div class="section-head"><h2 id="aiTitle"></h2><div class="rule"></div></div>
-    <div class="section-body chat-wrap">
-      <div id="aiExamples" class="example-prompts"></div>
-      <div class="chat-messages" id="chatMessages"></div>
-      <div class="chat-input-row">
-        <input class="chat-input" id="chatInput" onkeydown="if(event.key==='Enter')sendChat()">
-        <button class="chat-send" id="chatSendBtn" onclick="sendChat()"></button>
-      </div>
-    </div>
-  </div>
-</main>
-
-<footer>
-  <p>Social Work Capstone Mentor — Interactive Multilingual Learning Platform</p>
-</footer>
+<nav id="topnav"><div class="ni"><div class="nb"><div class="nl">SW</div><div><div class="nt" id="nT"></div><div class="ns" id="nS"></div></div></div><div class="nls" id="nL"></div><div style="display:flex;align-items:center;gap:9px"><select class="ls" id="lS" onchange="setLang(this.value)"><option value="en">English</option><option value="es">Español</option><option value="fr">Français</option></select><button id="mt" onclick="document.getElementById('mm').classList.toggle('open')">☰</button></div></div><div id="mm"></div></nav>
+<main><div class="page v" id="pg-home"></div><div class="page" id="pg-writing"></div><div class="page" id="pg-ethics"></div><div class="page" id="pg-theory"></div><div class="page" id="pg-exam"></div><div class="page" id="pg-milestones"></div><div class="page" id="pg-access"></div><div class="page" id="pg-ai"></div></main>
+<footer><p>Social Work Capstone Mentor — Interactive Multilingual Learning Platform</p></footer>
 
 <script>
-// ===== TRANSLATION DATA =====
-const T = {
-  en: {
-    title: "Capstone Mentor", subtitle: "Social Work Excellence Hub",
-    nav: { home:"Home", writing:"Writing Lab", ethics:"Ethics", theory:"Theory", exam:"Exam Prep", milestones:"Milestones", access:"Accessibility", ai:"AI Assistant" },
-    home: {
-      hero: "Your Journey to Social Work Mastery",
-      heroSub: "Interactive mentoring, AI-powered guidance, and comprehensive exam preparation for your capstone success.",
-      stats: ["8 Modules","200+ Scenarios","Multilingual","AI-Powered"],
-      quickStart: "Quick Start Paths",
-      paths: [
-        { title:"Capstone Writing", desc:"Master APA formatting, literature reviews, and scholarly argumentation.", icon:"✍️", nav:"writing" },
-        { title:"Ethics Deep Dive", desc:"Navigate NASW Code of Ethics with real-world dilemma scenarios.", icon:"⚖️", nav:"ethics" },
-        { title:"Theory Integration", desc:"Connect systems theory, ecological models, and strengths-based approaches.", icon:"🧠", nav:"theory" },
-        { title:"Exam Readiness", desc:"Practice with timed quizzes and adaptive difficulty testing.", icon:"📝", nav:"exam" }
-      ]
-    },
-    writing: {
-      title: "Capstone Writing Lab",
-      sections: ["Structure","APA Style","Literature Review","Argument Building"],
-      tips: [
-        { heading:"Thesis Development", content:"A strong capstone thesis identifies a specific social work practice issue, proposes an evidence-based intervention, and articulates measurable outcomes. Begin with: 'This capstone examines...' then state your population, intervention, and expected impact. Your thesis should be arguable, specific, and grounded in the literature." },
-        { heading:"APA 7th Edition Essentials", content:"Use 12pt Times New Roman or 11pt Calibri. Double-space throughout. Include running head on title page only. In-text citations: (Author, Year) for paraphrasing; (Author, Year, p. #) for direct quotes. Reference list entries use hanging indent. Level 1 headings are bold and centered; Level 2 are bold and left-aligned. Use active voice when possible." },
-        { heading:"Literature Review Framework", content:"Organize thematically, not chronologically. Identify gaps in existing research. Synthesize 15-25 peer-reviewed sources. Use transition phrases: 'Building on this finding...', 'In contrast to earlier studies...', 'A critical gap exists in...' Compare and contrast findings rather than simply summarizing individual studies." },
-        { heading:"Evidence-Based Argument Building", content:"Connect your intervention to established research. Use the PICO framework: Population, Intervention, Comparison, Outcome. Demonstrate cultural humility in methodology design and acknowledge limitations honestly. Each claim should be supported by at least one peer-reviewed source. Build logical chains of evidence from problem statement through proposed solution." }
-      ]
-    },
-    ethics: {
-      title: "Ethics & Professional Standards",
-      code: "NASW Code of Ethics Core Values",
-      values: ["Service","Social Justice","Dignity & Worth","Importance of Human Relationships","Integrity","Competence"],
-      scenarios: [
-        { title:"Dual Relationship Dilemma", situation:"You discover your new client is the parent of your child's best friend. You've had several social interactions at school events.", question:"What ethical principles apply, and what steps should you take?", guidance:"This involves NASW Standard 1.06 (Conflicts of Interest). You should consult your supervisor immediately, consider whether the dual relationship could impair professional judgment, document your decision-making process, and potentially transfer the client with proper referral procedures. The client's welfare must remain paramount." },
-        { title:"Confidentiality vs. Duty to Warn", situation:"During a session, your adult client reveals they have been having violent fantasies about a specific coworker and have purchased a weapon.", question:"How do you balance confidentiality with potential harm prevention?", guidance:"NASW Standard 1.07 addresses confidentiality limits. Tarasoff duty applies — you have a legal and ethical obligation to warn identifiable potential victims and notify authorities. Document thoroughly, consult your supervisor, contact local law enforcement, and attempt to notify the potential victim. Maintain therapeutic relationship while fulfilling legal obligations." },
-        { title:"Cultural Competence Challenge", situation:"A family from a collectivist culture refuses individual therapy for their adolescent, insisting all decisions be made by family elders. The teen has expressed suicidal ideation privately to you.", question:"How do you respect cultural values while ensuring client safety?", guidance:"Balance NASW Standards 1.05 (Cultural Awareness) and 1.02 (Self-Determination) with duty to protect. Acknowledge cultural values while explaining safety obligations. Explore family-inclusive approaches that honor traditions while addressing safety. Consider culturally adapted interventions and consult cultural liaisons. Document all cultural consultation efforts." }
-      ]
-    },
-    theory: {
-      title: "Theory Integration Workshop",
-      frameworks: [
-        { name:"Systems Theory", key:"Interconnection", desc:"Views clients within their environmental context — family, community, institutions. Changes in one part affect the whole system.", apps:["Family dynamics assessment","Community needs analysis","Organizational change planning","Policy impact evaluation"] },
-        { name:"Ecological Model", key:"Environment", desc:"Bronfenbrenner's nested systems: micro, meso, exo, macro, and chrono levels of influence on human development.", apps:["Multi-level intervention design","Cultural context mapping","Developmental trajectory analysis","Environmental risk assessment"] },
-        { name:"Strengths-Based", key:"Empowerment", desc:"Focuses on client assets, resilience, and capacities rather than deficits. Every individual has inherent strengths.", apps:["Asset-based community development","Solution-focused brief therapy","Positive youth development","Recovery-oriented practice"] },
-        { name:"Critical Race Theory", key:"Equity", desc:"Examines how systemic racism is embedded in institutions and policies, affecting social work practice and client outcomes.", apps:["Anti-racist practice development","Policy analysis through equity lens","Intersectional assessment","Institutional bias identification"] }
-      ]
-    },
-    exam: {
-      title: "Exam Preparation Center",
-      submit:"Submit Answer", next:"Next Question", score:"Your Score", restart:"Restart Quiz", correct:"Correct!", incorrect:"Not quite.",
-      questions: [
-        { q:"According to the NASW Code of Ethics, which core value emphasizes that social workers' primary goal is to help people in need?", opts:["Integrity","Service","Competence","Social Justice"], ans:1, exp:"Service is the core value stating that social workers' primary goal is to help people in need and address social problems." },
-        { q:"Which theoretical framework views human development through nested environmental systems (micro, meso, exo, macro)?", opts:["Systems Theory","Psychodynamic Theory","Ecological Model","Conflict Theory"], ans:2, exp:"Bronfenbrenner's Ecological Model describes development through nested systems: microsystem, mesosystem, exosystem, and macrosystem." },
-        { q:"In crisis intervention, what is the recommended first step when working with a client experiencing acute distress?", opts:["Develop a treatment plan","Ensure immediate safety","Complete a full assessment","Contact family members"], ans:1, exp:"Ensuring immediate safety is always the first priority in crisis intervention." },
-        { q:"What does SMART stand for in goal-setting within social work treatment plans?", opts:["Simple, Manageable, Actionable, Relevant, Timely","Specific, Measurable, Achievable, Relevant, Time-bound","Strategic, Meaningful, Appropriate, Realistic, Targeted","Sustainable, Monitored, Assessed, Reviewed, Tracked"], ans:1, exp:"SMART goals are Specific, Measurable, Achievable, Relevant, and Time-bound." },
-        { q:"Which legislation established the legal framework for protecting children from abuse and neglect in the United States?", opts:["Americans with Disabilities Act","Child Abuse Prevention and Treatment Act (CAPTA)","Family and Medical Leave Act","Social Security Act"], ans:1, exp:"CAPTA (1974) provides federal funding for child protective services and establishes minimum standards for defining child abuse and neglect." },
-        { q:"In motivational interviewing, the acronym OARS stands for:", opts:["Observe, Analyze, Reflect, Summarize","Open questions, Affirmations, Reflections, Summaries","Offer, Assess, Recommend, Support","Outline, Accept, Reframe, Strategize"], ans:1, exp:"OARS: Open questions explore perspective, Affirmations recognize strengths, Reflections demonstrate understanding, Summaries tie key points together." },
-        { q:"Which ethical standard requires social workers to provide services only within the boundaries of their education and training?", opts:["Informed Consent","Competence","Cultural Awareness","Self-Determination"], ans:1, exp:"NASW Standard 4.01 (Competence) requires social workers to practice within their areas of competence." },
-        { q:"Trauma-informed care principles include all EXCEPT:", opts:["Safety and trustworthiness","Peer support and collaboration","Requiring detailed trauma narratives early in treatment","Empowerment and choice"], ans:2, exp:"Requiring detailed trauma narratives early can be harmful. TIC avoids re-traumatization." }
-      ]
-    },
-    milestones: {
-      title: "Milestone Coaching Tracker",
-      phases: [
-        { name:"Phase 1: Foundation", weeks:"Weeks 1–3", tasks:["Select capstone topic and get faculty approval","Complete preliminary literature search (minimum 10 sources)","Draft problem statement and research questions","Submit IRB application if applicable"], color:"#3a7d53" },
-        { name:"Phase 2: Deep Research", weeks:"Weeks 4–7", tasks:["Expand literature review to 20–25 sources","Develop theoretical framework section","Outline methodology and intervention design","Schedule peer review session"], color:"var(--gold)" },
-        { name:"Phase 3: Writing & Integration", weeks:"Weeks 8–11", tasks:["Complete first full draft of capstone","Integrate theory with practice examples","Add data analysis or program evaluation section","Submit draft for faculty feedback"], color:"#4a7c8b" },
-        { name:"Phase 4: Refinement", weeks:"Weeks 12–14", tasks:["Revise based on faculty feedback","Ensure APA compliance throughout","Prepare oral presentation materials","Complete final submission checklist"], color:"#8b6e4a" }
-      ],
-      tip: "💡 Pro Tip: Schedule weekly writing blocks of 2–3 hours. Consistency beats intensity for capstone completion."
-    },
-    accessibility: {
-      title: "Accessibility & Inclusive Practice",
-      principles: [
-        { name:"Universal Design in Social Work", desc:"Create services accessible to all people regardless of ability, age, or status.", items:["Provide materials in multiple formats (audio, visual, tactile)","Use plain language at 6th–8th grade reading level","Ensure physical spaces meet ADA requirements","Offer virtual service options"] },
-        { name:"Cultural Accessibility", desc:"Go beyond language translation to ensure services are culturally responsive.", items:["Provide qualified interpreters (not family members)","Adapt assessment tools for cultural relevance","Recognize diverse family structures and values","Address health literacy disparities"] },
-        { name:"Digital Accessibility", desc:"Ensure all digital communications and telehealth services are accessible.", items:["Caption all video content","Use screen-reader compatible documents","Provide alt text for images and charts","Ensure keyboard navigation works throughout"] },
-        { name:"Neurodiversity-Affirming Practice", desc:"Adopt strengths-based approaches that respect neurological differences.", items:["Offer flexible session formats and lengths","Provide sensory-friendly environments","Use concrete, direct communication","Respect different processing styles and timelines"] }
-      ]
-    },
-    ai: {
-      title: "AI Practice Assistant",
-      placeholder: "Describe a social work scenario or ask a capstone question...",
-      send: "Send →",
-      examples: ["How should I structure my capstone literature review?","Walk me through a client crisis intervention scenario","Explain how systems theory applies to child welfare","Help me analyze an ethical dilemma involving confidentiality"]
-    }
-  },
-  es: {
-    title: "Mentor de Tesis", subtitle: "Centro de Excelencia en Trabajo Social",
-    nav: { home:"Inicio", writing:"Escritura", ethics:"Ética", theory:"Teoría", exam:"Exámenes", milestones:"Hitos", access:"Accesibilidad", ai:"Asistente IA" },
-    home: {
-      hero: "Tu Camino hacia la Maestría en Trabajo Social",
-      heroSub: "Tutoría interactiva, guía impulsada por IA y preparación integral de exámenes para el éxito de tu tesis.",
-      stats: ["8 Módulos","200+ Escenarios","Multilingüe","Impulsado por IA"],
-      quickStart: "Rutas de Inicio Rápido",
-      paths: [
-        { title:"Escritura de Tesis", desc:"Domina el formato APA, las revisiones de literatura y la argumentación académica.", icon:"✍️", nav:"writing" },
-        { title:"Inmersión Ética", desc:"Navega el Código de Ética NASW con escenarios de dilemas reales.", icon:"⚖️", nav:"ethics" },
-        { title:"Integración Teórica", desc:"Conecta la teoría de sistemas, modelos ecológicos y enfoques basados en fortalezas.", icon:"🧠", nav:"theory" },
-        { title:"Preparación Exámenes", desc:"Practica con cuestionarios cronometrados y pruebas de dificultad adaptativa.", icon:"📝", nav:"exam" }
-      ]
-    },
-    writing: { title:"Laboratorio de Escritura", sections:["Estructura","Estilo APA","Revisión de Literatura","Argumentación"],
-      tips: [
-        { heading:"Desarrollo de Tesis", content:"Una tesis sólida identifica un problema específico de práctica en trabajo social, propone una intervención basada en evidencia y articula resultados medibles. Comience con: 'Esta tesis examina...' luego indique su población, intervención e impacto esperado." },
-        { heading:"APA 7ª Edición", content:"Use Times New Roman 12pt o Calibri 11pt. Doble espacio. Citas en texto: (Autor, Año) para paráfrasis; (Autor, Año, p. #) para citas directas. Referencias con sangría francesa." },
-        { heading:"Revisión de Literatura", content:"Organice temáticamente, no cronológicamente. Identifique brechas en la investigación. Sintetice 15-25 fuentes revisadas por pares. Use frases de transición para conectar ideas." },
-        { heading:"Construcción de Argumentos", content:"Conecte su intervención con la investigación establecida. Use el marco PICO: Población, Intervención, Comparación, Resultado. Cada afirmación debe estar respaldada por fuentes." }
-      ]
-    },
-    ethics: { title:"Ética y Estándares Profesionales", code:"Valores Fundamentales NASW", values:["Servicio","Justicia Social","Dignidad y Valor","Relaciones Humanas","Integridad","Competencia"],
-      scenarios: [
-        { title:"Dilema de Relación Dual", situation:"Descubre que su nuevo cliente es padre del mejor amigo de su hijo. Han tenido varias interacciones sociales en eventos escolares.", question:"¿Qué principios éticos aplican y qué pasos debe tomar?", guidance:"Norma NASW 1.06 (Conflictos de Interés). Consulte a su supervisor inmediatamente, considere si la relación dual podría afectar el juicio profesional, documente su proceso de toma de decisiones y posiblemente transfiera al cliente." },
-        { title:"Confidencialidad vs. Deber de Advertir", situation:"Su cliente adulto revela fantasías violentas sobre un compañero de trabajo específico y ha comprado un arma.", question:"¿Cómo equilibra la confidencialidad con la prevención del daño?", guidance:"Norma NASW 1.07. El deber de Tarasoff aplica — debe advertir a las víctimas potenciales identificables y notificar a las autoridades. Documente, consulte a su supervisor y contacte a las autoridades." },
-        { title:"Competencia Cultural", situation:"Una familia de una cultura colectivista rechaza la terapia individual para su adolescente, quien ha expresado ideación suicida en privado.", question:"¿Cómo respeta los valores culturales mientras garantiza la seguridad?", guidance:"Equilibre las Normas NASW 1.05 y 1.02 con el deber de proteger. Explore enfoques inclusivos familiares que honren tradiciones mientras abordan la seguridad." }
-      ]
-    },
-    theory: { title:"Taller de Integración Teórica",
-      frameworks: [
-        { name:"Teoría de Sistemas", key:"Interconexión", desc:"Ve a los clientes dentro de su contexto ambiental — familia, comunidad, instituciones.", apps:["Evaluación de dinámica familiar","Análisis de necesidades comunitarias","Planificación de cambio organizacional","Evaluación de impacto de políticas"] },
-        { name:"Modelo Ecológico", key:"Ambiente", desc:"Sistemas anidados de Bronfenbrenner: micro, meso, exo, macro y crono.", apps:["Diseño de intervención multinivel","Mapeo de contexto cultural","Análisis de trayectoria","Evaluación de riesgo ambiental"] },
-        { name:"Basado en Fortalezas", key:"Empoderamiento", desc:"Se enfoca en activos, resiliencia y capacidades del cliente.", apps:["Desarrollo comunitario basado en activos","Terapia breve centrada en soluciones","Desarrollo positivo juvenil","Práctica de recuperación"] },
-        { name:"Teoría Crítica de Raza", key:"Equidad", desc:"Examina el racismo sistémico en instituciones y políticas.", apps:["Práctica antirracista","Análisis de políticas con lente de equidad","Evaluación interseccional","Identificación de sesgo institucional"] }
-      ]
-    },
-    exam: { title:"Centro de Preparación para Exámenes", submit:"Enviar", next:"Siguiente", score:"Tu Puntuación", restart:"Reiniciar", correct:"¡Correcto!", incorrect:"No exactamente.",
-      questions: [
-        { q:"¿Qué valor NASW enfatiza que el objetivo principal es ayudar a las personas necesitadas?", opts:["Integridad","Servicio","Competencia","Justicia Social"], ans:1, exp:"Servicio es el valor fundamental." },
-        { q:"¿Qué marco teórico usa sistemas ambientales anidados?", opts:["Teoría de Sistemas","Teoría Psicodinámica","Modelo Ecológico","Teoría del Conflicto"], ans:2, exp:"El Modelo Ecológico de Bronfenbrenner." },
-        { q:"Primer paso en intervención de crisis:", opts:["Plan de tratamiento","Seguridad inmediata","Evaluación completa","Contactar familiares"], ans:1, exp:"La seguridad inmediata es siempre prioritaria." },
-        { q:"¿Qué significa SMART en metas?", opts:["Simple, Manejable, Accionable, Relevante, Temporal","Específico, Medible, Alcanzable, Relevante, Temporal","Estratégico, Significativo, Apropiado, Realista, Dirigido","Sostenible, Monitoreado, Evaluado, Revisado, Rastreado"], ans:1, exp:"Específico, Medible, Alcanzable, Relevante, Temporal." }
-      ]
-    },
-    milestones: { title:"Seguimiento de Hitos",
-      phases: [
-        { name:"Fase 1: Fundamento", weeks:"Semanas 1–3", tasks:["Seleccionar tema y obtener aprobación","Búsqueda preliminar (mínimo 10 fuentes)","Borrador de planteamiento del problema","Enviar solicitud IRB si aplica"], color:"#3a7d53" },
-        { name:"Fase 2: Investigación", weeks:"Semanas 4–7", tasks:["Expandir revisión a 20–25 fuentes","Desarrollar marco teórico","Esbozar metodología","Programar revisión por pares"], color:"var(--gold)" },
-        { name:"Fase 3: Escritura", weeks:"Semanas 8–11", tasks:["Completar primer borrador","Integrar teoría con práctica","Agregar análisis de datos","Enviar para retroalimentación"], color:"#4a7c8b" },
-        { name:"Fase 4: Refinamiento", weeks:"Semanas 12–14", tasks:["Revisar según retroalimentación","Cumplimiento APA","Preparar presentación oral","Lista de verificación final"], color:"#8b6e4a" }
-      ],
-      tip: "💡 Consejo: Programe bloques semanales de escritura de 2–3 horas. La consistencia vence a la intensidad."
-    },
-    accessibility: { title:"Accesibilidad y Práctica Inclusiva",
-      principles: [
-        { name:"Diseño Universal", desc:"Servicios accesibles para todas las personas.", items:["Materiales en múltiples formatos","Lenguaje sencillo","Espacios físicos accesibles","Opciones virtuales"] },
-        { name:"Accesibilidad Cultural", desc:"Más allá de la traducción de idiomas.", items:["Intérpretes calificados","Herramientas adaptadas culturalmente","Estructuras familiares diversas","Disparidades en alfabetización"] },
-        { name:"Accesibilidad Digital", desc:"Comunicaciones digitales accesibles.", items:["Subtítulos en video","Documentos compatibles con lectores","Texto alternativo para imágenes","Navegación por teclado"] },
-        { name:"Práctica Neuro-afirmativa", desc:"Respetar diferencias neurológicas.", items:["Sesiones flexibles","Ambientes sensoriales amigables","Comunicación directa","Estilos de procesamiento variados"] }
-      ]
-    },
-    ai: { title:"Asistente de Práctica IA", placeholder:"Describa un escenario o pregunta...", send:"Enviar →",
-      examples: ["¿Cómo estructuro mi revisión de literatura?","Guíame en un escenario de crisis","Explica la teoría de sistemas en bienestar infantil","Analiza un dilema ético sobre confidencialidad"]
-    }
-  },
-  fr: {
-    title: "Mentor de Mémoire", subtitle: "Centre d'Excellence en Travail Social",
-    nav: { home:"Accueil", writing:"Écriture", ethics:"Éthique", theory:"Théorie", exam:"Examens", milestones:"Jalons", access:"Accessibilité", ai:"Assistant IA" },
-    home: {
-      hero: "Votre Parcours vers la Maîtrise du Travail Social",
-      heroSub: "Mentorat interactif, guidance IA et préparation complète aux examens pour votre mémoire.",
-      stats: ["8 Modules","200+ Scénarios","Multilingue","Propulsé par IA"],
-      quickStart: "Démarrage Rapide",
-      paths: [
-        { title:"Rédaction de Mémoire", desc:"Maîtrisez le format APA et l'argumentation académique.", icon:"✍️", nav:"writing" },
-        { title:"Éthique Approfondie", desc:"Naviguez le Code d'Éthique avec des scénarios réels.", icon:"⚖️", nav:"ethics" },
-        { title:"Intégration Théorique", desc:"Connectez théorie des systèmes et approches basées sur les forces.", icon:"🧠", nav:"theory" },
-        { title:"Préparation Examens", desc:"Pratiquez avec des quiz chronométrés.", icon:"📝", nav:"exam" }
-      ]
-    },
-    writing: { title:"Laboratoire d'Écriture", sections:["Structure","Style APA","Revue de Littérature","Argumentation"],
-      tips: [
-        { heading:"Développement de Thèse", content:"Une thèse solide identifie un problème spécifique, propose une intervention basée sur les preuves et articule des résultats mesurables. Commencez par: 'Ce mémoire examine...' puis indiquez votre population, intervention et impact attendu." },
-        { heading:"APA 7e Édition", content:"Utilisez Times New Roman 12pt. Double interligne. Citations: (Auteur, Année). Références avec retrait suspendu. Titres de niveau 1 en gras et centrés." },
-        { heading:"Revue de Littérature", content:"Organisez thématiquement. Identifiez les lacunes. Synthétisez 15-25 sources évaluées par des pairs. Utilisez des phrases de transition pour connecter les idées." },
-        { heading:"Construction d'Arguments", content:"Utilisez le cadre PICO: Population, Intervention, Comparaison, Résultat. Chaque affirmation doit être appuyée par des sources. Construisez des chaînes logiques d'évidence." }
-      ]
-    },
-    ethics: { title:"Éthique et Normes", code:"Valeurs Fondamentales NASW", values:["Service","Justice Sociale","Dignité","Relations Humaines","Intégrité","Compétence"],
-      scenarios: [
-        { title:"Dilemme de Double Relation", situation:"Vous découvrez que votre nouveau client est le parent du meilleur ami de votre enfant.", question:"Quels principes éthiques s'appliquent?", guidance:"Norme NASW 1.06 (Conflits d'Intérêts). Consultez votre superviseur, évaluez l'impact sur le jugement professionnel, documentez votre processus décisionnel." },
-        { title:"Confidentialité vs. Devoir d'Avertir", situation:"Votre client révèle des fantasmes violents envers un collègue et a acheté une arme.", question:"Comment équilibrer confidentialité et prévention?", guidance:"Norme NASW 1.07. Le devoir de Tarasoff s'applique — obligation d'avertir les victimes potentielles et les autorités." },
-        { title:"Compétence Culturelle", situation:"Une famille collectiviste refuse la thérapie individuelle pour leur adolescent qui a exprimé des idées suicidaires.", question:"Comment respecter les valeurs culturelles tout en assurant la sécurité?", guidance:"Équilibrez les Normes 1.05 et 1.02 avec le devoir de protection. Explorez des approches familiales inclusives." }
-      ]
-    },
-    theory: { title:"Atelier d'Intégration Théorique",
-      frameworks: [
-        { name:"Théorie des Systèmes", key:"Interconnexion", desc:"Voit les clients dans leur contexte — famille, communauté, institutions.", apps:["Dynamique familiale","Besoins communautaires","Changement organisationnel","Impact des politiques"] },
-        { name:"Modèle Écologique", key:"Environnement", desc:"Systèmes imbriqués de Bronfenbrenner: micro, meso, exo, macro, chrono.", apps:["Intervention multi-niveaux","Cartographie culturelle","Trajectoire développementale","Évaluation des risques"] },
-        { name:"Perspective des Forces", key:"Autonomisation", desc:"Se concentre sur les atouts, la résilience et les capacités.", apps:["Développement communautaire","Thérapie brève axée solutions","Développement positif des jeunes","Pratique de rétablissement"] },
-        { name:"Théorie Critique de Race", key:"Équité", desc:"Examine le racisme systémique dans les institutions.", apps:["Pratique antiraciste","Analyse politique d'équité","Évaluation intersectionnelle","Identification des biais"] }
-      ]
-    },
-    exam: { title:"Centre de Préparation", submit:"Soumettre", next:"Suivante", score:"Votre Score", restart:"Recommencer", correct:"Correct!", incorrect:"Pas tout à fait.",
-      questions: [
-        { q:"Quelle valeur NASW souligne l'aide aux personnes dans le besoin?", opts:["Intégrité","Service","Compétence","Justice Sociale"], ans:1, exp:"Le Service est la valeur fondamentale." },
-        { q:"Quel cadre utilise des systèmes environnementaux imbriqués?", opts:["Théorie des Systèmes","Théorie Psychodynamique","Modèle Écologique","Théorie du Conflit"], ans:2, exp:"Le Modèle Écologique de Bronfenbrenner." },
-        { q:"Première étape en intervention de crise?", opts:["Plan de traitement","Sécurité immédiate","Évaluation complète","Contacter la famille"], ans:1, exp:"La sécurité immédiate est toujours prioritaire." },
-        { q:"Que signifie SMART?", opts:["Simple, Gérable, Actionnable, Pertinent, Temporel","Spécifique, Mesurable, Atteignable, Réaliste, Temporel","Stratégique, Significatif, Approprié, Réaliste, Ciblé","Durable, Suivi, Évalué, Révisé, Suivi"], ans:1, exp:"Spécifique, Mesurable, Atteignable, Réaliste, Temporel." }
-      ]
-    },
-    milestones: { title:"Suivi des Jalons",
-      phases: [
-        { name:"Phase 1: Fondation", weeks:"Semaines 1–3", tasks:["Sélectionner le sujet et obtenir approbation","Recherche préliminaire (10 sources min.)","Ébauche du problème et questions","Demande IRB si applicable"], color:"#3a7d53" },
-        { name:"Phase 2: Recherche", weeks:"Semaines 4–7", tasks:["Élargir la revue à 20–25 sources","Développer le cadre théorique","Esquisser la méthodologie","Planifier révision par pairs"], color:"var(--gold)" },
-        { name:"Phase 3: Rédaction", weeks:"Semaines 8–11", tasks:["Premier brouillon complet","Intégration théorie-pratique","Section d'analyse de données","Soumission pour révision"], color:"#4a7c8b" },
-        { name:"Phase 4: Raffinement", weeks:"Semaines 12–14", tasks:["Révision selon commentaires","Conformité APA","Préparation orale","Liste de vérification finale"], color:"#8b6e4a" }
-      ],
-      tip: "💡 Conseil: Planifiez des blocs d'écriture hebdomadaires de 2–3 heures."
-    },
-    accessibility: { title:"Accessibilité et Pratique Inclusive",
-      principles: [
-        { name:"Conception Universelle", desc:"Services accessibles à tous.", items:["Formats multiples","Langage simple","Espaces accessibles ADA","Options virtuelles"] },
-        { name:"Accessibilité Culturelle", desc:"Au-delà de la traduction linguistique.", items:["Interprètes qualifiés","Outils culturellement adaptés","Structures familiales diverses","Littératie en santé"] },
-        { name:"Accessibilité Numérique", desc:"Communications numériques accessibles.", items:["Sous-titres vidéo","Documents compatibles lecteurs","Texte alternatif","Navigation clavier"] },
-        { name:"Pratique Neuro-affirmative", desc:"Respecter les différences neurologiques.", items:["Sessions flexibles","Environnements sensoriels","Communication directe","Styles de traitement variés"] }
-      ]
-    },
-    ai: { title:"Assistant IA", placeholder:"Décrivez un scénario ou posez une question...", send:"Envoyer →",
-      examples: ["Comment structurer ma revue de littérature?","Guidez-moi dans un scénario de crise","Expliquez la théorie des systèmes","Analysez un dilemme éthique"]
-    }
-  }
-};
+// =====================================================================
+//  STATIC JSON DATA
+// =====================================================================
+const D={en:{nav:{title:"Capstone Mentor",sub:"Social Work Excellence Hub",items:{home:"Home",writing:"Writing Lab",ethics:"Ethics",theory:"Theory",exam:"Exam Prep",milestones:"Milestones",access:"Accessibility",ai:"AI Assistant"}},
+home:{hero:"Your Journey to Social Work Mastery",heroSub:"Interactive mentoring, AI-powered guidance, and comprehensive exam preparation for your capstone success.",stats:["8 Modules","200+ Scenarios","Multilingual","AI-Powered"],qs:"Quick Start Paths",
+paths:[{t:"Capstone Writing",d:"Master APA formatting, literature reviews, and scholarly argumentation.",i:"✍️",n:"writing"},{t:"Ethics Deep Dive",d:"Navigate NASW Code of Ethics with real-world dilemma scenarios.",i:"⚖️",n:"ethics"},{t:"Theory Integration",d:"Connect systems theory, ecological models, and strengths-based approaches.",i:"🧠",n:"theory"},{t:"Exam Readiness",d:"Practice with timed quizzes and adaptive difficulty testing.",i:"📝",n:"exam"}]},
+writing:{title:"Capstone Writing Lab",tabs:["Structure","APA Style","Literature Review","Argument Building"],
+tips:[{h:"Thesis Development",c:"A strong capstone thesis identifies a specific social work practice issue, proposes an evidence-based intervention, and articulates measurable outcomes. Begin with: 'This capstone examines...' then state your population, intervention, and expected impact.\n\nExample: 'This capstone examines the effectiveness of trauma-focused CBT for refugee children ages 8-12 resettled in urban communities, measuring outcomes through the UCLA PTSD Reaction Index.'\n\nYour thesis should be arguable, specific, and grounded in literature. Avoid vague language like 'helping people' or 'making a difference.'"},
+{h:"APA 7th Edition Essentials",c:"Use 12pt Times New Roman or 11pt Calibri. Double-space throughout. Running head on title page only.\n\nIn-text citations: (Author, Year) for paraphrasing; (Author, Year, p. #) for direct quotes. Block quotes for 40+ words — indent 0.5 inches, no quotation marks.\n\nHeading levels: Level 1 = Bold, Centered. Level 2 = Bold, Left-Aligned. Level 3 = Bold Italic, Left-Aligned.\n\nReference list uses hanging indent. Alphabetize by first author's last name. Include DOIs when available."},
+{h:"Literature Review Framework",c:"Organize thematically, not chronologically. Identify gaps in existing research. Synthesize 15-25 peer-reviewed sources minimum.\n\nRecommended structure:\n• Introduction & search strategy (1-2 paragraphs)\n• Theme 1: Background/context (2-3 paragraphs)\n• Theme 2: Theoretical foundations (2-3 paragraphs)\n• Theme 3: Current interventions (3-4 paragraphs)\n• Theme 4: Gaps & your contribution (1-2 paragraphs)\n\nEach paragraph should integrate 2-4 sources. Use transitions: 'Building on this finding...', 'In contrast...', 'A critical gap exists in...'"},
+{h:"Evidence-Based Argument Building",c:"Use the PICO framework: Population (who), Intervention (what), Comparison (against what), Outcome (measuring what).\n\nBuild logical chains: problem → existing evidence → gap → proposed solution → expected outcomes.\n\nEach claim needs peer-reviewed support. Use hedging appropriately: 'The evidence suggests...' rather than 'This proves...'\n\nDemonstrate cultural humility in methodology design. Acknowledge limitations honestly — this strengthens, not weakens, your work."}],
+ai:{label:"Ask the Writing Coach",hint:"Get feedback on structure, citations, and style",
+prompts:["How do I write a strong thesis statement?","What's the difference between heading levels?","How do I cite multiple authors in APA?","Help me outline my literature review","What makes a good research question?","How do I avoid plagiarism?"],
+r:{"thesis":"📝 Writing a Strong Thesis Statement:\n\nYour thesis should answer three questions:\n1. WHAT social work issue are you addressing?\n2. HOW will you address it (intervention)?\n3. WHY does it matter (expected outcomes)?\n\nFormula: 'This capstone examines [intervention] for [population] to [expected outcome].'\n\nStrong: 'This capstone examines motivational interviewing within school-based services for adolescents with substance use concerns, measuring engagement rates and readiness to change.'\n\nWeak: 'This paper is about helping teenagers with drug problems.' (Too vague, no method, no outcome)\n\nTips:\n• Make it specific enough to be testable\n• Include population, method, and outcome measure\n• Keep it to 1-2 sentences\n• Avoid value-laden language",
+"heading":"📋 APA Heading Levels:\n\nLevel 1: Centered, Bold, Title Case\n   Example: Literature Review\n\nLevel 2: Left-Aligned, Bold, Title Case\n   Example: Trauma-Informed Interventions\n\nLevel 3: Left-Aligned, Bold Italic, Title Case\n   Example: Cognitive Behavioral Approaches\n\nLevel 4: Indented, Bold, ending with period.\n   Text continues on same line.\n\nLevel 5: Indented, Bold Italic, ending with period.\n   Text continues on same line.\n\nMost capstones only need Levels 1-3.",
+"cite":"📚 APA Citation Rules:\n\nOne author: (Smith, 2023)\nTwo authors: (Smith & Jones, 2022)\nThree+ authors: (Smith et al., 2021)\n\nDirect quote: (Smith, 2023, p. 45)\nBlock quote (40+ words): Indent 0.5in, no quotes\n\nMultiple sources: (Adams, 2020; Brown, 2021) — alphabetical, semicolons\nSame author, same year: (Smith, 2023a, 2023b)\nOrganization first time: (National Association of Social Workers [NASW], 2021)\nAfter: (NASW, 2021)",
+"literature":"📖 Literature Review Outline:\n\n1. Introduction (1-2 para): Scope, search strategy, themes preview\n2. Background (2-3 para): Historical context, prevalence, significance\n3. Theory (2-3 para): Foundations grounding your intervention\n4. Interventions (3-4 para): What works, what doesn't, methods\n5. Gaps (1-2 para): What's missing, your contribution\n\nEach paragraph: 2-4 sources, synthesized around one idea.\nCompare and contrast — don't just summarize.\nEnd with clear statement of the gap your capstone addresses.",
+"research":"🔬 Crafting a Good Research Question:\n\nUse PICO:\n• Population: Who are you studying?\n• Intervention: What are you proposing?\n• Comparison: Alternative approach?\n• Outcome: What will you measure?\n\nExample: 'Among low-income single mothers (P), does a 12-week peer support group (I) compared to standard case management (C) improve mental health outcomes (O)?'\n\nYour question should be:\n✓ Specific and focused\n✓ Answerable with available methods\n✓ Relevant to social work practice\n✓ Ethically sound\n✓ Original",
+"plagiarism":"⚠️ Avoiding Plagiarism:\n\n3-step paraphrasing method:\n1. Read the original carefully\n2. Put it away — don't look at it\n3. Write the idea in YOUR words, then cite\n\nBad (too close to original):\n'Social workers need to show cultural competence in every professional interaction.'\n\nGood paraphrase:\n'Practitioners are expected to integrate cultural awareness into their work with all client populations (NASW, 2021).'\n\nRules:\n• Change BOTH words AND sentence structure\n• Always cite, even when paraphrasing\n• Use quotation marks for any exact phrases kept\n• Use plagiarism detection before submitting",
+"default":"I can help with capstone writing!\n\n✍️ Thesis statements & research questions\n📋 APA formatting (headings, citations, references)\n📖 Literature review structure & synthesis\n🔗 Evidence-based arguments\n📝 Paraphrasing & plagiarism avoidance\n\nWhat writing challenge are you facing?"}}},
+ethics:{title:"Ethics & Professional Standards",code:"NASW Code of Ethics Core Values",values:["Service","Social Justice","Dignity & Worth","Human Relationships","Integrity","Competence"],
+scenarios:[{t:"Dual Relationship Dilemma",s:"You discover your new client is the parent of your child's best friend. You've had several social interactions at school events and birthday parties.",q:"What ethical principles apply, and what steps should you take?",g:"NASW Standard 1.06 (Conflicts of Interest):\n\n1. Consult your supervisor immediately\n2. Assess if dual relationship impairs judgment\n3. Consider: Can you maintain objectivity?\n4. Document decision-making process\n5. If transferring, provide warm handoff referral\n6. If continuing, establish clear boundaries\n7. Client welfare remains paramount\n\nEven if you believe you can be objective, the appearance of conflict matters."},
+{t:"Confidentiality vs. Duty to Warn",s:"Your adult client reveals violent fantasies about a specific coworker named James. They describe purchasing a firearm and say 'James will finally understand.'",q:"How do you balance confidentiality with harm prevention?",g:"NASW Standard 1.07 + Tarasoff duty:\n\n1. Assess: specific victim (James), means (firearm), stated intent — criteria met\n2. Document statements verbatim\n3. Consult supervisor immediately\n4. Contact local law enforcement\n5. Make reasonable effort to notify James\n6. Consider involuntary evaluation\n7. Explain to client why you must act\n8. Follow agency duty-to-warn protocol\n\nWhen confidentiality conflicts with safety, safety takes precedence."},
+{t:"Cultural Competence Challenge",s:"A Somali Bantu family refuses individual therapy for their 15-year-old. The teen has privately disclosed suicidal ideation and cutting to you.",q:"How do you respect cultural values while ensuring safety?",g:"Balance NASW Standards 1.05, 1.02, and duty to protect:\n\n1. Assess immediacy using Columbia Protocol\n2. If imminent: safety overrides cultural preferences\n3. If serious but non-imminent:\n   • Engage qualified Somali cultural liaison\n   • Meet with family elders to build trust\n   • Explore family-inclusive therapy models\n   • Identify culturally acceptable healing practices\n4. Document all cultural consultation\n5. Don't assume — some members may support treatment privately"},
+{t:"Social Media Boundary Violation",s:"A current client sends you a Facebook friend request. You see they've been posting about your sessions publicly, naming you and describing treatment details.",q:"How do you address this multi-layered boundary issue?",g:"NASW Standards 1.06, 1.07, 4.03:\n\n1. Do NOT accept the friend request\n2. Do NOT respond to or comment on posts\n3. Consult supervisor before any action\n4. Address in session: boundaries, confidentiality, risks\n5. Explore motivation — validation? boundary testing?\n6. Educate about risks to their privacy\n7. Document incident and response\n8. Review agency social media policy\n\nThis is a therapeutic opportunity, not just rule enforcement."},
+{t:"Resource Allocation Dilemma",s:"Your agency has funding for 5 more clients. You have 12 on the waitlist: a veteran with PTSD, a pregnant woman fleeing DV, a teen aging out of foster care, and a family of four.",q:"What ethical framework guides this impossible choice?",g:"Distributive justice + NASW Standards 6.01, 3.07:\n\n1. Establish transparent criteria — don't decide alone\n   • Urgency of need (immediate safety?)\n   • Vulnerability factors (children, pregnancy)\n   • Available alternatives\n   • Likelihood of benefit\n2. Apply criteria consistently, document rationale\n3. For those not selected:\n   • Active referrals to alternatives\n   • Priority waitlist with timeline\n   • Emergency resource connections\n4. Advocate for increased funding\n5. Debrief with supervisor\n\nNo perfect answer — transparent process is essential."}],
+ai:{label:"Ask the Ethics Advisor",hint:"Get guidance on dilemmas and standards",
+prompts:["What is informed consent?","Explain duty to warn vs. duty to protect","How do I handle gifts from clients?","When must I break confidentiality?","What is the ETHIC decision-making model?","How do I document ethical decisions?"],
+r:{"consent":"📋 Informed Consent (NASW 1.03):\n\nClients must understand and agree to:\n1. Purpose of services\n2. Risks and benefits\n3. Available alternatives\n4. Right to refuse/withdraw\n5. Limits of confidentiality\n6. Fees and billing\n7. Technology use (telehealth, records)\n\nSpecial cases:\n• Diminished capacity — simplified language, include guardians\n• Minors — parent consent AND child assent\n• Involuntary — still must be informed\n• Review and renew periodically\n• Document that consent was obtained AND understood",
+"duty":"⚖️ Duty to Warn vs. Protect:\n\nDuty to Warn (Tarasoff I, 1974):\n• Directly warn an identifiable potential victim\n• Triggered by credible threat to specific person\n\nDuty to Protect (Tarasoff II, 1976):\n• Broader — take reasonable protective steps\n• Options: warn victim, notify police, hospitalize, intensify treatment\n\nTriggered when:\n✓ Specific, identifiable victim\n✓ Credible, imminent threat\n✓ Client has means to act\n\nAlways: consult supervisor, document, follow agency protocol.",
+"gift":"🎁 Handling Client Gifts:\n\nSmall, cultural gifts (card, cookies): May accept if refusal would offend. Discuss meaning therapeutically.\n\nLarge/expensive gifts: Generally decline. 'I appreciate the thought, but I can't accept this. Can we discuss what prompted it?'\n\nGifts creating obligation: Always decline.\n\nAsk yourself:\n1. Does accepting exploit the client?\n2. Does it create obligation?\n3. Would my supervisor approve?\n4. What's the clinical significance?\n5. Is it culturally meaningful?\n\nAlways document your decision and reasoning.",
+"confidentiality":"🔒 Breaking Confidentiality:\n\nMandatory reporting:\n• Child abuse/neglect (all 50 states)\n• Elder abuse (most states)\n• Dependent adult abuse\n\nSafety exceptions:\n• Imminent danger to self (suicidal with plan/means)\n• Imminent danger to others (Tarasoff)\n• Gravely disabled\n\nLegal: Court orders/subpoenas (consult attorney)\n\nBest practices:\n• Discuss limits at intake\n• Disclose minimum necessary\n• Document what, to whom, why\n• Inform client when possible before breaking",
+"ethic":"🧭 ETHIC Decision-Making Model (Congress, 2000):\n\nE — Examine personal, societal, agency, client, professional values\nT — Think about applicable standards and laws\nH — Hypothesize consequences of each option\nI — Identify who benefits and who is harmed\nC — Consult with supervisor and colleagues\n\nAlso: Reamer's 7-Step Framework:\n1. Identify ethical issues and competing values\n2. Identify who is affected\n3. List all possible courses of action\n4. Examine pros/cons of each\n5. Consult colleagues/supervisors/ethics committees\n6. Decide and document rationale\n7. Monitor and evaluate outcome",
+"document":"📝 Documenting Ethical Decisions:\n\nInclude:\n1. The situation — factual description\n2. Ethical standards — which NASW codes apply\n3. Legal considerations\n4. Options considered — all alternatives\n5. Consultation — who, what they advised\n6. Decision and rationale\n7. Actions taken and timeline\n8. Outcome\n\nTips:\n• Write at time of event\n• Use objective, behavioral language\n• Include direct quotes when significant\n• Date and sign all entries\n\nTemplate: 'After consulting NASW Standard [X.XX] and discussing with [supervisor] on [date], the decision was made to [action] because [rationale].'",
+"default":"I can help with ethics! Topics:\n\n⚖️ NASW Code standards\n📋 Informed consent\n🔒 Confidentiality exceptions\n🎁 Boundary issues\n🧭 Decision-making models\n📝 Ethical documentation\n\nWhat question can I help with?"}}},
+theory:{title:"Theory Integration Workshop",
+fw:[{name:"Systems Theory",key:"Interconnection",desc:"Views clients within environmental context — family, community, institutions. Changes in one part affect the whole. Key concepts: homeostasis, feedback loops, boundaries, equifinality.",
+apps:["Family dynamics assessment","Community needs analysis","Organizational change planning","Policy impact evaluation"],
+cases:[{t:"Case: The Rodriguez Family",x:"Maria (42) has depression after job loss. Her withdrawal affects husband Carlos (works longer hours), son Luis (grades dropping), daughter Ana (behavioral issues). Systems approach maps these interconnections and intervenes at multiple points."},
+{t:"Case: Agency Restructuring",x:"A nonprofit merges child welfare and substance abuse programs. Systems theory helps understand how changing one department creates ripple effects across the organization."}]},
+{name:"Ecological Model",key:"Environment",desc:"Bronfenbrenner's nested systems: micro (immediate), meso (connections between), exo (indirect), macro (culture/policy), chrono (time/change).",
+apps:["Multi-level intervention design","Cultural context mapping","Developmental trajectory analysis","Environmental risk assessment"],
+cases:[{t:"Case: Jaylen's School Struggles",x:"Jaylen (10) is failing. Micro: single-parent, inconsistent meals. Meso: no school-parent communication. Exo: parent works nights. Macro: district funding cuts. Chrono: recent move. Ecological model reveals intervention targets at EVERY level."},
+{t:"Case: Community Opioid Crisis",x:"Rather than only treating individuals, ecological approach addresses pharmacy access (micro), school-doctor partnerships (meso), employment (exo), Medicaid policy (macro), coal industry decline (chrono)."}]},
+{name:"Strengths-Based",key:"Empowerment",desc:"Focuses on client assets, resilience, and capacities rather than deficits. Every individual has inherent strengths. Helper is collaborator, not 'fixer.'",
+apps:["Asset-based community development","Solution-focused brief therapy","Positive youth development","Recovery-oriented practice"],
+cases:[{t:"Reframing 'Resistance'",x:"Deficit: 'Tom is non-compliant, misses appointments, resistant.' Strengths: 'Tom has survived 20 years of homelessness through remarkable resourcefulness. He maintains sobriety on his own terms. How can we build on his resilience?'"},
+{t:"Community Asset Mapping",x:"Instead of cataloging problems, map: 3 active churches, community garden, informal childcare networks, local business owners willing to hire, retired teacher offering tutoring. Build on what works."}]},
+{name:"Critical Race Theory",key:"Equity",desc:"Examines systemic racism in institutions, policies, everyday practices. Race is socially constructed but has real consequences. Centers experiences of people of color.",
+apps:["Anti-racist practice","Policy equity analysis","Intersectional assessment","Institutional bias identification"],
+cases:[{t:"Child Welfare Disparities",x:"Black children removed at 2x the rate for similar circumstances. CRT asks: What assessment tools contain bias? How do caseworkers' implicit biases affect decisions? What systemic factors trigger CPS involvement?"},
+{t:"Clinical Assessment Bias",x:"A depression screening normed on white, middle-class samples may miss culturally specific distress expressions. CRT prompts: Who created this tool? Whose experiences does it center?"}]}],
+ai:{label:"Ask the Theory Tutor",hint:"Explore theories and apply them to your capstone",
+prompts:["How do I integrate two theories?","Compare systems theory and ecological model","Best theory for child welfare?","How to write a theoretical framework?","Explain intersectionality","How does CRT apply to policy?"],
+r:{"integrate":"🔗 Integrating Two Theories:\n\n1. Choose complementary theories addressing different aspects\n2. Explain each separately (1-2 paragraphs each)\n3. Show the connection between them\n4. Apply together to your topic\n5. Cite original theorists\n\nExample connector: 'While the ecological model provides a framework for understanding environmental factors affecting [population], the strengths-based perspective guides the intervention by centering client resilience at each system level.'\n\nCommon pairings:\n• Ecological + Strengths-Based\n• Systems + Family Therapy\n• CRT + Intersectionality\n• Empowerment + Community Development",
+"compare":"🔄 Systems Theory vs. Ecological Model:\n\nSystems Theory (von Bertalanffy):\n• How parts interact within a whole\n• Boundaries, feedback loops, homeostasis\n• Shows interdependence\n\nEcological Model (Bronfenbrenner):\n• Nested environmental layers\n• Micro, meso, exo, macro, chrono\n• Maps specific influences\n\nKey difference: Systems emphasizes circular causality (everything affects everything). Ecological emphasizes layered influence (outer shapes inner).\n\nOften used together: Ecological identifies WHERE to intervene; systems explains HOW changes ripple.",
+"child":"👶 Best Theories for Child Welfare:\n\n1. Attachment Theory (Bowlby) — parent-child bonds, separation\n2. Ecological Model — risk/protective factors across levels\n3. Trauma-Informed — behaviors as adaptive responses\n4. Family Systems — abuse within family dynamics\n5. Critical Race Theory — disproportionality in the system\n\nChoose based on your focus:\n• Prevention? Attachment + Ecological\n• Policy? CRT + Ecological\n• Intervention? Trauma-informed + Strengths-based",
+"framework":"📐 Writing Your Theoretical Framework:\n\n1. Opening: State which theories and WHY (1 paragraph)\n2. Theory overview: Origins, key concepts, major theorists (2-3 para each)\n3. Application: HOW the theory explains your problem/guides your intervention — most important part\n4. Visual aid: Diagram mapping theory to your topic (optional)\n5. Limitations: What the theory doesn't explain\n\nCommon mistake: Describing theory in general without connecting to YOUR specific topic.",
+"intersect":"🔀 Intersectionality (Crenshaw, 1989):\n\nMultiple identity dimensions (race, gender, class, sexuality, disability) overlap and create unique experiences of privilege/oppression.\n\nKey principles:\n• No single identity operates alone\n• Overlapping identities create unique experiences\n• Systems of oppression interconnect\n\nIn your capstone: When describing your population, explicitly address intersecting identities and how they shape the issue.",
+"crt policy":"📜 CRT Applied to Policy:\n\nAsk:\n1. Who benefits from this policy?\n2. Who is harmed disproportionately?\n3. What racial context preceded it?\n4. Whose voices shaped it?\n5. What are actual racial outcomes vs. intent?\n\nExample — School Discipline:\n• Zero-tolerance appears race-neutral\n• Black students suspended 3-4x more\n• CRT reveals: policies mirror criminal justice, reflect cultural bias\n• Reform: restorative justice, community input, disaggregated data",
+"default":"I cover:\n🔄 Systems Theory & Ecological Models\n💪 Strengths-Based Perspective\n⚖️ Critical Race Theory\n🔗 Theory integration\n📐 Writing theoretical frameworks\n\nWhat theory question can I help with?"}}},
+exam:{title:"Exam Preparation Center",sub:"Submit",nxt:"Next Question",sc:"Your Score",rst:"Restart",ok:"Correct!",no:"Not quite.",
+qs:[{q:"Which NASW core value emphasizes helping people in need?",o:["Integrity","Service","Competence","Social Justice"],a:1,e:"Service: social workers' primary goal is helping people in need."},
+{q:"Which framework uses nested environmental systems (micro, meso, exo, macro)?",o:["Systems Theory","Psychodynamic","Ecological Model","Conflict Theory"],a:2,e:"Bronfenbrenner's Ecological Model describes nested systems."},
+{q:"First step in crisis intervention?",o:["Treatment plan","Ensure safety","Full assessment","Contact family"],a:1,e:"Immediate safety is always the first priority."},
+{q:"What does SMART stand for in goal-setting?",o:["Simple, Manageable, Actionable, Relevant, Timely","Specific, Measurable, Achievable, Relevant, Time-bound","Strategic, Meaningful, Appropriate, Realistic, Targeted","Sustainable, Monitored, Assessed, Reviewed, Tracked"],a:1,e:"Specific, Measurable, Achievable, Relevant, Time-bound."},
+{q:"Which law established federal child abuse protections?",o:["ADA","CAPTA","FMLA","Social Security Act"],a:1,e:"CAPTA (1974) provides federal CPS funding and standards."},
+{q:"OARS in motivational interviewing stands for:",o:["Observe, Analyze, Reflect, Summarize","Open questions, Affirmations, Reflections, Summaries","Offer, Assess, Recommend, Support","Outline, Accept, Reframe, Strategize"],a:1,e:"Open questions, Affirmations, Reflections, Summaries."},
+{q:"Which standard requires practicing within competence boundaries?",o:["Informed Consent","Competence (4.01)","Cultural Awareness","Self-Determination"],a:1,e:"NASW 4.01 requires practice within education/training/experience."},
+{q:"Trauma-informed care includes all EXCEPT:",o:["Safety and trustworthiness","Peer support","Requiring early trauma narratives","Empowerment and choice"],a:2,e:"Requiring trauma narratives early can re-traumatize clients."},
+{q:"Person-in-environment (PIE) is most associated with:",o:["CBT","Ecological perspective","Psychoanalysis","Behavioral modification"],a:1,e:"PIE is foundational to social work's ecological perspective."},
+{q:"Countertransference is:",o:["Client projecting onto therapist","Therapist's emotional response to client","Family therapy technique","Treatment resistance"],a:1,e:"Therapist's unresolved issues triggered by client material."},
+{q:"Stages of Change model sequence:",o:["Denial, Anger, Bargaining, Acceptance","Precontemplation, Contemplation, Preparation, Action, Maintenance","Assessment, Planning, Implementation, Evaluation","Engagement, Exploration, Resolution, Termination"],a:1,e:"Prochaska & DiClemente: Precontemplation → Contemplation → Preparation → Action → Maintenance."},
+{q:"Erikson's stage for adolescents (12-18) is:",o:["Industry vs. Inferiority","Autonomy vs. Shame","Identity vs. Role Confusion","Intimacy vs. Isolation"],a:2,e:"Identity vs. Role Confusion: exploring identity, peer influence, self-definition."}],
+ai:{label:"Ask the Exam Coach",hint:"Study tips and concept review",
+prompts:["Top ASWB exam topics?","Best study strategy?","Explain group development stages","CBT vs. DBT?","Key social work legislation","Explain Erikson's stages"],
+r:{"aswb":"📝 Top ASWB Topics:\n\nHuman Development (28%): Erikson, Piaget, attachment\nAssessment (24%): DSM-5, biopsychosocial, risk assessment\nInterventions (26%): CBT, MI, crisis, group work\nEthics (22%): NASW Code, confidentiality, boundaries\n\nPriority: Ethics appears throughout ALL sections.",
+"study":"📚 Study Strategy:\n\n12-Week Plan:\nWeeks 1-3: Content review\n4-6: Practice questions (50/day)\n7-9: Focus on weak areas\n10-11: Full practice exams timed\nWeek 12: Light review, self-care\n\nTips:\n• Eliminate wrong answers first\n• 'What would the IDEAL social worker do?'\n• NASW Code is your cheat sheet\n• Watch for absolutes (always/never = usually wrong)",
+"group":"👥 Tuckman's Stages:\n\n1. Forming — Polite, anxious. Leader provides structure.\n2. Storming — Conflict emerges. Normal and necessary.\n3. Norming — Cohesion develops. Trust builds.\n4. Performing — Productive work. Goals achieved.\n5. Adjourning — Termination. Process and celebrate.\n\nSW role changes: Directive → Facilitator → Collaborator → Observer → Processor",
+"cbt":"🧠 CBT vs. DBT:\n\nCBT (Beck):\n• Change distorted thoughts\n• Thoughts → Feelings → Behaviors\n• 12-20 sessions, individual\n• Best for: depression, anxiety, PTSD\n\nDBT (Linehan):\n• Balance acceptance AND change\n• 4 modules: Mindfulness, Distress Tolerance, Emotion Regulation, Interpersonal Effectiveness\n• Individual + group, ~1 year\n• Best for: BPD, self-harm, emotion dysregulation\n\nKey difference: CBT says 'change thinking.' DBT says 'accept AND change.'",
+"legislation":"📜 Key Legislation:\n\n• Social Security Act (1935) — welfare foundation\n• Civil Rights Act (1964) — anti-discrimination\n• CAPTA (1974) — child abuse protections\n• ADA (1990) — disability rights\n• HIPAA (1996) — health info privacy\n• ASFA (1997) — foster care permanency\n• ACA (2010) — healthcare expansion\n• ICWA (1978) — tribal child welfare authority\n• Tarasoff (1976) — duty to protect",
+"erikson":"👤 Erikson's 8 Stages:\n\n1. Trust vs. Mistrust (0-1) — consistent caregiving\n2. Autonomy vs. Shame (1-3) — exploration\n3. Initiative vs. Guilt (3-6) — creativity, purpose\n4. Industry vs. Inferiority (6-12) — competence\n5. Identity vs. Role Confusion (12-18) — self-definition\n6. Intimacy vs. Isolation (18-40) — relationships\n7. Generativity vs. Stagnation (40-65) — contributing\n8. Integrity vs. Despair (65+) — life review\n\nUnresolved stages create later challenges.",
+"default":"I cover:\n📝 ASWB content areas\n📚 Study strategies\n🧠 Theory comparisons\n📜 Legislation\n👤 Development stages\n\nWhat to review?"}}},
+milestones:{title:"Milestone Coaching Tracker",
+ph:[{n:"Phase 1: Foundation",w:"Weeks 1–3",ts:["Select topic and get faculty approval","Preliminary lit search (10+ sources)","Draft problem statement","Submit IRB if applicable","Meet field supervisor"],c:"#3a7d53"},
+{n:"Phase 2: Deep Research",w:"Weeks 4–7",ts:["Expand lit review to 20-25 sources","Develop theoretical framework","Outline methodology","Schedule peer review","Create synthesis matrix"],c:"var(--gold)"},
+{n:"Phase 3: Writing",w:"Weeks 8–11",ts:["Complete first full draft","Integrate theory with field examples","Add data analysis section","Submit for faculty feedback","Revise intro and conclusion"],c:"#4a7c8b"},
+{n:"Phase 4: Refinement",w:"Weeks 12–14",ts:["Revise per feedback","APA compliance check","Prepare oral presentation","Final checklist","Submit final document"],c:"#8b6e4a"}],
+tip:"💡 Schedule weekly 2-3 hour writing blocks. Consistency beats intensity.",
+ai:{label:"Ask the Milestone Coach",hint:"Time management and planning help",
+prompts:["I'm behind — help me catch up","How to beat writer's block?","Managing capstone stress","Preparing for oral defense","Final submission checklist","How to ask for an extension"],
+r:{"behind":"⏰ Getting Back on Track:\n\n1. Honest assessment — list what's done vs. remaining\n2. Triage by urgency and dependencies\n3. Compressed timeline — week by week\n4. Tell your advisor (they've seen it before)\n5. Daily Pomodoro blocks (25 min each)\n6. Write 1 hour minimum daily\n7. End each session with tomorrow's first sentence\n\nA completed capstone beats a perfect one.",
+"block":"✍️ Beating Writer's Block:\n\nImmediate: Write the easiest section first. Lower the bar to '200 terrible words.' Talk your topic out loud, then write what you said.\n\nStructural: Outline with bullet points. Fill in citations first. Use 'shitty first draft' method.\n\nIf anxiety: Name the fear. Remember drafts aren't final.\nIf confusion: Read more sources. Talk to advisor.\n\nRitual: Same time, same place, same drink. Build the habit.",
+"stress":"🧘 Managing Stress:\n\n• Break into tiny tasks (not 'write chapter' but '1 paragraph')\n• Physical checklist — crossing off items helps\n• Set boundaries: '2 hours then stop'\n• Maintain ONE non-academic activity\n• Sleep. Seriously.\n\nSeek help if: persistent anxiety, avoiding ALL work for a week, feeling hopeless.\n\nPerspective: This is one document. It doesn't define your worth as a social worker.",
+"defense":"🎤 Oral Defense Prep:\n\nStructure (15-20 min):\n1. Problem & significance (2 min)\n2. Literature highlights (3 min)\n3. Theory (2 min)\n4. Methodology (3 min)\n5. Findings (3 min)\n6. Implications (2 min)\n7. Limitations (2 min)\n\nAnticipate: 'Why this theory?' 'What would you change?' 'How does this apply?'\n\nPractice 3x aloud. Bring key points summary. It's OK to pause and think.",
+"checklist":"✅ Final Checklist:\n\nFormatting: APA 7th, 12pt TNR/11pt Calibri, double-spaced, 1in margins, page numbers, proper headings\n\nContent: Title page, abstract (150-250 words), introduction with thesis, lit review (15-25 sources), theory, methodology, findings, discussion, conclusion, references\n\nQuality: Spell-checked, read aloud, peer reviewed, faculty feedback incorporated, no tracked changes, tables/figures formatted, appendices labeled",
+"extension":"📧 Requesting an Extension:\n\nEmail template:\nSubject: Extension Request — [Name] Capstone\n\nDear Professor [Name],\nI'm requesting a [X-day] extension for my capstone due [date].\n[One sentence reason.]\n\nCompleted so far: [list sections]\nRevised timeline: [specific dates]\n\nI take responsibility and am committed to quality work.\nThank you, [Name]\n\nTips: Ask BEFORE deadline. Show progress. Propose specific new date.",
+"default":"I help with:\n⏰ Catching up on schedule\n✍️ Writer's block strategies\n🧘 Stress management\n🎤 Defense prep\n✅ Checklists\n📧 Faculty communication\n\nWhat do you need?"}}},
+access:{title:"Accessibility & Inclusive Practice",
+pr:[{n:"Universal Design",d:"Services accessible to all regardless of ability.",it:["Multiple formats (audio, visual, tactile, digital)","Plain language (6th-8th grade level)","ADA-compliant spaces","Virtual/telehealth options","Flexible scheduling"]},
+{n:"Cultural Accessibility",d:"Beyond translation — culturally responsive services.",it:["Qualified interpreters (never family)","Culturally adapted assessment tools","Diverse family structure recognition","Health literacy support","Community partnerships"]},
+{n:"Digital Accessibility (WCAG 2.1)",d:"Accessible digital communications and telehealth.",it:["Caption all video + audio transcripts","Screen-reader compatible documents","4.5:1 color contrast minimum","Keyboard navigation support","Test with assistive technology"]},
+{n:"Neurodiversity-Affirming",d:"Strengths-based approach to neurological differences.",it:["Flexible session formats","Sensory-friendly environments","Concrete, direct communication","Visual schedules and summaries","Respect for self-regulation behaviors"]}],
+ai:{label:"Ask the Accessibility Consultant",hint:"Making practice more inclusive",
+prompts:["How to make forms accessible?","Working with Deaf clients","Trauma-informed accessibility","Creating easy-read documents","Telehealth accessibility","Neurodivergent accommodations"],
+r:{"form":"📋 Accessible Forms:\n\nPhysical: 12pt+ sans-serif, high contrast, large-print versions, help available, multiple languages\n\nDigital: Proper labels (not just placeholders), logical tab order, plain-language errors, save progress, screen-reader tested\n\nContent: 6th grade reading level, define terms, explain why you're asking sensitive questions\n\nTest: If your most vulnerable client can complete it independently, it's accessible.",
+"deaf":"🤟 Working with Deaf Clients:\n\nAlways use qualified ASL interpreters. Position interpreter beside you. Look at the CLIENT. Speak normally.\n\nCultural competence: Deaf culture has its own values. Not all deaf people use ASL. ASK preferred communication. 'Deaf' (capital D) = cultural identity.\n\nPractical: Visual fire alarms, written summaries, video relay service option.",
+"trauma":"💜 Trauma-Informed Accessibility:\n\nEnvironment: Clear sightlines, client chooses seating, predictable routines, explain what happens before it happens.\n\nCommunication: 'What happened to you?' not 'What's wrong?' Ask permission before touch. Provide choices.\n\nForms: Warn before sensitive questions. Allow skipping. Multiple-session intake. Materials to review at home.\n\nPower: Minimize authority cues. Share decision-making. Explain reasoning.",
+"easy":"📄 Easy-Read Documents:\n\nLanguage: One idea per sentence. Under 15 words. Common words. Active voice.\n\nLayout: 14-16pt sans-serif, left-aligned, lots of white space, bullet points.\n\nVisuals: Simple images beside key concepts, consistent symbols (✓/✗), color boxes for important info.\n\nBefore: 'Eligibility contingent upon income verification.'\nAfter: 'We need to see proof of your income. This helps us know if you can get services.'",
+"telehealth":"💻 Telehealth Accessibility:\n\nTechnical: Screen-reader tested platform, phone backup, step-by-step instructions, test call option.\n\nVisual: Good lighting, plain background, live captions, screen sharing.\n\nCognitive: Agenda before session, shorter sessions (30-40 min), camera-off option, written summary after.\n\nEquity: Not all clients have reliable internet. Phone sessions as equal option. Assess privacy and tech literacy.",
+"neuro":"🧩 Neurodivergent Accommodations:\n\nADHD: Shorter sessions, written summaries, visual timers, fidget tools, text reminders.\n\nAutism: Reduced sensory input, literal communication, predictable routines, extra processing time, respect for sameness.\n\nDyslexia: Verbal AND written info, dyslexia-friendly fonts, allow recording, don't ask to read aloud.\n\nUniversal: ASK what helps — don't assume. Frame as standard practice. 'How do you learn best?' is a great intake question.",
+"default":"I cover:\n📋 Accessible forms\n🤟 Deaf clients\n💜 Trauma-informed access\n📄 Easy-read documents\n💻 Telehealth access\n🧩 Neurodivergent accommodations\n\nWhat topic?"}}},
+ai:{title:"AI Practice Assistant",ph:"Describe a scenario or ask a question...",send:"Send →",
+ex:["How should I structure my capstone?","Walk me through crisis intervention","Explain ecological model with an example","Help me analyze an ethical dilemma","Stages of group development?","How to write a theoretical framework?","Motivational interviewing techniques?","Explain trauma-informed care"]}}};
+// Quick ES/FR overrides
+D.es=JSON.parse(JSON.stringify(D.en));D.es.nav={title:"Mentor de Tesis",sub:"Excelencia en Trabajo Social",items:{home:"Inicio",writing:"Escritura",ethics:"Ética",theory:"Teoría",exam:"Exámenes",milestones:"Hitos",access:"Accesibilidad",ai:"Asistente IA"}};
+D.es.home.hero="Tu Camino hacia la Maestría en Trabajo Social";D.es.home.heroSub="Tutoría interactiva y preparación integral.";D.es.ai.ph="Describe un escenario...";D.es.ai.send="Enviar →";
+D.fr=JSON.parse(JSON.stringify(D.en));D.fr.nav={title:"Mentor de Mémoire",sub:"Excellence en Travail Social",items:{home:"Accueil",writing:"Écriture",ethics:"Éthique",theory:"Théorie",exam:"Examens",milestones:"Jalons",access:"Accessibilité",ai:"Assistant IA"}};
+D.fr.home.hero="Votre Parcours vers la Maîtrise";D.fr.home.heroSub="Mentorat interactif et préparation complète.";D.fr.ai.ph="Décrivez un scénario...";D.fr.ai.send="Envoyer →";
 
-// ===== AI RESPONSE DATA =====
-const AI = {
-  "literature":  "📚 **Structuring Your Literature Review:**\n\n1. **Thematic Organization** — Group sources by themes, not chronologically. Common themes: intervention effectiveness, population characteristics, systemic barriers, theoretical foundations.\n\n2. **Funnel Approach** — Start broad (field overview), narrow to your specific topic, then identify the gap your capstone fills.\n\n3. **Synthesis Matrix** — Create a table: sources as rows, themes as columns. This reveals patterns and gaps.\n\n4. **Critical Analysis** — Don't just summarize. Compare findings, note methodological strengths/weaknesses, connect to your question.\n\n5. **Transitions** — Use: 'Building on this evidence...', 'A contrasting perspective...', 'Despite these findings, a gap remains...'",
-  "crisis":      "🚨 **Crisis Intervention Scenario:**\n\nA 28-year-old calls saying they've been evicted and are in their car with two children (ages 3, 6). They're crying: 'I can't do this anymore.'\n\n**Step 1: Ensure Safety**\n'Are you and the children safe right now? Are you parked in a safe area?'\n\n**Step 2: Validate**\n'I hear how overwhelmed you are. Being evicted with young children is incredibly stressful.'\n\n**Step 3: Assess Immediate Needs**\nShelter, food, safety for tonight. Support network?\n\n**Step 4: Action Plan**\nConnect to emergency shelter. One concrete next step. Follow-up within 24 hours.\n\n**Step 5: Document & Coordinate**\nCrisis documentation. Warm handoff to shelter intake.",
-  "system":      "🔄 **Systems Theory in Child Welfare:**\n\n**Family System Level:**\n• Parent-child attachment patterns\n• Sibling relationships as protective factors\n• Intergenerational trauma transmission\n\n**Community System Level:**\n• School involvement and academic support\n• Neighborhood safety and resources\n• Faith community connections\n\n**Institutional System Level:**\n• CPS policies and procedures\n• Court system interactions\n• Foster care dynamics\n\n**Macro System Level:**\n• Federal legislation (CAPTA, ASFA)\n• Funding allocation patterns\n• Cultural norms around parenting\n\n**Key Insight:** Effective interventions address multiple system levels simultaneously.",
-  "ethic":       "⚖️ **Ethical Analysis Framework:**\n\n**Step 1: Identify Standards**\nNASW 1.07 (Confidentiality), 1.01 (Commitment to Clients), state/federal laws (HIPAA, Tarasoff)\n\n**Step 2: Who Is Affected?**\nClient (autonomy, trust), Third parties (safety), Professional (liability), Agency (policies)\n\n**Step 3: Decision-Making Model**\n• Identify the problem clearly\n• Consult Code of Ethics\n• Review relevant laws\n• Seek supervision\n• Examine all courses of action\n• Consider consequences of each\n\n**Step 4: Document Everything**\nYour reasoning, consultations sought, decision rationale, actions taken.\n\n**Remember:** When confidentiality conflicts with safety, safety generally takes precedence.",
-  "default":     "I'd be happy to help with your social work capstone! Here are areas I can assist with:\n\n📚 **Capstone Writing** — Structure, APA, literature reviews, thesis development\n⚖️ **Ethics** — NASW Code analysis, ethical dilemma frameworks\n🧠 **Theory** — Systems theory, ecological models, strengths-based perspective\n📝 **Exam Prep** — Practice questions, concept review, legislation\n🎯 **Milestones** — Timeline planning, writing strategies\n\nTry asking about a specific topic or scenario!"
-};
+// STATE
+let L='en',P='home',wT=0,tT=0,ex={c:0,s:null,d:false,sc:0,f:false},mC={},aC={};
+function G(){return D[L]}
 
-function getAIReply(input) {
-  const l = input.toLowerCase();
-  if (l.includes("literature") || l.includes("review") || l.includes("estructura") || l.includes("revue")) return AI.literature;
-  if (l.includes("crisis") || l.includes("intervención") || l.includes("crise")) return AI.crisis;
-  if (l.includes("system") || l.includes("sistema") || l.includes("système") || l.includes("welfare") || l.includes("bienestar")) return AI.system;
-  if (l.includes("ethic") || l.includes("ética") || l.includes("éthique") || l.includes("confidential") || l.includes("dilemma") || l.includes("dilema")) return AI.ethic;
-  return AI.default;
+// AI ENGINE
+function findR(sec,inp){
+  const rs=G()[sec]?.ai?.r||G().writing.ai.r;
+  const lo=inp.toLowerCase();let bk='default',bs=0;
+  for(const k of Object.keys(rs)){if(k==='default')continue;const ws=k.split(/[\s,]+/);let s=0;for(const w of ws)if(lo.includes(w))s+=w.length;if(s>bs){bs=s;bk=k;}}
+  return rs[bk];
 }
-
-// ===== STATE =====
-let lang = 'en';
-let activePage = 'home';
-let writingTab = 0;
-let theoryTab = 0;
-let examState = { current: 0, selected: null, submitted: false, score: 0, finished: false };
-let milestoneChecks = {};
-let chatMessages = [];
-let chatLoading = false;
-
-function t() { return T[lang]; }
-
-// ===== NAVIGATION =====
-function navigate(page) {
-  activePage = page;
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
-  const el = document.getElementById('page-' + page);
-  if (el) el.classList.add('visible');
-  // Update nav active states
-  document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll(`.nav-link[data-page="${page}"]`).forEach(b => b.classList.add('active'));
-  document.getElementById('mobileMenu').classList.remove('open');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+function initC(s){if(!aC[s])aC[s]=[];}
+function sendM(s,t){
+  initC(s);const inp=t||document.getElementById('ai-i-'+s)?.value;
+  if(!inp?.trim())return;aC[s].push({r:'user',t:inp});
+  if(document.getElementById('ai-i-'+s))document.getElementById('ai-i-'+s).value='';
+  rW(s,true);
+  setTimeout(()=>{aC[s].push({r:'bot',t:findR(s,inp)});rW(s,false);},500+Math.random()*600);
 }
-
-function toggleMobile() { document.getElementById('mobileMenu').classList.toggle('open'); }
-
-function switchLang(l) { lang = l; renderAll(); }
-
-// ===== RENDER FUNCTIONS =====
-function renderNav() {
-  const d = t();
-  document.getElementById('navTitle').textContent = d.title;
-  document.getElementById('navSubtitle').textContent = d.subtitle;
-  const links = document.getElementById('navLinks');
-  const mobile = document.getElementById('mobileMenu');
-  links.innerHTML = ''; mobile.innerHTML = '';
-  Object.entries(d.nav).forEach(([key, label]) => {
-    const btn = `<button class="nav-link ${activePage===key?'active':''}" data-page="${key}" onclick="navigate('${key}')">${label}</button>`;
-    links.innerHTML += btn;
-    mobile.innerHTML += btn;
+function rW(s,ld){
+  initC(s);const ms=aC[s],el=document.getElementById('ai-c-'+s);if(!el)return;
+  let h=ms.map(m=>`<div class="am ${m.r==='user'?'usr':'bot'}"><div class="abl">${m.t}</div></div>`).join('');
+  if(ld)h+=`<div class="am bot"><div class="abl"><div class="ti"><span></span><span></span><span></span></div></div></div>`;
+  el.innerHTML=h;el.scrollTop=el.scrollHeight;
+  document.querySelectorAll(`#ai-p-${s} .apb`).forEach(b=>{
+    if(ms.some(m=>m.r==='user'&&m.t===b.dataset.t))b.classList.add('u');
   });
 }
-
-function renderHome() {
-  const d = t();
-  document.getElementById('heroTitle').textContent = d.home.hero;
-  document.getElementById('heroSub').textContent = d.home.heroSub;
-  document.getElementById('statBar').innerHTML = d.home.stats.map(s => `<div class="stat-chip">${s}</div>`).join('');
-  document.getElementById('quickStartTitle').textContent = d.home.quickStart;
-  document.getElementById('pathCards').innerHTML = d.home.paths.map(p =>
-    `<div class="path-card" onclick="navigate('${p.nav}')">
-      <span class="icon">${p.icon}</span>
-      <h3>${p.title}</h3>
-      <p>${p.desc}</p>
-    </div>`
-  ).join('');
+function bW(s){
+  const ai=G()[s]?.ai;if(!ai)return '';initC(s);
+  return `<div class="aw" id="aw-${s}">
+    <button class="at" onclick="document.getElementById('aw-${s}').classList.toggle('open')">
+      <div class="ag">🤖</div><div><div class="al">${ai.label}</div><div class="ah">${ai.hint}</div></div><span class="aa">▼</span>
+    </button>
+    <div class="ab">
+      <div class="ap" id="ai-p-${s}">${ai.prompts.map(p=>`<button class="apb" data-t="${p.replace(/"/g,'&quot;')}" onclick="sendM('${s}',this.dataset.t)">${p}</button>`).join('')}</div>
+      <div class="aca" id="ai-c-${s}"></div>
+      <div class="air"><input class="ain" id="ai-i-${s}" placeholder="Type your question..." onkeydown="if(event.key==='Enter')sendM('${s}')"><button class="asnd" onclick="sendM('${s}')">Ask →</button></div>
+    </div></div>`;
 }
 
-function renderWriting() {
-  const d = t();
-  document.getElementById('writingTitle').textContent = d.writing.title;
-  document.getElementById('writingTabs').innerHTML = d.writing.sections.map((s, i) =>
-    `<button class="tab-btn ${writingTab===i?'active':''}" onclick="writingTab=${i};renderWriting()">${s}</button>`
-  ).join('');
-  const tip = d.writing.tips[writingTab];
-  document.getElementById('writingPanelHead').textContent = tip ? tip.heading : '';
-  document.getElementById('writingPanelBody').textContent = tip ? tip.content : '';
+// NAV
+function nav(p){P=p;document.querySelectorAll('.page').forEach(e=>e.classList.remove('v'));document.getElementById('pg-'+p)?.classList.add('v');document.querySelectorAll('.nlk').forEach(b=>b.classList.toggle('a',b.dataset.p===p));document.getElementById('mm').classList.remove('open');window.scrollTo({top:0,behavior:'smooth'});setTimeout(()=>{for(const s of['writing','ethics','theory','exam','milestones','access'])rW(s,false);},50);}
+function setLang(l){L=l;renderAll();}
+
+// RENDERERS
+function rNav(){const n=G().nav;document.getElementById('nT').textContent=n.title;document.getElementById('nS').textContent=n.sub;let h='';for(const[k,v]of Object.entries(n.items))h+=`<button class="nlk ${P===k?'a':''}" data-p="${k}" onclick="nav('${k}')">${v}</button>`;document.getElementById('nL').innerHTML=h;document.getElementById('mm').innerHTML=h;}
+
+function rHome(){const h=G().home;document.getElementById('pg-home').innerHTML=`<div class="hero"><h1 class="fade-up">${h.hero}</h1><p class="fade-up s1">${h.heroSub}</p><div class="stb fade-up s2">${h.stats.map(s=>`<div class="stc">${s}</div>`).join('')}</div></div><div class="sb" style="padding-top:36px"><h2 style="text-align:center;font-size:28px;margin-bottom:5px">${h.qs}</h2><div style="width:54px;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:2px;margin:0 auto 22px"></div><div class="cg">${h.paths.map(p=>`<div class="pc" onclick="nav('${p.n}')"><span class="ic">${p.i}</span><h3>${p.t}</h3><p>${p.d}</p></div>`).join('')}</div></div>`;}
+
+function rWriting(){const w=G().writing,t=w.tips[wT];document.getElementById('pg-writing').innerHTML=`<div class="sh"><h2>${w.title}</h2><div class="rl"></div></div><div class="sb"><div class="tb">${w.tabs.map((s,i)=>`<button class="tbtn ${wT===i?'a':''}" onclick="wT=${i};rWriting()">${s}</button>`).join('')}</div><div class="pn"><div class="ph"><h3>${t.h}</h3></div><div class="pb" style="white-space:pre-wrap">${t.c}</div></div>${bW('writing')}</div>`;}
+
+function rEthics(){const e=G().ethics;document.getElementById('pg-ethics').innerHTML=`<div class="sh"><h2>${e.title}</h2><div class="rl"></div></div><div class="sb"><div class="pn" style="padding:22px;margin-bottom:22px"><h3 style="font-size:19px;font-weight:700;margin-bottom:12px">${e.code}</h3><div class="vc">${e.values.map(v=>`<span class="vch">${v}</span>`).join('')}</div></div>${e.scenarios.map((s,i)=>`<div class="scc" id="sc${i}"><button class="sct" onclick="document.getElementById('sc${i}').classList.toggle('o')"><h3>⚖️ ${s.t}</h3><span class="sar">▼</span></button><div class="scb"><div class="sit"><p>${s.s}</p><p class="q">${s.q}</p></div><button class="rvb" id="rb${i}" onclick="this.style.display='none';document.getElementById('gd${i}').style.display='block'">Reveal Guidance</button><div class="gdb" id="gd${i}" style="display:none">${s.g}</div></div></div>`).join('')}${bW('ethics')}</div>`;}
+
+function rTheory(){const t=G().theory,f=t.fw[tT];document.getElementById('pg-theory').innerHTML=`<div class="sh"><h2>${t.title}</h2><div class="rl"></div></div><div class="sb"><div class="tsl">${t.fw.map((x,i)=>`<button class="tsb ${tT===i?'a':''}" onclick="tT=${i};rTheory()"><div class="k">${x.key}</div><div class="n">${x.name}</div></button>`).join('')}</div><div class="pn" style="border:0"><div class="thd"><div class="k">${f.key}</div><h3>${f.name}</h3><p>${f.desc}</p></div><div class="tap">${f.apps.map(a=>`<div class="tai"><div class="tad"></div><span>${a}</span></div>`).join('')}</div>${f.cases?`<div class="tcs"><h4 style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em">📋 Case Studies</h4>${f.cases.map(c=>`<div class="tc"><h4>${c.t}</h4><p>${c.x}</p></div>`).join('')}</div>`:''}</div>${bW('theory')}</div>`;}
+
+function rExam(){const e=G().exam,qs=e.qs,s=ex;let h=`<div class="sh"><h2>${e.title}</h2><div class="rl"></div></div><div class="sb">`;
+if(s.f){const p=Math.round((s.sc/qs.length)*100),c=p>=75?'shi':p>=50?'smi':'slo';h+=`<div style="text-align:center"><h3 style="font-size:26px">${e.sc}</h3><div class="scr ${c}">${p}%</div><p style="font-size:17px;color:var(--sage);margin-bottom:24px">${s.sc}/${qs.length}</p><button class="bp" onclick="ex={c:0,s:null,d:false,sc:0,f:false};rExam()">${e.rst}</button></div>`;}
+else{const q=qs[s.c],pp=((s.c+1)/qs.length)*100;
+let os=q.o.map((o,i)=>{let c='ob';if(s.d&&i===q.a)c+=' ok';else if(s.d&&i===s.s&&i!==q.a)c+=' no';else if(!s.d&&i===s.s)c+=' sl';return `<button class="${c}" ${s.d?'disabled':''} onclick="ex.s=${i};rExam()"><span class="ol">${String.fromCharCode(65+i)}</span>${o}</button>`;}).join('');
+let ep='';if(s.d){const ok=s.s===q.a;ep=`<div class="eb ${ok?'eok':'eno'}"><div class="v">${ok?'✓ '+e.ok:'✗ '+e.no}</div>${q.e}</div>`;}
+let ac=!s.d?`<button class="bp" ${s.s===null?'disabled':''} onclick="exSub()">${e.sub}</button>`:`<button class="bg" onclick="exNxt()">${s.c<qs.length-1?e.nxt:e.sc}</button>`;
+h+=`<div class="ep"><span class="ec">Question ${s.c+1}/${qs.length}</span><div class="pt"><div class="pf" style="width:${pp}%"></div></div></div><div class="pn" style="padding:26px"><p class="qt">${q.q}</p>${os}${ep}<div class="ea">${ac}</div></div>`;}
+h+=bW('exam')+'</div>';document.getElementById('pg-exam').innerHTML=h;}
+function exSub(){if(ex.s===null)return;ex.d=true;if(ex.s===G().exam.qs[ex.c].a)ex.sc++;rExam();}
+function exNxt(){if(ex.c<G().exam.qs.length-1){ex.c++;ex.s=null;ex.d=false;}else ex.f=true;rExam();}
+
+function rMiles(){const m=G().milestones;let ph=m.ph.map((p,pi)=>{const tot=p.ts.length,dn=p.ts.filter((_,ti)=>mC[`${pi}-${ti}`]).length,pct=Math.round((dn/tot)*100);
+return `<div class="mc"><div class="mh" style="background:linear-gradient(135deg,${p.c}12,${p.c}06)"><div><h3>${p.n}</h3><span class="wk">${p.w}</span></div><div class="mp"><div class="mb"><div class="mf" style="width:${pct}%;background:${p.c}"></div></div><span class="mpct" style="color:${p.c}">${pct}%</span></div></div><div class="mts">${p.ts.map((t,ti)=>{const ck=mC[`${pi}-${ti}`];return `<div class="tr ${ck?'d':''}" onclick="mC['${pi}-${ti}']=!mC['${pi}-${ti}'];rMiles()"><div class="tck">${ck?'✓':''}</div><span class="tl">${t}</span></div>`;}).join('')}</div></div>`;}).join('');
+document.getElementById('pg-milestones').innerHTML=`<div class="sh"><h2>${m.title}</h2><div class="rl"></div></div><div class="sb">${ph}<div class="tipb">${m.tip}</div>${bW('milestones')}</div>`;}
+
+function rAccess(){const a=G().access;document.getElementById('pg-access').innerHTML=`<div class="sh"><h2>${a.title}</h2><div class="rl"></div></div><div class="sb"><div class="acg">${a.pr.map(p=>`<div class="acc"><div class="achd"><h3>${p.n}</h3><p>${p.d}</p></div><div class="acbd">${p.it.map(i=>`<div class="aci"><div class="acd"></div><span>${i}</span></div>`).join('')}</div></div>`).join('')}</div>${bW('access')}</div>`;}
+
+function rAI(){const ai=G().ai;initC('global');const ms=aC.global||[];
+let ex=ms.length?'':`<div class="ap" id="ai-p-global">${ai.ex.map(e=>`<button class="apb" data-t="${e.replace(/"/g,'&quot;')}" onclick="sendG(this.dataset.t)">${e}</button>`).join('')}</div>`;
+document.getElementById('pg-ai').innerHTML=`<div class="sh"><h2>${ai.title}</h2><div class="rl"></div></div><div class="sb gcw">${ex}<div class="gcm" id="ai-c-global">${ms.map(m=>`<div class="am ${m.r==='user'?'usr':'bot'}"><div class="abl">${m.t}</div></div>`).join('')}</div><div class="air"><input class="ain" id="ai-i-global" placeholder="${ai.ph}" onkeydown="if(event.key==='Enter')sendG()"><button class="asnd" onclick="sendG()">${ai.send}</button></div></div>`;}
+
+function sendG(t){
+  initC('global');const inp=t||document.getElementById('ai-i-global')?.value;if(!inp?.trim())return;
+  aC.global.push({r:'user',t:inp});rAI();
+  const lo=inp.toLowerCase();let sec='writing';
+  if(lo.match(/ethic|confiden|nasw|dual|bound|gift|consent/))sec='ethics';
+  else if(lo.match(/theor|system|ecolog|strength|crt|race|intersect/))sec='theory';
+  else if(lo.match(/exam|aswb|study|erikson|stage|legis|cbt|dbt|group/))sec='exam';
+  else if(lo.match(/milestone|schedule|behind|block|stress|defense|check/))sec='milestones';
+  else if(lo.match(/access|deaf|form|telehealth|neuro|easy|trauma.inform/))sec='access';
+  const el=document.getElementById('ai-c-global');
+  el.innerHTML+=`<div class="am bot"><div class="abl"><div class="ti"><span></span><span></span><span></span></div></div></div>`;el.scrollTop=el.scrollHeight;
+  setTimeout(()=>{aC.global.push({r:'bot',t:findR(sec,inp)});rAI();document.getElementById('ai-c-global').scrollTop=999999;},600+Math.random()*700);
 }
 
-function renderEthics() {
-  const d = t();
-  document.getElementById('ethicsTitle').textContent = d.ethics.title;
-  document.getElementById('ethicsCodeTitle').textContent = d.ethics.code;
-  document.getElementById('ethicsValues').innerHTML = d.ethics.values.map(v => `<span class="value-chip">${v}</span>`).join('');
-  document.getElementById('ethicsScenarios').innerHTML = d.ethics.scenarios.map((s, i) =>
-    `<div class="scenario-card" id="scenario-${i}">
-      <button class="scenario-toggle" onclick="toggleScenario(${i})">
-        <h3>⚖️ ${s.title}</h3>
-        <span class="scenario-arrow">▼</span>
-      </button>
-      <div class="scenario-body">
-        <div class="scenario-situation">
-          <p>${s.situation}</p>
-          <p class="question">${s.question}</p>
-        </div>
-        <button class="reveal-btn" id="reveal-btn-${i}" onclick="revealGuidance(${i})">Reveal Guidance</button>
-        <div class="guidance-box" id="guidance-${i}" style="display:none">${s.guidance}</div>
-      </div>
-    </div>`
-  ).join('');
-}
-
-function toggleScenario(i) {
-  const el = document.getElementById('scenario-' + i);
-  el.classList.toggle('open');
-}
-
-function revealGuidance(i) {
-  document.getElementById('reveal-btn-' + i).style.display = 'none';
-  document.getElementById('guidance-' + i).style.display = 'block';
-}
-
-function renderTheory() {
-  const d = t();
-  document.getElementById('theoryTitle').textContent = d.theory.title;
-  document.getElementById('theorySelector').innerHTML = d.theory.frameworks.map((f, i) =>
-    `<button class="theory-btn ${theoryTab===i?'active':''}" onclick="theoryTab=${i};renderTheory()">
-      <div class="label">${f.key}</div>
-      <div class="name">${f.name}</div>
-    </button>`
-  ).join('');
-  const fw = d.theory.frameworks[theoryTab];
-  document.getElementById('theoryHead').innerHTML =
-    `<div class="key">${fw.key}</div><h3>${fw.name}</h3><p>${fw.desc}</p>`;
-  document.getElementById('theoryApps').innerHTML = fw.apps.map(a =>
-    `<div class="theory-app-item"><div class="theory-app-dot"></div><span>${a}</span></div>`
-  ).join('');
-}
-
-function renderExam() {
-  const d = t();
-  document.getElementById('examTitle').textContent = d.exam.title;
-  const qs = d.exam.questions;
-  const s = examState;
-
-  if (s.finished) {
-    const pct = Math.round((s.score / qs.length) * 100);
-    const cls = pct >= 75 ? 'score-high' : pct >= 50 ? 'score-mid' : 'score-low';
-    document.getElementById('examContent').innerHTML =
-      `<div style="text-align:center">
-        <h3 style="font-size:28px;font-weight:700;margin-bottom:4px;">${d.exam.score}</h3>
-        <div class="score-circle ${cls}">${pct}%</div>
-        <p style="font-size:18px;color:var(--sage);margin-bottom:28px;">${s.score} / ${qs.length}</p>
-        <button class="btn-primary" onclick="examState={current:0,selected:null,submitted:false,score:0,finished:false};renderExam()">${d.exam.restart}</button>
-      </div>`;
-    return;
-  }
-
-  const q = qs[s.current];
-  const pctProgress = ((s.current + 1) / qs.length) * 100;
-
-  let optionsHtml = q.opts.map((opt, i) => {
-    let cls = 'option-btn';
-    if (s.submitted && i === q.ans) cls += ' correct';
-    else if (s.submitted && i === s.selected && i !== q.ans) cls += ' wrong';
-    else if (!s.submitted && i === s.selected) cls += ' selected';
-    return `<button class="${cls}" ${s.submitted?'disabled':''} onclick="examSelect(${i})">
-      <span class="option-letter">${String.fromCharCode(65+i)}</span>${opt}
-    </button>`;
-  }).join('');
-
-  let expHtml = '';
-  if (s.submitted) {
-    const isCorrect = s.selected === q.ans;
-    expHtml = `<div class="explanation-box ${isCorrect?'correct-exp':'wrong-exp'}">
-      <div class="verdict">${isCorrect ? '✓ ' + d.exam.correct : '✗ ' + d.exam.incorrect}</div>
-      ${q.exp}
-    </div>`;
-  }
-
-  let actionHtml = '';
-  if (!s.submitted) {
-    actionHtml = `<button class="btn-primary" ${s.selected===null?'disabled':''} onclick="examSubmit()">${d.exam.submit}</button>`;
-  } else {
-    const label = s.current < qs.length - 1 ? d.exam.next : d.exam.score;
-    actionHtml = `<button class="btn-gold" onclick="examNext()">${label}</button>`;
-  }
-
-  document.getElementById('examContent').innerHTML =
-    `<div class="exam-progress">
-      <span class="exam-counter">Question ${s.current+1} / ${qs.length}</span>
-      <div class="progress-track"><div class="progress-fill" style="width:${pctProgress}%"></div></div>
-    </div>
-    <div class="content-panel" style="padding:28px;">
-      <p class="question-text">${q.q}</p>
-      ${optionsHtml}
-      ${expHtml}
-      <div class="exam-actions">${actionHtml}</div>
-    </div>`;
-}
-
-function examSelect(i) { if (!examState.submitted) { examState.selected = i; renderExam(); } }
-function examSubmit() {
-  if (examState.selected === null) return;
-  examState.submitted = true;
-  const d = t();
-  if (examState.selected === d.exam.questions[examState.current].ans) examState.score++;
-  renderExam();
-}
-function examNext() {
-  const d = t();
-  if (examState.current < d.exam.questions.length - 1) {
-    examState.current++; examState.selected = null; examState.submitted = false;
-  } else { examState.finished = true; }
-  renderExam();
-}
-
-function renderMilestones() {
-  const d = t();
-  document.getElementById('milestonesTitle').textContent = d.milestones.title;
-  document.getElementById('milestonesTip').textContent = d.milestones.tip;
-  document.getElementById('milestonesContent').innerHTML = d.milestones.phases.map((phase, pi) => {
-    const total = phase.tasks.length;
-    const done = phase.tasks.filter((_, ti) => milestoneChecks[`${pi}-${ti}`]).length;
-    const pct = Math.round((done / total) * 100);
-    const color = phase.color;
-    return `<div class="phase-card">
-      <div class="phase-header" style="background:linear-gradient(135deg,${color}12,${color}06)">
-        <div>
-          <h3>${phase.name}</h3>
-          <span class="weeks">${phase.weeks}</span>
-        </div>
-        <div class="phase-progress-wrap">
-          <div class="phase-progress-bar"><div class="phase-progress-fill" style="width:${pct}%;background:${color}"></div></div>
-          <span class="phase-pct" style="color:${color}">${pct}%</span>
-        </div>
-      </div>
-      <div class="phase-tasks">
-        ${phase.tasks.map((task, ti) => {
-          const checked = milestoneChecks[`${pi}-${ti}`];
-          return `<div class="task-row ${checked?'done':''}" onclick="toggleTask(${pi},${ti})">
-            <div class="task-check">${checked?'✓':''}</div>
-            <span class="task-label">${task}</span>
-          </div>`;
-        }).join('')}
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function toggleTask(pi, ti) {
-  const key = `${pi}-${ti}`;
-  milestoneChecks[key] = !milestoneChecks[key];
-  renderMilestones();
-}
-
-function renderAccess() {
-  const d = t();
-  document.getElementById('accessTitle').textContent = d.accessibility.title;
-  document.getElementById('accessGrid').innerHTML = d.accessibility.principles.map(p =>
-    `<div class="access-card">
-      <div class="access-card-head">
-        <h3>${p.name}</h3>
-        <p>${p.desc}</p>
-      </div>
-      <div class="access-card-body">
-        ${p.items.map(item => `<div class="access-item"><div class="access-dot"></div><span>${item}</span></div>`).join('')}
-      </div>
-    </div>`
-  ).join('');
-}
-
-function renderAI() {
-  const d = t();
-  document.getElementById('aiTitle').textContent = d.ai.title;
-  document.getElementById('chatInput').placeholder = d.ai.placeholder;
-  document.getElementById('chatSendBtn').textContent = d.ai.send;
-
-  const exEl = document.getElementById('aiExamples');
-  if (chatMessages.length === 0) {
-    exEl.style.display = 'flex';
-    exEl.innerHTML = d.ai.examples.map(ex =>
-      `<button class="example-btn" onclick="sendChat('${ex.replace(/'/g, "\\'")}')">${ex}</button>`
-    ).join('');
-  } else { exEl.style.display = 'none'; }
-
-  const msgEl = document.getElementById('chatMessages');
-  let html = chatMessages.map(m =>
-    `<div class="chat-msg ${m.role}"><div class="chat-bubble">${m.text}</div></div>`
-  ).join('');
-  if (chatLoading) {
-    html += `<div class="chat-msg ai"><div class="chat-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div></div>`;
-  }
-  msgEl.innerHTML = html;
-  msgEl.scrollTop = msgEl.scrollHeight;
-}
-
-function sendChat(text) {
-  const input = text || document.getElementById('chatInput').value;
-  if (!input.trim() || chatLoading) return;
-  chatMessages.push({ role: 'user', text: input });
-  document.getElementById('chatInput').value = '';
-  chatLoading = true;
-  renderAI();
-  setTimeout(() => {
-    chatMessages.push({ role: 'ai', text: getAIReply(input) });
-    chatLoading = false;
-    renderAI();
-  }, 700 + Math.random() * 800);
-}
-
-function renderAll() {
-  renderNav();
-  renderHome();
-  renderWriting();
-  renderEthics();
-  renderTheory();
-  renderExam();
-  renderMilestones();
-  renderAccess();
-  renderAI();
-  navigate(activePage);
-}
-
-// ===== INIT =====
+function renderAll(){rNav();rHome();rWriting();rEthics();rTheory();rExam();rMiles();rAccess();rAI();nav(P);}
 renderAll();
 </script>
 </body>
