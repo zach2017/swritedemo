@@ -1,0 +1,516 @@
+{
+  "categories": [
+    {
+      "id": "ethics",
+      "name": "Ethics & Professional Conduct",
+      "icon": "⚖️",
+      "year": [1, 2],
+      "description": "NASW Code of Ethics applications and ethical dilemmas"
+    },
+    {
+      "id": "case_management",
+      "name": "Case Management & Documentation",
+      "icon": "📋",
+      "year": [1, 2],
+      "description": "Client intake, assessment, progress notes, and treatment planning"
+    },
+    {
+      "id": "crisis",
+      "name": "Crisis Intervention",
+      "icon": "🚨",
+      "year": [2],
+      "description": "Emergency response, suicide assessment, and safety planning"
+    },
+    {
+      "id": "human_behavior",
+      "name": "Human Behavior & Social Environment",
+      "icon": "🧠",
+      "year": [1],
+      "description": "HBSE theories, developmental stages, and systems theory"
+    },
+    {
+      "id": "diversity",
+      "name": "Diversity, Equity & Inclusion",
+      "icon": "🌍",
+      "year": [1, 2],
+      "description": "Cultural competency, anti-oppressive practice, and social justice"
+    },
+    {
+      "id": "policy",
+      "name": "Social Welfare Policy",
+      "icon": "🏛️",
+      "year": [2],
+      "description": "Policy analysis, advocacy, and legislative impact on practice"
+    },
+    {
+      "id": "research",
+      "name": "Research Methods",
+      "icon": "📊",
+      "year": [2],
+      "description": "Evidence-based practice, program evaluation, and research ethics"
+    },
+    {
+      "id": "clinical",
+      "name": "Clinical Practice & Assessment",
+      "icon": "🩺",
+      "year": [2],
+      "description": "DSM-5 diagnoses, biopsychosocial assessments, and treatment modalities"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "eth-001",
+      "category": "ethics",
+      "title": "Dual Relationship Dilemma",
+      "difficulty": "intermediate",
+      "year": 1,
+      "exam_relevant": true,
+      "exam_topics": ["ASWB Bachelors", "ASWB Masters"],
+      "scenario": "You are a social worker at a community mental health center in a small rural town. Your new client, Maria (age 34), arrives for her intake appointment. You recognize her as the parent of a child in your daughter's soccer team. Maria discloses she is experiencing severe depression and marital conflict. She specifically requested you because she heard you are 'the best therapist in town.' The nearest alternative provider is 45 miles away, and Maria lacks reliable transportation.",
+      "key_concepts": ["Dual relationships", "Rural practice challenges", "NASW Code of Ethics Section 1.06", "Boundary management", "Client self-determination"],
+      "writing_prompt": "Write a comprehensive ethical analysis addressing: (1) Identify the ethical dilemma and relevant NASW Code of Ethics sections, (2) Discuss the risks and benefits of accepting this client, (3) Propose a plan of action with rationale, (4) Document how you would address boundaries if you accept the case.",
+      "rubric": {
+        "identification": {"points": 25, "criteria": "Correctly identifies dual relationship, cites NASW 1.06(c), discusses rural practice considerations"},
+        "analysis": {"points": 25, "criteria": "Weighs benefits (access to care, client preference) against risks (compromised objectivity, community dynamics)"},
+        "action_plan": {"points": 30, "criteria": "Proposes concrete steps: consultation, informed consent about dual relationship, boundary agreement, supervision plan, referral options"},
+        "documentation": {"points": 20, "criteria": "Professional writing, proper social work terminology, addresses ongoing boundary monitoring"}
+      },
+      "model_response_key_points": [
+        "Acknowledge the ethical tension between client self-determination and professional boundaries",
+        "Reference NASW Code of Ethics Section 1.06(c) on dual relationships",
+        "Consider the unique challenges of rural social work practice",
+        "Discuss informed consent regarding the dual relationship",
+        "Outline specific boundary management strategies",
+        "Include a plan for ongoing supervision and consultation",
+        "Consider documentation requirements"
+      ],
+      "tips": "On the licensing exam, rural practice scenarios frequently test your ability to balance competing ethical principles. Remember that not all dual relationships are prohibited — the key is whether the relationship could cause harm."
+    },
+    {
+      "id": "eth-002",
+      "category": "ethics",
+      "title": "Confidentiality and Duty to Warn",
+      "difficulty": "advanced",
+      "year": 2,
+      "exam_relevant": true,
+      "exam_topics": ["ASWB Masters", "ASWB Clinical"],
+      "scenario": "During a routine session, your client James (age 28) becomes agitated and states: 'If my ex-girlfriend doesn't stop seeing that guy, something bad is going to happen. I've been watching their apartment. I know his schedule. He parks in the same spot every night.' When you probe further, James says, 'I'm not going to do anything stupid, I just want to scare him.' James has a history of assault charges (dismissed) and was previously mandated for anger management. He denies owning weapons but has made vague threats before that were not acted upon.",
+      "key_concepts": ["Duty to warn/protect", "Tarasoff decision", "Confidentiality limits", "Risk assessment", "Mandatory reporting", "Documentation"],
+      "writing_prompt": "Write a detailed clinical response that includes: (1) A risk assessment based on the information provided, (2) Your legal and ethical obligations in this scenario, (3) The specific steps you would take immediately and in follow-up, (4) How you would document this session, (5) How you would address this with James therapeutically.",
+      "rubric": {
+        "risk_assessment": {"points": 20, "criteria": "Identifies specific risk factors: history of violence, surveillance behavior, identified victim, escalating language"},
+        "legal_ethical": {"points": 25, "criteria": "References Tarasoff, state duty-to-warn laws, NASW 1.07(c), discusses when confidentiality must be broken"},
+        "action_steps": {"points": 25, "criteria": "Immediate: safety assessment, consultation with supervisor, contact identified victim/law enforcement. Follow-up: safety plan, treatment modification"},
+        "documentation": {"points": 15, "criteria": "Detailed progress note including exact quotes, risk assessment rationale, actions taken, consultation obtained"},
+        "therapeutic": {"points": 15, "criteria": "Addresses maintaining therapeutic alliance while fulfilling duty, discusses transparency with client about limits"}
+      },
+      "model_response_key_points": [
+        "Conduct structured risk assessment (e.g., history of violence, specificity of threat, means, opportunity)",
+        "Reference Tarasoff v. Regents of the University of California",
+        "Identify duty to warn/protect under state law",
+        "Consult with supervisor before taking action",
+        "Notify identifiable potential victim and/or law enforcement",
+        "Document thoroughly with direct quotes where possible",
+        "Address with client transparently about limits of confidentiality",
+        "Modify treatment plan to address anger and threat behaviors"
+      ],
+      "tips": "Licensing exams almost always include a duty-to-warn question. Remember: the threat must be specific and credible, with an identifiable victim. When in doubt, always err on the side of protecting potential victims."
+    },
+    {
+      "id": "cm-001",
+      "category": "case_management",
+      "title": "Biopsychosocial Assessment — Adolescent in Foster Care",
+      "difficulty": "intermediate",
+      "year": 1,
+      "exam_relevant": true,
+      "exam_topics": ["ASWB Bachelors"],
+      "scenario": "Jaylen is a 15-year-old African American male who has been in foster care for 3 years following removal due to parental substance abuse and neglect. He is currently in his fourth foster placement. His current foster parents report increasing behavioral problems including truancy, defiance, and suspected marijuana use. Jaylen's school reports declining grades (from B average to failing three classes), frequent fights, and social withdrawal. Jaylen tells you he 'doesn't care about anything anymore' and that 'nobody wants me anyway.' He has a history of ADHD (diagnosed at age 8) and was previously prescribed Adderall, which he stopped taking after his third placement change. Jaylen enjoys basketball and drawing but has stopped participating in both. His biological mother is currently in a residential treatment program and has begun supervised visits.",
+      "key_concepts": ["Biopsychosocial assessment", "Trauma-informed care", "Foster care system", "Adolescent development", "Racial identity", "Attachment disruption"],
+      "writing_prompt": "Complete a comprehensive biopsychosocial assessment for Jaylen. Include: (1) Biological factors, (2) Psychological factors, (3) Social/environmental factors, (4) Strengths assessment, (5) DSM-5 diagnostic considerations, (6) Treatment recommendations with prioritization, (7) Goals for the case plan.",
+      "rubric": {
+        "biological": {"points": 15, "criteria": "ADHD history, medication discontinuation, substance use screening, developmental health needs, nutrition/sleep assessment"},
+        "psychological": {"points": 20, "criteria": "Trauma history, attachment disruption, grief/loss, identity development, potential depression screening, hopelessness statements"},
+        "social": {"points": 20, "criteria": "Placement instability, school functioning, peer relationships, racial identity, cultural factors, biological family connections, foster family dynamics"},
+        "strengths": {"points": 10, "criteria": "Basketball, artistic ability, prior academic success, mother's engagement in treatment, resilience"},
+        "diagnostic": {"points": 15, "criteria": "ADHD pre-existing, rule out MDD, PTSD, adjustment disorder, substance use disorder; consider trauma lens vs pathologizing"},
+        "treatment": {"points": 20, "criteria": "Prioritized recommendations: safety/stability first, then trauma processing, medication evaluation, school supports, family therapy, mentoring, cultural connections"}
+      },
+      "model_response_key_points": [
+        "Use a trauma-informed lens throughout the assessment",
+        "Address each domain thoroughly with specific details from the scenario",
+        "Identify strengths explicitly — not just deficits",
+        "Consider racial identity development and cultural factors",
+        "Be cautious about over-pathologizing normative responses to trauma",
+        "Prioritize placement stability and relational consistency",
+        "Include measurable, time-specific goals",
+        "Reference evidence-based practices (TF-CBT, EMDR, etc.)"
+      ],
+      "tips": "On the licensing exam, biopsychosocial assessments test your ability to think systemically. Always consider the interaction between biological, psychological, and social factors rather than treating them as isolated domains."
+    },
+    {
+      "id": "cm-002",
+      "category": "case_management",
+      "title": "SOAP Note — Substance Abuse Session",
+      "difficulty": "beginner",
+      "year": 1,
+      "exam_relevant": true,
+      "exam_topics": ["ASWB Bachelors"],
+      "scenario": "You are a social worker at an outpatient substance abuse treatment center. You just completed a session with David (age 42), who is in his 6th week of treatment for alcohol use disorder. David reports he attended 5 of 7 AA meetings this week but had a 'slip' on Saturday when he drank two beers at a family barbecue. He states he felt pressured by his brother and 'didn't want to make a scene.' David expresses guilt and frustration, saying 'I ruined six weeks of sobriety.' He was tearful during the session. You worked with David on cognitive restructuring around his all-or-nothing thinking and helped him develop a relapse prevention plan for upcoming family events. David agreed to call his sponsor before the next family gathering and to practice refusal skills. He appeared more hopeful by the end of the session.",
+      "key_concepts": ["SOAP documentation format", "Substance abuse treatment", "Relapse prevention", "Cognitive behavioral therapy", "Motivational interviewing", "Progress notes"],
+      "writing_prompt": "Write a complete SOAP note for this session following the standard format: Subjective (client's self-report), Objective (clinician observations and measurable data), Assessment (clinical analysis and progress evaluation), Plan (next steps and interventions).",
+      "rubric": {
+        "subjective": {"points": 25, "criteria": "Client's own words about the week, AA attendance, the lapse, feelings about it, family pressure. Uses direct quotes appropriately."},
+        "objective": {"points": 25, "criteria": "Observable data: affect (tearful, then more hopeful), session attendance, AA meetings attended (5/7), specific lapse details (2 beers, Saturday), behavioral observations"},
+        "assessment": {"points": 25, "criteria": "Clinical analysis: distinguishes lapse from relapse, identifies cognitive distortions (all-or-nothing thinking), evaluates overall treatment progress, identifies triggers (family pressure)"},
+        "plan": {"points": 25, "criteria": "Specific next steps: continue weekly sessions, sponsor contact plan, refusal skills practice, address family dynamics, consider family session, next session date"}
+      },
+      "model_response_key_points": [
+        "Distinguish between a lapse (slip) and a full relapse",
+        "Use the client's exact language in the Subjective section",
+        "Include specific measurable data in the Objective section",
+        "Demonstrate clinical reasoning in the Assessment",
+        "Make the Plan specific and actionable",
+        "Maintain non-judgmental, strength-based language throughout"
+      ],
+      "tips": "SOAP notes are one of the most commonly tested documentation formats. Keep each section distinct — avoid mixing subjective and objective data. The Assessment is where you show clinical reasoning, not just summarize."
+    },
+    {
+      "id": "cr-001",
+      "category": "crisis",
+      "title": "Suicide Risk Assessment",
+      "difficulty": "advanced",
+      "year": 2,
+      "exam_relevant": true,
+      "exam_topics": ["ASWB Masters", "ASWB Clinical"],
+      "scenario": "You receive a call from the front desk that a walk-in client is requesting to see someone immediately. Sarah (age 22, college senior) appears disheveled, has been crying, and is clutching her phone. She tells you that her fiancé ended their engagement last night via text message. She says, 'I can't do this anymore. There's no point. Everyone leaves me.' When asked directly about suicidal thoughts, she says, 'I thought about driving into a bridge abutment on the way here, but I came here instead.' She reports she has not eaten or slept in 24 hours. Sarah has a history of one previous suicide attempt (overdose at age 17) and a diagnosis of Borderline Personality Disorder. She is currently prescribed Prozac but admits she stopped taking it 'a few weeks ago.' She lives alone and states her family is 'not an option' for support. She does have a close friend who 'doesn't know what's going on.'",
+      "key_concepts": ["Suicide risk assessment", "Safety planning", "Columbia Suicide Severity Rating Scale", "Protective factors", "Lethal means counseling", "Crisis intervention", "Documentation"],
+      "writing_prompt": "Write a complete crisis intervention response including: (1) Structured suicide risk assessment identifying all risk and protective factors, (2) Risk level determination with rationale, (3) A detailed safety plan, (4) Immediate intervention steps, (5) Documentation of the encounter, (6) Follow-up plan.",
+      "rubric": {
+        "risk_assessment": {"points": 25, "criteria": "Identifies: ideation with plan (bridge), intent (came for help = ambivalence), prior attempt, discontinued medication, BPD diagnosis, acute loss, isolation, hopelessness. Protective: help-seeking, ambivalence, friend exists"},
+        "risk_level": {"points": 15, "criteria": "Correctly identifies as high risk with specific rationale; discusses whether involuntary hospitalization is warranted"},
+        "safety_plan": {"points": 25, "criteria": "Follows Stanley-Brown Safety Plan format: warning signs, coping strategies, social contacts, professional contacts, means restriction, reasons for living"},
+        "intervention": {"points": 20, "criteria": "Immediate: ensure physical safety, assess medical needs (no food/sleep), contact prescriber about medication, engage support system (friend with consent), determine level of care"},
+        "documentation": {"points": 15, "criteria": "Thorough documentation of assessment, rationale for clinical decisions, client statements in quotes, plan with timeline"}
+      },
+      "model_response_key_points": [
+        "Use a structured assessment tool (Columbia, SAD PERSONS, etc.)",
+        "Identify both risk factors AND protective factors",
+        "Note that help-seeking behavior is a significant protective factor",
+        "Address medication discontinuation as urgent medical concern",
+        "Create a specific, detailed safety plan with the client",
+        "Address lethal means (driving/bridge access)",
+        "Engage natural supports with client's consent",
+        "Document clinical decision-making process",
+        "Plan for follow-up within 24-48 hours"
+      ],
+      "tips": "Suicide assessment is one of the MOST tested topics on licensing exams. Always assess: ideation, plan, intent, means, timeline, and protective factors. When a client comes to you voluntarily, that is always a protective factor worth noting."
+    },
+    {
+      "id": "hb-001",
+      "category": "human_behavior",
+      "title": "Applying Erikson's Theory to a Client System",
+      "difficulty": "beginner",
+      "year": 1,
+      "exam_relevant": true,
+      "exam_topics": ["ASWB Bachelors"],
+      "scenario": "Margaret is a 72-year-old retired teacher who was referred to your senior services agency by her physician. Since her husband's death 18 months ago, Margaret has become increasingly isolated. She stopped volunteering at the library, rarely sees her grandchildren, and spends most days watching television. She tells you, 'I look back at my life and wonder if any of it mattered. I was just a teacher. I never did anything important.' She also expresses regret about not traveling more and not reconciling with her estranged sister before her sister's death 5 years ago. Despite this, Margaret occasionally mentions proud moments — a former student who became a doctor and credited Margaret, her 45-year marriage, and raising three children who 'turned out well.'",
+      "key_concepts": ["Erikson's psychosocial stages", "Integrity vs. Despair", "Grief and loss", "Life review therapy", "Strengths perspective", "Gerontological social work"],
+      "writing_prompt": "Write an analysis that includes: (1) Identify Margaret's current psychosocial stage and explain its relevance, (2) Analyze how grief is affecting her developmental task, (3) Apply at least two additional theories (e.g., Kübler-Ross, attachment theory, activity theory), (4) Develop an intervention plan grounded in theory, (5) Discuss how you would use the strengths perspective.",
+      "rubric": {
+        "erikson": {"points": 25, "criteria": "Correctly identifies Integrity vs. Despair, explains the stage thoroughly, connects Margaret's statements to stage-specific behaviors"},
+        "grief_analysis": {"points": 20, "criteria": "Analyzes how unresolved grief (husband, sister) is complicating the developmental task, discusses complicated grief indicators"},
+        "additional_theories": {"points": 20, "criteria": "Meaningfully applies 2+ theories beyond Erikson with specific connections to Margaret's situation"},
+        "intervention": {"points": 20, "criteria": "Theory-grounded plan: life review/reminiscence therapy, grief counseling, gradual reengagement, explore meaning-making"},
+        "strengths": {"points": 15, "criteria": "Identifies specific strengths: teaching legacy, long marriage, successful children, prior community involvement, willingness to attend session"}
+      },
+      "model_response_key_points": [
+        "Correctly identify Integrity vs. Despair (Stage 8)",
+        "Explain that this stage involves reflecting on life with acceptance or regret",
+        "Connect Margaret's 'it didn't matter' statements to despair",
+        "Connect her proud moments to potential for integrity",
+        "Analyze grief's impact on her ability to resolve this stage",
+        "Apply additional theories meaningfully",
+        "Recommend life review/reminiscence therapy",
+        "Use strengths perspective to reframe her narrative"
+      ],
+      "tips": "Erikson's stages are heavily tested on the ASWB exam. Know each stage, the age range, the central conflict, and what successful vs. unsuccessful resolution looks like. Pay special attention to Stages 5-8 as these are most commonly tested."
+    },
+    {
+      "id": "div-001",
+      "category": "diversity",
+      "title": "Cultural Competence in Practice",
+      "difficulty": "intermediate",
+      "year": 1,
+      "exam_relevant": true,
+      "exam_topics": ["ASWB Bachelors", "ASWB Masters"],
+      "scenario": "You are assigned to work with the Nguyen family, who immigrated from Vietnam 5 years ago. The parents, Thanh (father, 48) and Linh (mother, 44), are concerned about their 16-year-old daughter, Mai, who has been 'acting American' — wanting to date, refusing to speak Vietnamese at home, and arguing about attending college instead of working in the family restaurant. Thanh tells you through an interpreter (his 12-year-old son, Bao) that Mai is 'disrespecting the family' and needs to 'remember who she is.' Mai tells you privately that she feels torn between two worlds and has been having panic attacks. She also shares that she is questioning her sexual orientation but begs you not to tell her parents, saying 'they would disown me.'",
+      "key_concepts": ["Acculturation conflict", "Cultural competence", "Intersectionality", "Interpreter ethics", "LGBTQ+ youth in immigrant families", "Confidentiality with minors", "Family systems"],
+      "writing_prompt": "Write a comprehensive cultural assessment and intervention plan addressing: (1) Multiple cultural dynamics at play, (2) Ethical concerns with using the child as interpreter, (3) How you would navigate Mai's confidentiality regarding sexual orientation, (4) Culturally responsive intervention strategies, (5) Your own cultural humility and potential biases.",
+      "rubric": {
+        "cultural_dynamics": {"points": 20, "criteria": "Identifies: acculturation gap, individualist vs collectivist values, generational conflict, bicultural identity stress, intersectionality of ethnicity, gender, and potential LGBTQ+ identity"},
+        "interpreter_ethics": {"points": 15, "criteria": "Identifies ethical problem of child interpreter (parentification, power dynamics, NASW standards), proposes professional interpreter"},
+        "confidentiality": {"points": 25, "criteria": "Navigates the complex tension between Mai's right to confidentiality about sexual orientation, safety assessment, family's cultural values, and minor's rights by state law"},
+        "interventions": {"points": 25, "criteria": "Culturally responsive: respects family hierarchy while supporting Mai's development, explores family's immigration experience, connects to Vietnamese community resources, addresses panic attacks, considers family therapy with cultural adaptation"},
+        "self_awareness": {"points": 15, "criteria": "Demonstrates cultural humility, acknowledges potential Western bias, considers own positionality, commits to ongoing learning about Vietnamese culture"}
+      },
+      "model_response_key_points": [
+        "Never use a family member (especially a child) as an interpreter",
+        "Acknowledge and respect the family's cultural values while supporting Mai",
+        "Recognize acculturation stress as a normative experience, not pathology",
+        "Navigate confidentiality carefully — Mai's safety is the deciding factor",
+        "Use an intersectional lens to understand Mai's multiple identities",
+        "Explore your own cultural positionality and potential biases",
+        "Connect the family to culturally specific resources",
+        "Avoid imposing Western individualistic values"
+      ],
+      "tips": "Cultural competence questions on the licensing exam often test whether you can balance cultural respect with professional ethics. The answer is rarely 'impose your values' OR 'defer entirely to culture.' Look for the response that demonstrates cultural humility while upholding professional standards."
+    },
+    {
+      "id": "pol-001",
+      "category": "policy",
+      "title": "Policy Analysis — Housing First Model",
+      "difficulty": "advanced",
+      "year": 2,
+      "exam_relevant": true,
+      "exam_topics": ["ASWB Masters"],
+      "scenario": "Your agency has been asked to provide testimony to the city council regarding the adoption of a Housing First model for addressing chronic homelessness. The council is divided: some members support traditional shelter-based approaches that require sobriety and program compliance, while others want to adopt Housing First. Your agency serves approximately 200 chronically homeless individuals, 65% of whom have co-occurring mental health and substance use disorders. The current shelter system has a 23% success rate in transitioning clients to permanent housing. The city has allocated $2 million for homelessness services next fiscal year.",
+      "key_concepts": ["Policy analysis frameworks", "Housing First vs Treatment First", "Evidence-based policy", "Advocacy", "Cost-benefit analysis", "Macro social work"],
+      "writing_prompt": "Write a formal policy analysis brief that includes: (1) Problem statement with relevant data, (2) Analysis of both policy options using a social work policy framework, (3) Evidence base for each approach, (4) Cost-benefit analysis, (5) Equity and social justice implications, (6) Your recommendation with implementation plan.",
+      "rubric": {
+        "problem_statement": {"points": 15, "criteria": "Clear definition of chronic homelessness, local data, population characteristics, current system limitations"},
+        "policy_analysis": {"points": 25, "criteria": "Uses established framework (e.g., Popple & Leighninger, Gilbert & Terrell), analyzes both options across dimensions of adequacy, equity, efficiency"},
+        "evidence_base": {"points": 20, "criteria": "Cites Housing First research (Tsemberis, Pathways to Housing), shelter-based outcomes, cost studies, comparative effectiveness data"},
+        "cost_benefit": {"points": 15, "criteria": "Compares costs of both models, includes indirect costs (ER visits, incarceration, shelter cycling), discusses ROI"},
+        "equity": {"points": 10, "criteria": "Analyzes racial disparities in homelessness, barriers in treatment-first model, dignity and self-determination"},
+        "recommendation": {"points": 15, "criteria": "Clear recommendation with phased implementation plan, measurable outcomes, accountability mechanisms"}
+      },
+      "model_response_key_points": [
+        "Frame the analysis using a recognized social work policy framework",
+        "Present both sides fairly but support recommendation with evidence",
+        "Include specific research citations for Housing First outcomes",
+        "Address cost-effectiveness (Housing First typically costs less long-term)",
+        "Discuss equity and racial disparities in homelessness",
+        "Connect to social work values of dignity and self-determination",
+        "Propose a realistic implementation plan",
+        "Include measurable outcomes and evaluation plan"
+      ],
+      "tips": "Policy questions on the licensing exam test your ability to think at the macro level. Know major social welfare policies and programs, understand how to analyze policy from a social work perspective, and always connect policy to social work values."
+    },
+    {
+      "id": "res-001",
+      "category": "research",
+      "title": "Program Evaluation Design",
+      "difficulty": "intermediate",
+      "year": 2,
+      "exam_relevant": true,
+      "exam_topics": ["ASWB Masters"],
+      "scenario": "Your agency has been running a 12-week group therapy program for survivors of domestic violence for the past two years. The program includes psychoeducation, CBT-based coping skills, safety planning, and peer support. The agency director wants to apply for a federal grant to expand the program but needs evidence of effectiveness. You have been asked to design a program evaluation. The program currently serves approximately 40 participants per year across 4 groups. You have access to pre/post assessments that have been administered (but not analyzed), attendance records, and client satisfaction surveys.",
+      "key_concepts": ["Program evaluation", "Research design", "Outcome measurement", "Evidence-based practice", "IRB considerations", "Data analysis", "Logic models"],
+      "writing_prompt": "Design a comprehensive program evaluation proposal that includes: (1) A logic model for the program, (2) Research questions, (3) Evaluation design and methodology, (4) Outcome measures and data collection plan, (5) Data analysis plan, (6) Ethical considerations, (7) Limitations and strategies to address them.",
+      "rubric": {
+        "logic_model": {"points": 15, "criteria": "Clear inputs, activities, outputs, short-term and long-term outcomes; logical connections between elements"},
+        "research_questions": {"points": 10, "criteria": "Specific, measurable questions about program effectiveness, client satisfaction, and implementation fidelity"},
+        "design": {"points": 20, "criteria": "Appropriate design (pre-post, quasi-experimental if possible), addresses internal validity threats, considers comparison group"},
+        "measures": {"points": 20, "criteria": "Valid and reliable outcome measures (e.g., PCL-5, BDI-II, Danger Assessment), process measures, cultural appropriateness of tools"},
+        "analysis": {"points": 15, "criteria": "Appropriate statistical methods (paired t-tests, repeated measures ANOVA), qualitative component, effect sizes"},
+        "ethics": {"points": 10, "criteria": "IRB considerations, informed consent with vulnerable population, confidentiality in group setting, trauma-sensitive research practices"},
+        "limitations": {"points": 10, "criteria": "Identifies threats (small sample, no random assignment, attrition) and proposes mitigation strategies"}
+      },
+      "model_response_key_points": [
+        "Create a clear logic model connecting program components to outcomes",
+        "Use validated outcome measures appropriate for the population",
+        "Address the ethical complexities of research with DV survivors",
+        "Consider both quantitative and qualitative methods",
+        "Acknowledge limitations honestly while proposing mitigation",
+        "Connect evaluation back to evidence-based practice",
+        "Consider cultural responsiveness of assessment tools",
+        "Plan for participant attrition in the design"
+      ],
+      "tips": "Research questions on the licensing exam focus on basic research literacy: understanding designs, validity threats, ethical requirements (especially informed consent and IRB), and the difference between qualitative and quantitative methods."
+    },
+    {
+      "id": "cl-001",
+      "category": "clinical",
+      "title": "Differential Diagnosis and Treatment Planning",
+      "difficulty": "advanced",
+      "year": 2,
+      "exam_relevant": true,
+      "exam_topics": ["ASWB Clinical"],
+      "scenario": "Aisha (age 35) presents with the following symptoms over the past 3 months: persistent sadness, difficulty sleeping (waking at 3 AM nightly), loss of appetite (12-pound weight loss), difficulty concentrating at work, and withdrawal from friends. She reports a traumatic event 4 months ago when she witnessed a violent robbery at her workplace. Since then, she has nightmares about the event 3-4 times per week, avoids the area where it occurred (which means taking a longer route to work), startles easily at loud noises, and reports feeling 'constantly on edge.' Aisha also mentions that she has 'always been a worrier' and has had periodic episodes of intense anxiety with heart racing, shortness of breath, and dizziness lasting about 10 minutes since her early 20s. She drinks 2-3 glasses of wine nightly 'to calm down,' increased from occasional social drinking before the robbery.",
+      "key_concepts": ["Differential diagnosis", "PTSD", "Major Depressive Disorder", "Panic Disorder", "Generalized Anxiety Disorder", "Substance use assessment", "Comorbidity", "DSM-5 criteria"],
+      "writing_prompt": "Write a comprehensive clinical assessment that includes: (1) Differential diagnosis discussion analyzing each possible diagnosis with DSM-5 criteria, (2) Your recommended diagnoses with rationale, (3) Rule-out diagnoses, (4) A comprehensive treatment plan with evidence-based interventions prioritized, (5) Risk assessment regarding substance use.",
+      "rubric": {
+        "differential": {"points": 25, "criteria": "Systematically evaluates PTSD, MDD, Panic Disorder, GAD, Alcohol Use Disorder using DSM-5 criteria; distinguishes overlapping symptoms"},
+        "diagnoses": {"points": 20, "criteria": "Identifies primary PTSD (with all criteria clusters), comorbid MDD, Panic Disorder (pre-existing), and assesses Alcohol Use Disorder criteria"},
+        "rule_outs": {"points": 10, "criteria": "Rules out medical conditions, substance-induced symptoms, adjustment disorder, acute stress disorder (>1 month)"},
+        "treatment_plan": {"points": 30, "criteria": "Prioritizes evidence-based treatments: trauma-focused CBT or CPT/PE for PTSD, addresses substance use, considers pharmacological consultation, includes timeline and measurable goals"},
+        "risk_assessment": {"points": 15, "criteria": "Evaluates alcohol use pattern, self-medication, risk of escalation, screening for AUD, addresses substance use in treatment sequencing"}
+      },
+      "model_response_key_points": [
+        "Use DSM-5 criteria systematically for each potential diagnosis",
+        "Distinguish PTSD from depression (they share overlapping symptoms)",
+        "Note that panic attacks pre-date the trauma (separate panic disorder)",
+        "Assess alcohol use as potential AUD vs situational coping",
+        "Recommend trauma-focused evidence-based treatment (PE, CPT, or EMDR)",
+        "Address treatment sequencing — which issues to target first",
+        "Consider safety and stabilization before trauma processing",
+        "Include measurable treatment goals with timelines"
+      ],
+      "tips": "The clinical licensing exam heavily tests differential diagnosis. Pay attention to timelines — when symptoms started relative to events matters for diagnosis. Comorbidity is the norm, not the exception, in clinical practice."
+    },
+    {
+      "id": "cm-003",
+      "category": "case_management",
+      "title": "Termination and Transfer Summary",
+      "difficulty": "intermediate",
+      "year": 2,
+      "exam_relevant": true,
+      "exam_topics": ["ASWB Masters"],
+      "scenario": "You have been working with Rosa (age 38) for 8 months at your community mental health center. Rosa was initially referred for severe depression and PTSD following a domestic violence experience. Over the course of treatment, Rosa has made significant progress: she obtained a protective order, moved to safe housing through a DV transitional program, began part-time employment, reconnected with her sister, and her PHQ-9 scores decreased from 24 to 8. You are leaving the agency for a new position and must transfer Rosa to a new clinician. Rosa has expressed anxiety about the transition, stating 'You're the only one who believed me. I don't want to start over with someone new.'",
+      "key_concepts": ["Termination process", "Transfer of care", "Therapeutic relationship", "Attachment", "Documentation", "Continuity of care", "Client self-determination"],
+      "writing_prompt": "Write: (1) A comprehensive transfer summary document for the receiving clinician, (2) A session plan for how you would conduct the termination session with Rosa, (3) An analysis of the ethical considerations involved in termination and transfer.",
+      "rubric": {
+        "transfer_summary": {"points": 35, "criteria": "Complete clinical summary including: presenting problem, treatment history, diagnosis, interventions used, progress (with measurable outcomes), current functioning, remaining needs, medications, safety considerations, recommendations for continued treatment"},
+        "session_plan": {"points": 35, "criteria": "Addresses: processing feelings about ending, reviewing progress and growth, normalizing transition anxiety, introducing new clinician, providing closure, reinforcing coping skills, creating a transition plan with timeline"},
+        "ethics": {"points": 30, "criteria": "Discusses: NASW standards on termination (1.16), abandonment vs appropriate termination, managing dependency, client's attachment history and how it affects this transition, continuity of care, proper documentation, informed consent"}
+      },
+      "model_response_key_points": [
+        "Acknowledge and validate Rosa's feelings about the transition",
+        "Frame termination as part of the therapeutic process",
+        "Highlight Rosa's growth and attribute progress to her own strength",
+        "Prepare a thorough transfer summary for continuity",
+        "Plan a graduated transition (overlap sessions if possible)",
+        "Address attachment dynamics — this may trigger trauma responses",
+        "Ensure proper documentation protects both client and clinician",
+        "Connect termination process to Rosa's larger healing narrative"
+      ],
+      "tips": "Termination is a frequently tested topic. Remember that planned termination should be gradual, collaborative, and clinically processed. The way you end treatment matters as much as how you begin it."
+    },
+    {
+      "id": "eth-003",
+      "category": "ethics",
+      "title": "Social Media and Professional Boundaries",
+      "difficulty": "beginner",
+      "year": 1,
+      "exam_relevant": true,
+      "exam_topics": ["ASWB Bachelors"],
+      "scenario": "You are a school social worker working with high school students. One of your clients, Tyler (age 17), sends you a friend request on Instagram. You do not accept it, but you notice his profile is public. Out of concern for his wellbeing (he recently disclosed self-harm), you view his profile and discover posts suggesting he is using drugs, attending parties, and making concerning statements about 'not being here much longer.' Some posts include other students you also work with. Your supervisor suggests you screen all student clients' social media regularly 'for safety purposes.'",
+      "key_concepts": ["Digital ethics", "Social media boundaries", "Privacy", "Supervision", "Minor clients", "School social work", "Documentation of online observations"],
+      "writing_prompt": "Write an analysis that addresses: (1) Ethical issues with accepting the friend request, (2) Ethical issues with viewing the public profile, (3) Whether and how the social media content should be addressed clinically, (4) Your response to the supervisor's suggestion, (5) A proposed social media policy for your school social work practice.",
+      "rubric": {
+        "friend_request": {"points": 15, "criteria": "Clear explanation of why accepting is inappropriate (dual relationship, boundary violation, power dynamics with minor)"},
+        "viewing_profile": {"points": 25, "criteria": "Nuanced analysis: public profile vs privacy expectations, whether viewing constitutes surveillance, informed consent issues, how viewing changes the therapeutic relationship"},
+        "clinical_response": {"points": 25, "criteria": "Discusses: duty to respond to safety concerns, how to bring up observations without revealing source in a way that damages trust, considers Tyler's autonomy, addresses clinically not punitively"},
+        "supervisor_response": {"points": 15, "criteria": "Respectfully pushes back with ethical rationale, discusses systematic screening as surveillance vs individual safety concerns, proposes alternative approaches"},
+        "policy_proposal": {"points": 20, "criteria": "Comprehensive social media policy addressing: general prohibition on connecting with clients, guidelines for incidental discovery, documentation requirements, consent considerations, training for staff"}
+      },
+      "model_response_key_points": [
+        "Declining the friend request was correct — explain why with ethical codes",
+        "Viewing public profiles is ethically gray — discuss the complexity",
+        "Safety concerns may justify action but process matters",
+        "Address the content therapeutically, not punitively",
+        "Systematic social media surveillance is ethically problematic",
+        "Propose transparent policies that balance safety and privacy",
+        "Consider the developmental needs of adolescents online",
+        "Document your reasoning process"
+      ],
+      "tips": "Digital ethics is an emerging area in social work. While licensing exams may not ask specifically about social media, the underlying principles (boundaries, confidentiality, dual relationships, informed consent) are tested constantly. Apply traditional ethics to digital contexts."
+    }
+  ],
+  "exam_prep": {
+    "aswb_bachelors": {
+      "name": "ASWB Bachelors Exam (BSW)",
+      "description": "For BSW graduates seeking initial licensure",
+      "content_areas": [
+        {"area": "Human Development, Diversity, and Behavior in the Environment", "percentage": 28},
+        {"area": "Assessment and Intervention Planning", "percentage": 24},
+        {"area": "Interventions with Clients/Client Systems", "percentage": 27},
+        {"area": "Professional Relationships, Values, and Ethics", "percentage": 21}
+      ],
+      "total_questions": 170,
+      "scored_questions": 150,
+      "time_limit_minutes": 240
+    },
+    "aswb_masters": {
+      "name": "ASWB Masters Exam (MSW)",
+      "description": "For MSW graduates seeking advanced licensure",
+      "content_areas": [
+        {"area": "Human Development, Diversity, and Behavior in the Environment", "percentage": 24},
+        {"area": "Assessment and Intervention Planning", "percentage": 30},
+        {"area": "Interventions with Clients/Client Systems", "percentage": 21},
+        {"area": "Professional Relationships, Values, and Ethics", "percentage": 25}
+      ],
+      "total_questions": 170,
+      "scored_questions": 150,
+      "time_limit_minutes": 240
+    },
+    "aswb_clinical": {
+      "name": "ASWB Clinical Exam",
+      "description": "For licensed clinical social workers (LCSW)",
+      "content_areas": [
+        {"area": "Human Development, Diversity, and Behavior in the Environment", "percentage": 21},
+        {"area": "Assessment, Diagnosis, and Treatment Planning", "percentage": 27},
+        {"area": "Psychotherapy, Clinical Interventions, and Case Management", "percentage": 27},
+        {"area": "Professional Values and Ethics", "percentage": 25}
+      ],
+      "total_questions": 170,
+      "scored_questions": 150,
+      "time_limit_minutes": 240
+    }
+  },
+  "writing_guides": {
+    "soap_note": {
+      "name": "SOAP Note Format",
+      "sections": ["Subjective", "Objective", "Assessment", "Plan"],
+      "description": "Standard progress note format used in clinical settings"
+    },
+    "biopsychosocial": {
+      "name": "Biopsychosocial Assessment",
+      "sections": ["Identifying Information", "Presenting Problem", "Biological Factors", "Psychological Factors", "Social Factors", "Strengths & Resources", "Clinical Impressions", "Recommendations"],
+      "description": "Comprehensive assessment framework examining biological, psychological, and social dimensions"
+    },
+    "treatment_plan": {
+      "name": "Treatment Plan",
+      "sections": ["Problem Identification", "Goals (Long-term)", "Objectives (Short-term, Measurable)", "Interventions", "Timeline", "Evaluation Criteria"],
+      "description": "Structured plan for addressing identified client needs"
+    },
+    "process_recording": {
+      "name": "Process Recording",
+      "sections": ["Setting Description", "Dialogue (Verbatim)", "Worker's Feelings/Reactions", "Analysis of Interaction", "Supervisor Feedback", "Learning Points"],
+      "description": "Detailed recording of a practice interaction for supervision and learning"
+    },
+    "policy_brief": {
+      "name": "Policy Analysis Brief",
+      "sections": ["Executive Summary", "Problem Statement", "Background", "Policy Options", "Analysis (Criteria-based)", "Recommendation", "Implementation Plan"],
+      "description": "Formal analysis of social policy for advocacy and decision-making"
+    },
+    "case_presentation": {
+      "name": "Case Presentation",
+      "sections": ["Client Demographics", "Referral Source", "Presenting Problem", "History", "Assessment", "Diagnosis", "Treatment Plan", "Progress", "Questions for Consultation"],
+      "description": "Structured format for presenting cases in supervision or team meetings"
+    }
+  },
+  "quick_reference": {
+    "nasw_code_sections": [
+      {"section": "1.01", "topic": "Commitment to Clients", "summary": "Social workers' primary responsibility is to promote well-being of clients"},
+      {"section": "1.02", "topic": "Self-Determination", "summary": "Respect and promote clients' right to self-determination"},
+      {"section": "1.03", "topic": "Informed Consent", "summary": "Provide services with valid informed consent"},
+      {"section": "1.06", "topic": "Conflicts of Interest", "summary": "Be alert to and avoid conflicts of interest"},
+      {"section": "1.07", "topic": "Privacy and Confidentiality", "summary": "Respect clients' right to privacy"},
+      {"section": "1.16", "topic": "Termination of Services", "summary": "Terminate services when no longer needed or serving client's needs"},
+      {"section": "2.01", "topic": "Respect for Colleagues", "summary": "Treat colleagues with respect"},
+      {"section": "4.01", "topic": "Competence", "summary": "Practice within areas of competence"},
+      {"section": "6.01", "topic": "Social Welfare", "summary": "Promote general welfare of society"},
+      {"section": "6.04", "topic": "Social and Political Action", "summary": "Engage in social and political action"}
+    ],
+    "defense_mechanisms": [
+      {"name": "Denial", "description": "Refusing to accept reality", "example": "A person with alcohol use disorder insisting they can stop anytime"},
+      {"name": "Projection", "description": "Attributing one's feelings to others", "example": "An angry client accusing the social worker of being hostile"},
+      {"name": "Displacement", "description": "Redirecting emotions to a safer target", "example": "A client who is angry at their boss yelling at their children instead"},
+      {"name": "Rationalization", "description": "Creating logical explanations for irrational behavior", "example": "A parent who hits their child saying 'I turned out fine'"},
+      {"name": "Sublimation", "description": "Channeling unacceptable impulses into acceptable activities", "example": "A person with aggressive tendencies becoming a competitive athlete"},
+      {"name": "Regression", "description": "Reverting to earlier developmental behavior", "example": "An adult throwing a tantrum when frustrated"},
+      {"name": "Intellectualization", "description": "Using abstract thinking to avoid emotions", "example": "A grieving person discussing the 'stages of grief' without expressing feelings"}
+    ]
+  }
+}

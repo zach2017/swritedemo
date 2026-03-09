@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Work Skills Lab</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Source Serif 4"', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            bark:    { 50:'#faf6f1', 100:'#f0e8db', 200:'#e0cfb5', 300:'#cdb08a', 400:'#b8905f', 500:'#a37847', 600:'#8b6340', 700:'#6f4e36', 800:'#5c4130', 900:'#4d372a' },
+            sage:    { 50:'#f4f7f4', 100:'#e6ede5', 200:'#cddacc', 300:'#a8bfa7', 400:'#7da07c', 500:'#5e8460', 600:'#4a6b4c', 700:'#3d563e', 800:'#334634', 900:'#2b3a2c' },
+            clay:    { 50:'#fdf5f3', 100:'#fce8e3', 200:'#fbd4cb', 300:'#f6b4a5', 400:'#ee8971', 500:'#e46a4e', 600:'#d04f33', 700:'#ae4129', 800:'#903926', 900:'#7b3526' },
+            parch:   { 50:'#fdfcf9', 100:'#faf7f0', 200:'#f3eddd', 300:'#e9dfc5', 400:'#d9c99d', 500:'#c9b47e', 600:'#b29a62', 700:'#95804f', 800:'#796843', 900:'#635639' },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    [x-cloak] { display: none !important; }
+    .writing-area { min-height: 280px; }
+    .fade-in { animation: fadeIn 0.4s ease-out; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes pulse-dot { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+    .pulse-dot { animation: pulse-dot 1.4s ease-in-out infinite; }
+    .markdown-content h2 { font-size:1.25rem; font-weight:700; margin-top:1.25rem; margin-bottom:0.5rem; color:#4d372a; }
+    .markdown-content h3 { font-size:1.1rem; font-weight:600; margin-top:1rem; margin-bottom:0.375rem; color:#5c4130; }
+    .markdown-content p  { margin-bottom:0.75rem; line-height:1.7; }
+    .markdown-content ul { list-style:disc; padding-left:1.5rem; margin-bottom:0.75rem; }
+    .markdown-content li { margin-bottom:0.25rem; line-height:1.6; }
+    .markdown-content strong { color:#4d372a; }
+    .scenario-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(77,55,42,0.12); }
+    .scenario-card { transition: all 0.2s ease; }
+    .tab-active { border-bottom: 3px solid #a37847; color: #4d372a; font-weight: 600; }
+    .tab-inactive { border-bottom: 3px solid transparent; color: #796843; }
+    .tab-inactive:hover { color: #5c4130; border-bottom-color: #e0cfb5; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #faf7f0; }
+    ::-webkit-scrollbar-thumb { background: #cdb08a; border-radius: 3px; }
+    textarea:focus { box-shadow: 0 0 0 3px rgba(163,120,71,0.15); }
+  </style>
+</head>
+
+<body class="bg-parch-50 text-bark-800 font-sans antialiased">
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!--  APP SHELL                                                      -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<div id="app" class="min-h-screen flex flex-col">
+
+  <!-- ── Header ──────────────────────────────────────────────────── -->
+  <header class="bg-bark-800 text-parch-100 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16">
+        <!-- Brand -->
+        <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
+          <div class="w-9 h-9 rounded-lg bg-sage-500 flex items-center justify-center text-white text-lg font-bold">SW</div>
+          <div>
+            <div class="font-serif font-bold text-lg leading-tight tracking-tight">Social Work Skills Lab</div>
+            <div class="text-[10px] text-bark-300 tracking-widest uppercase">Writing · Scenarios · Exam Prep</div>
+          </div>
+        </div>
+
+        <!-- Nav -->
+        <nav class="hidden md:flex items-center gap-1">
+          <button onclick="navigateTo('home')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-bark-700 transition">Home</button>
+          <button onclick="navigateTo('scenarios')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-bark-700 transition">Scenarios</button>
+          <button onclick="navigateTo('writing')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-bark-700 transition">Writing Lab</button>
+          <button onclick="navigateTo('exam')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-bark-700 transition">Exam Prep</button>
+          <button onclick="navigateTo('reference')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-bark-700 transition">Reference</button>
+          <button onclick="navigateTo('costs')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-bark-700 transition">Costs</button>
+        </nav>
+
+        <!-- Status badges -->
+        <div class="flex items-center gap-2">
+          <div id="sim-badge" class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono">
+            <span class="w-2 h-2 rounded-full pulse-dot"></span>
+            <span></span>
+          </div>
+          <select id="year-select" onchange="setYearLevel(this.value)" class="bg-bark-700 border border-bark-600 text-parch-200 text-xs rounded-md px-2 py-1.5 focus:outline-none">
+            <option value="1">Year 1 (BSW)</option>
+            <option value="2">Year 2 (MSW)</option>
+          </select>
+          <!-- Mobile menu -->
+          <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden p-2 hover:bg-bark-700 rounded-md">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile nav -->
+      <div id="mobile-menu" class="hidden md:hidden pb-3 space-y-1">
+        <button onclick="navigateTo('home');this.closest('#mobile-menu').classList.add('hidden')" class="block w-full text-left px-3 py-2 rounded-md text-sm hover:bg-bark-700">Home</button>
+        <button onclick="navigateTo('scenarios');this.closest('#mobile-menu').classList.add('hidden')" class="block w-full text-left px-3 py-2 rounded-md text-sm hover:bg-bark-700">Scenarios</button>
+        <button onclick="navigateTo('writing');this.closest('#mobile-menu').classList.add('hidden')" class="block w-full text-left px-3 py-2 rounded-md text-sm hover:bg-bark-700">Writing Lab</button>
+        <button onclick="navigateTo('exam');this.closest('#mobile-menu').classList.add('hidden')" class="block w-full text-left px-3 py-2 rounded-md text-sm hover:bg-bark-700">Exam Prep</button>
+        <button onclick="navigateTo('reference');this.closest('#mobile-menu').classList.add('hidden')" class="block w-full text-left px-3 py-2 rounded-md text-sm hover:bg-bark-700">Reference</button>
+        <button onclick="navigateTo('costs');this.closest('#mobile-menu').classList.add('hidden')" class="block w-full text-left px-3 py-2 rounded-md text-sm hover:bg-bark-700">Costs</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Main Content Area ───────────────────────────────────────── -->
+  <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-6">
+
+    <!-- ╔═══ HOME PAGE ═══╗ -->
+    <section id="page-home" class="page fade-in">
+      <!-- Hero -->
+      <div class="bg-gradient-to-br from-bark-800 via-bark-700 to-sage-800 rounded-2xl p-8 sm:p-12 text-parch-100 mb-8 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5" style="background-image:url('data:image/svg+xml,%3Csvg width=60 height=60 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M0 0h60v60H0z%22 fill=%22none%22/%3E%3Cpath d=%22M30 0v60M0 30h60%22 stroke=%22%23fff%22 stroke-width=%220.5%22/%3E%3C/svg%3E')"></div>
+        <div class="relative">
+          <div class="text-sage-400 text-xs font-mono tracking-widest uppercase mb-3">Practice · Prepare · Pass</div>
+          <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight">Master Social Work<br/>Writing &amp; Practice Skills</h1>
+          <p class="text-bark-200 text-lg max-w-2xl mb-8 leading-relaxed">
+            Real case scenarios, AI-powered feedback, and structured exam preparation for BSW and MSW students. 
+            Practice clinical documentation, ethical analysis, and policy writing with immediate evaluation.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <button onclick="navigateTo('scenarios')" class="px-6 py-3 bg-sage-600 hover:bg-sage-500 rounded-lg font-semibold text-white transition shadow-lg shadow-sage-900/20">
+              Browse Scenarios
+            </button>
+            <button onclick="navigateTo('writing')" class="px-6 py-3 bg-parch-100/10 hover:bg-parch-100/20 border border-parch-300/20 rounded-lg font-medium transition">
+              Start Writing
+            </button>
+            <button onclick="navigateTo('exam')" class="px-6 py-3 bg-parch-100/10 hover:bg-parch-100/20 border border-parch-300/20 rounded-lg font-medium transition">
+              Exam Prep
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white rounded-xl p-5 border border-parch-200 text-center">
+          <div class="text-3xl font-bold text-bark-700 font-serif" id="stat-scenarios">—</div>
+          <div class="text-xs text-bark-400 mt-1 uppercase tracking-wide">Case Scenarios</div>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-parch-200 text-center">
+          <div class="text-3xl font-bold text-sage-600 font-serif" id="stat-categories">—</div>
+          <div class="text-xs text-bark-400 mt-1 uppercase tracking-wide">Topic Areas</div>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-parch-200 text-center">
+          <div class="text-3xl font-bold text-clay-600 font-serif" id="stat-guides">—</div>
+          <div class="text-xs text-bark-400 mt-1 uppercase tracking-wide">Writing Guides</div>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-parch-200 text-center">
+          <div class="text-3xl font-bold text-parch-600 font-serif">3</div>
+          <div class="text-xs text-bark-400 mt-1 uppercase tracking-wide">ASWB Exam Levels</div>
+        </div>
+      </div>
+
+      <!-- Category Cards -->
+      <h2 class="font-serif text-2xl font-bold mb-4">Practice Areas</h2>
+      <div id="home-categories" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"></div>
+
+      <!-- How It Works -->
+      <div class="bg-white rounded-2xl border border-parch-200 p-8 mb-8">
+        <h2 class="font-serif text-2xl font-bold mb-6 text-center">How It Works</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div class="w-14 h-14 mx-auto bg-sage-100 rounded-xl flex items-center justify-center text-2xl mb-3">1</div>
+            <h3 class="font-semibold mb-2">Choose a Scenario</h3>
+            <p class="text-sm text-bark-500">Browse real-world case scenarios organized by topic, difficulty, and exam relevance.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-14 h-14 mx-auto bg-bark-100 rounded-xl flex items-center justify-center text-2xl mb-3">2</div>
+            <h3 class="font-semibold mb-2">Write Your Response</h3>
+            <p class="text-sm text-bark-500">Practice clinical documentation, ethical analyses, and policy briefs with structured prompts and rubrics.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-14 h-14 mx-auto bg-clay-100 rounded-xl flex items-center justify-center text-2xl mb-3">3</div>
+            <h3 class="font-semibold mb-2">Get AI Feedback</h3>
+            <p class="text-sm text-bark-500">Receive detailed scoring against professional rubrics plus exam tips from the AI evaluator.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ╔═══ SCENARIOS PAGE ═══╗ -->
+    <section id="page-scenarios" class="page hidden fade-in">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <h1 class="font-serif text-2xl font-bold">Case Scenarios</h1>
+        <div class="flex flex-wrap gap-2">
+          <select id="filter-category" onchange="filterScenarios()" class="bg-white border border-parch-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-bark-300">
+            <option value="">All Categories</option>
+          </select>
+          <select id="filter-difficulty" onchange="filterScenarios()" class="bg-white border border-parch-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-bark-300">
+            <option value="">All Levels</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </div>
+      </div>
+      <div id="scenarios-list" class="grid md:grid-cols-2 gap-4"></div>
+    </section>
+
+    <!-- ╔═══ SCENARIO DETAIL / WRITING PAGE ═══╗ -->
+    <section id="page-writing" class="page hidden fade-in">
+      <div id="writing-workspace">
+        <!-- Scenario selector for free writing -->
+        <div id="writing-no-scenario" class="mb-6">
+          <h1 class="font-serif text-2xl font-bold mb-2">Writing Lab</h1>
+          <p class="text-bark-500 mb-4">Choose a scenario below or write a free-form practice response.</p>
+          <div class="bg-white rounded-xl border border-parch-200 p-5 mb-4">
+            <label class="block text-sm font-semibold mb-2">Select a scenario (optional)</label>
+            <select id="writing-scenario-select" onchange="loadScenarioForWriting(this.value)" class="w-full bg-parch-50 border border-parch-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-bark-300">
+              <option value="">— Free Writing (no scenario) —</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Loaded scenario display -->
+        <div id="writing-scenario-display" class="hidden mb-6">
+          <button onclick="clearWritingScenario()" class="text-sm text-bark-400 hover:text-bark-600 mb-3 flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            Back to selection
+          </button>
+          <div class="bg-white rounded-2xl border border-parch-200 overflow-hidden mb-6">
+            <div id="scenario-header" class="bg-bark-50 px-6 py-4 border-b border-parch-200"></div>
+            <div id="scenario-body" class="p-6"></div>
+          </div>
+        </div>
+
+        <!-- Writing area -->
+        <div class="bg-white rounded-2xl border border-parch-200 overflow-hidden mb-6">
+          <div class="px-6 py-3 bg-parch-50 border-b border-parch-200 flex items-center justify-between">
+            <h3 class="font-semibold text-sm">Your Response</h3>
+            <div class="flex items-center gap-3 text-xs text-bark-400">
+              <span id="word-count">0 words</span>
+              <button onclick="document.getElementById('writing-input').value='';updateWordCount()" class="hover:text-clay-600 transition">Clear</button>
+            </div>
+          </div>
+          <textarea id="writing-input" class="writing-area w-full p-6 text-[15px] leading-relaxed border-0 focus:outline-none resize-y font-sans" placeholder="Write your response here. Consider the rubric criteria and key concepts as you develop your answer...&#10;&#10;Take your time — professional social work writing requires careful thought and attention to detail." oninput="updateWordCount()"></textarea>
+        </div>
+
+        <!-- Image Upload -->
+        <div class="bg-white rounded-xl border border-parch-200 p-5 mb-6">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-semibold text-sm">Attach Image (optional)</h3>
+            <span class="text-xs text-bark-400">PNG, JPG, PDF — Max 10MB</span>
+          </div>
+          <div class="border-2 border-dashed border-parch-300 rounded-lg p-6 text-center hover:border-bark-400 transition cursor-pointer" onclick="document.getElementById('file-input').click()">
+            <input type="file" id="file-input" class="hidden" accept="image/*,.pdf" onchange="handleFileUpload(this)" />
+            <div class="text-bark-400 text-sm" id="upload-status">Click or drag to upload an image</div>
+          </div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="flex flex-wrap gap-3 mb-6">
+          <button onclick="submitForEvaluation()" id="btn-evaluate" class="px-6 py-3 bg-sage-600 hover:bg-sage-500 text-white rounded-lg font-semibold transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
+            Evaluate My Writing
+          </button>
+          <button onclick="submitForFeedback()" class="px-6 py-3 bg-bark-600 hover:bg-bark-500 text-white rounded-lg font-semibold transition shadow-md disabled:opacity-50">
+            Get Writing Feedback
+          </button>
+          <button onclick="generatePracticeQuestion()" class="px-5 py-3 bg-white border border-parch-300 hover:bg-parch-50 rounded-lg font-medium transition text-sm">
+            Generate Practice Question
+          </button>
+        </div>
+
+        <!-- Results area -->
+        <div id="evaluation-results" class="hidden">
+          <div class="bg-white rounded-2xl border border-parch-200 overflow-hidden">
+            <div class="px-6 py-3 bg-sage-50 border-b border-sage-200 flex items-center justify-between">
+              <h3 class="font-semibold text-sage-800">AI Evaluation</h3>
+              <div id="result-badge" class="text-xs font-mono px-2 py-0.5 rounded-full"></div>
+            </div>
+            <div id="evaluation-content" class="p-6 markdown-content text-[15px] leading-relaxed"></div>
+            <div id="result-cost" class="px-6 py-3 bg-parch-50 border-t border-parch-200 text-xs text-bark-400 font-mono"></div>
+          </div>
+        </div>
+
+        <!-- Loading spinner -->
+        <div id="loading-indicator" class="hidden text-center py-12">
+          <div class="inline-flex items-center gap-3 text-bark-500">
+            <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+            <span class="text-sm">Analyzing your writing...</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ╔═══ EXAM PREP PAGE ═══╗ -->
+    <section id="page-exam" class="page hidden fade-in">
+      <h1 class="font-serif text-2xl font-bold mb-2">ASWB Exam Preparation</h1>
+      <p class="text-bark-500 mb-6">Understand exam structure, practice with targeted questions, and build confidence for your licensing exam.</p>
+
+      <!-- Exam Info Cards -->
+      <div id="exam-info-cards" class="grid md:grid-cols-3 gap-4 mb-8"></div>
+
+      <!-- Practice Question Generator -->
+      <div class="bg-white rounded-2xl border border-parch-200 p-6 mb-6">
+        <h2 class="font-serif text-xl font-bold mb-4">Practice Question Generator</h2>
+        <div class="grid sm:grid-cols-3 gap-4 mb-4">
+          <div>
+            <label class="block text-xs font-semibold text-bark-500 mb-1 uppercase tracking-wide">Category</label>
+            <select id="pq-category" class="w-full bg-parch-50 border border-parch-300 rounded-lg px-3 py-2 text-sm">
+              <option value="ethics">Ethics & Professional Conduct</option>
+              <option value="case_management">Case Management</option>
+              <option value="crisis">Crisis Intervention</option>
+              <option value="human_behavior">Human Behavior (HBSE)</option>
+              <option value="diversity">Diversity & Inclusion</option>
+              <option value="clinical">Clinical Practice</option>
+              <option value="policy">Social Welfare Policy</option>
+              <option value="research">Research Methods</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-bark-500 mb-1 uppercase tracking-wide">Difficulty</label>
+            <select id="pq-difficulty" class="w-full bg-parch-50 border border-parch-300 rounded-lg px-3 py-2 text-sm">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate" selected>Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-bark-500 mb-1 uppercase tracking-wide">Exam Level</label>
+            <select id="pq-exam" class="w-full bg-parch-50 border border-parch-300 rounded-lg px-3 py-2 text-sm">
+              <option value="aswb_bachelors">ASWB Bachelors</option>
+              <option value="aswb_masters">ASWB Masters</option>
+              <option value="aswb_clinical">ASWB Clinical</option>
+            </select>
+          </div>
+        </div>
+        <button onclick="fetchPracticeQuestion()" class="px-6 py-3 bg-bark-700 hover:bg-bark-600 text-white rounded-lg font-semibold transition">
+          Generate Question
+        </button>
+        <div id="practice-question-result" class="mt-6 hidden">
+          <div class="p-5 bg-parch-50 rounded-xl border border-parch-200 markdown-content text-[15px]" id="pq-content"></div>
+          <div id="pq-cost" class="mt-2 text-xs text-bark-400 font-mono"></div>
+        </div>
+        <div id="pq-loading" class="hidden text-center py-8">
+          <div class="inline-flex items-center gap-3 text-bark-500">
+            <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+            <span class="text-sm">Generating question...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exam-relevant scenarios -->
+      <h2 class="font-serif text-xl font-bold mb-4">Exam-Relevant Scenarios</h2>
+      <div id="exam-scenarios" class="grid md:grid-cols-2 gap-4"></div>
+    </section>
+
+    <!-- ╔═══ REFERENCE PAGE ═══╗ -->
+    <section id="page-reference" class="page hidden fade-in">
+      <h1 class="font-serif text-2xl font-bold mb-2">Quick Reference</h1>
+      <p class="text-bark-500 mb-6">Writing guides, NASW Code of Ethics, defense mechanisms, and key concepts for study.</p>
+
+      <!-- Tabs -->
+      <div class="flex gap-1 border-b border-parch-300 mb-6 overflow-x-auto">
+        <button onclick="switchRefTab('guides')" id="ref-tab-guides" class="px-4 py-2.5 text-sm whitespace-nowrap tab-active transition">Writing Guides</button>
+        <button onclick="switchRefTab('nasw')" id="ref-tab-nasw" class="px-4 py-2.5 text-sm whitespace-nowrap tab-inactive transition">NASW Code</button>
+        <button onclick="switchRefTab('defense')" id="ref-tab-defense" class="px-4 py-2.5 text-sm whitespace-nowrap tab-inactive transition">Defense Mechanisms</button>
+      </div>
+
+      <div id="ref-content-guides" class="ref-tab-content">
+        <div id="writing-guides-list" class="grid md:grid-cols-2 gap-4"></div>
+      </div>
+      <div id="ref-content-nasw" class="ref-tab-content hidden">
+        <div id="nasw-list" class="space-y-3"></div>
+      </div>
+      <div id="ref-content-defense" class="ref-tab-content hidden">
+        <div id="defense-list" class="space-y-3"></div>
+      </div>
+    </section>
+
+    <!-- ╔═══ COSTS PAGE ═══╗ -->
+    <section id="page-costs" class="page hidden fade-in">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h1 class="font-serif text-2xl font-bold">Cost Tracking</h1>
+          <p class="text-bark-500 text-sm">Monitor API usage and costs for each AI interaction.</p>
+        </div>
+        <button onclick="resetCosts()" class="px-4 py-2 bg-clay-100 hover:bg-clay-200 text-clay-700 rounded-lg text-sm font-medium transition">Reset</button>
+      </div>
+
+      <!-- Summary -->
+      <div class="grid sm:grid-cols-3 gap-4 mb-6">
+        <div class="bg-white rounded-xl border border-parch-200 p-5">
+          <div class="text-xs text-bark-400 uppercase tracking-wide mb-1">Total Cost</div>
+          <div class="text-2xl font-bold font-mono text-bark-700" id="cost-total">$0.000000</div>
+        </div>
+        <div class="bg-white rounded-xl border border-parch-200 p-5">
+          <div class="text-xs text-bark-400 uppercase tracking-wide mb-1">Total Requests</div>
+          <div class="text-2xl font-bold font-mono text-bark-700" id="cost-requests">0</div>
+        </div>
+        <div class="bg-white rounded-xl border border-parch-200 p-5">
+          <div class="text-xs text-bark-400 uppercase tracking-wide mb-1">Mode</div>
+          <div class="text-2xl font-bold font-mono" id="cost-mode">—</div>
+        </div>
+      </div>
+
+      <!-- Toggle simulation -->
+      <div class="bg-white rounded-xl border border-parch-200 p-5 mb-6 flex items-center justify-between">
+        <div>
+          <div class="font-semibold text-sm">Simulation Mode</div>
+          <div class="text-xs text-bark-400 mt-0.5">When enabled, API calls return mock responses (no real cost incurred).</div>
+        </div>
+        <button onclick="toggleSimulation()" id="sim-toggle-btn" class="px-4 py-2 rounded-lg text-sm font-medium transition"></button>
+      </div>
+
+      <!-- Ledger -->
+      <div class="bg-white rounded-2xl border border-parch-200 overflow-hidden">
+        <div class="px-6 py-3 bg-parch-50 border-b border-parch-200">
+          <h3 class="font-semibold text-sm">Recent Activity</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-parch-50 text-bark-500 text-xs uppercase tracking-wide">
+              <tr>
+                <th class="px-4 py-2.5 text-left">Time</th>
+                <th class="px-4 py-2.5 text-left">Action</th>
+                <th class="px-4 py-2.5 text-right">Input</th>
+                <th class="px-4 py-2.5 text-right">Output</th>
+                <th class="px-4 py-2.5 text-right">Cost</th>
+              </tr>
+            </thead>
+            <tbody id="cost-table-body" class="divide-y divide-parch-100">
+              <tr><td colspan="5" class="px-4 py-8 text-center text-bark-400 text-sm">No activity yet</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────────────── -->
+  <footer class="bg-bark-800 text-bark-300 py-6 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+      <div>Social Work Skills Lab — Educational Platform for BSW &amp; MSW Students</div>
+      <div class="flex items-center gap-4">
+        <span id="footer-mode" class="font-mono"></span>
+        <span>Docker Compose · Flask · Tailwind CSS</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!--  JAVASCRIPT                                                       -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<script>
+const API = '';  // Same origin
+let state = {
+  currentPage: 'home',
+  yearLevel: 1,
+  simulationMode: true,
+  scenarios: [],
+  categories: [],
+  currentScenario: null,
+};
+
+// ── Navigation ──────────────────────────────────────────────────────
+function navigateTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+  const el = document.getElementById(`page-${page}`);
+  if (el) { el.classList.remove('hidden'); el.classList.add('fade-in'); }
+  state.currentPage = page;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Load page-specific data
+  if (page === 'home') loadHomePage();
+  if (page === 'scenarios') loadScenarios();
+  if (page === 'writing') loadWritingPage();
+  if (page === 'exam') loadExamPage();
+  if (page === 'reference') loadReferencePage();
+  if (page === 'costs') loadCosts();
+}
+
+function setYearLevel(val) {
+  state.yearLevel = parseInt(val);
+  if (state.currentPage === 'scenarios') loadScenarios();
+  if (state.currentPage === 'exam') loadExamPage();
+}
+
+// ── API helpers ─────────────────────────────────────────────────────
+async function api(path, opts = {}) {
+  try {
+    const res = await fetch(`${API}${path}`, {
+      headers: { 'Content-Type': 'application/json' },
+      ...opts,
+    });
+    return await res.json();
+  } catch (e) {
+    console.error('API error:', e);
+    return { error: e.message };
+  }
+}
+
+// ── Markdown-ish renderer (simple) ──────────────────────────────────
+function renderMarkdown(text) {
+  if (!text) return '';
+  return text
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+    .replace(/^# (.+)$/gm, '<h2>$1</h2>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/^- (.+)$/gm, '<li>$1</li>')
+    .replace(/(<li>.*<\/li>\n?)+/g, (m) => `<ul>${m}</ul>`)
+    .replace(/\n{2,}/g, '</p><p>')
+    .replace(/\n/g, '<br/>')
+    .replace(/^/, '<p>').replace(/$/, '</p>')
+    .replace(/<p><h/g, '<h').replace(/<\/h(\d)><\/p>/g, '</h$1>')
+    .replace(/<p><ul>/g, '<ul>').replace(/<\/ul><\/p>/g, '</ul>');
+}
+
+// ── Difficulty badge ────────────────────────────────────────────────
+function diffBadge(d) {
+  const map = {
+    beginner: 'bg-sage-100 text-sage-700',
+    intermediate: 'bg-bark-100 text-bark-700',
+    advanced: 'bg-clay-100 text-clay-700',
+  };
+  return `<span class="px-2 py-0.5 rounded-full text-xs font-medium ${map[d] || ''}">${d}</span>`;
+}
+
+// ══════════════════════════════════════════════════════════════════════
+//  HOME PAGE
+// ══════════════════════════════════════════════════════════════════════
+async function loadHomePage() {
+  const [scenData, catData, guideData] = await Promise.all([
+    api('/api/scenarios'),
+    api('/api/categories'),
+    api('/api/writing-guides'),
+  ]);
+
+  state.scenarios = scenData.scenarios || [];
+  state.categories = catData || [];
+
+  document.getElementById('stat-scenarios').textContent = state.scenarios.length;
+  document.getElementById('stat-categories').textContent = state.categories.length;
+  document.getElementById('stat-guides').textContent = Object.keys(guideData || {}).length;
+
+  const catEl = document.getElementById('home-categories');
+  catEl.innerHTML = state.categories.map(c => `
+    <div class="scenario-card bg-white rounded-xl border border-parch-200 p-5 cursor-pointer" onclick="navigateTo('scenarios');document.getElementById('filter-category').value='${c.id}';filterScenarios()">
+      <div class="text-2xl mb-2">${c.icon}</div>
+      <h3 class="font-semibold text-sm mb-1">${c.name}</h3>
+      <p class="text-xs text-bark-400 leading-relaxed">${c.description}</p>
+      <div class="mt-3 text-xs text-bark-300">Year ${c.year.join(' & ')}</div>
+    </div>
+  `).join('');
+}
+
+// ══════════════════════════════════════════════════════════════════════
+//  SCENARIOS PAGE
+// ══════════════════════════════════════════════════════════════════════
+async function loadScenarios() {
+  const [scenData, catData] = await Promise.all([
+    api('/api/scenarios'),
+    api('/api/categories'),
+  ]);
+  state.scenarios = scenData.scenarios || [];
+  state.categories = catData || [];
+
+  // Populate category filter
+  const catSel = document.getElementById('filter-category');
+  if (catSel.options.length <= 1) {
+    state.categories.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c.id; opt.textContent = c.name;
+      catSel.appendChild(opt);
+    });
+  }
+  filterScenarios();
+}
+
+function filterScenarios() {
+  const cat = document.getElementById('filter-category').value;
+  const diff = document.getElementById('filter-difficulty').value;
+  let list = state.scenarios;
+  if (cat) list = list.filter(s => s.category === cat);
+  if (diff) list = list.filter(s => s.difficulty === diff);
+
+  const el = document.getElementById('scenarios-list');
+  if (!list.length) {
+    el.innerHTML = '<div class="col-span-2 text-center py-12 text-bark-400">No scenarios match your filters.</div>';
+    return;
+  }
+
+  el.innerHTML = list.map(s => {
+    const catObj = state.categories.find(c => c.id === s.category);
+    return `
+    <div class="scenario-card bg-white rounded-xl border border-parch-200 p-5 cursor-pointer" onclick="openScenario('${s.id}')">
+      <div class="flex items-start justify-between mb-2">
+        <span class="text-lg">${catObj ? catObj.icon : '📄'}</span>
+        <div class="flex gap-1.5">${diffBadge(s.difficulty)}${s.exam_relevant ? '<span class="px-2 py-0.5 rounded-full text-xs font-medium bg-parch-200 text-parch-700">Exam</span>' : ''}</div>
+      </div>
+      <h3 class="font-semibold mb-1">${s.title}</h3>
+      <p class="text-xs text-bark-400 line-clamp-2 mb-3">${s.scenario.substring(0, 150)}...</p>
+      <div class="flex items-center justify-between text-xs text-bark-300">
+        <span>Year ${s.year}</span>
+        <span>${s.key_concepts.slice(0, 2).join(' · ')}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openScenario(id) {
+  const s = state.scenarios.find(sc => sc.id === id);
+  if (!s) return;
+  state.currentScenario = s;
+  navigateTo('writing');
+  loadScenarioIntoWriting(s);
+}
+
+// ══════════════════════════════════════════════════════════════════════
+//  WRITING PAGE
+// ══════════════════════════════════════════════════════════════════════
+async function loadWritingPage() {
+  // Populate scenario selector
+  if (!state.scenarios.length) {
+    const data = await api('/api/scenarios');
+    state.scenarios = data.scenarios || [];
+  }
+  const sel = document.getElementById('writing-scenario-select');
+  if (sel.options.length <= 1) {
+    state.scenarios.forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s.id;
+      opt.textContent = `${s.title} (${s.difficulty}, Year ${s.year})`;
+      sel.appendChild(opt);
+    });
+  }
+  // If we have a current scenario, load it
+  if (state.currentScenario) {
+    loadScenarioIntoWriting(state.currentScenario);
+  }
+}
+
+function loadScenarioForWriting(id) {
+  if (!id) { clearWritingScenario(); return; }
+  const s = state.scenarios.find(sc => sc.id === id);
+  if (s) { state.currentScenario = s; loadScenarioIntoWriting(s); }
+}
+
+function loadScenarioIntoWriting(s) {
+  document.getElementById('writing-no-scenario').classList.add('hidden');
+  document.getElementById('writing-scenario-display').classList.remove('hidden');
+
+  const catObj = state.categories.find(c => c.id === s.category);
+  document.getElementById('scenario-header').innerHTML = `
+    <div class="flex items-center justify-between flex-wrap gap-2">
+      <h2 class="font-serif text-xl font-bold">${catObj ? catObj.icon : ''} ${s.title}</h2>
+      <div class="flex gap-2">${diffBadge(s.difficulty)}${s.exam_relevant ? '<span class="px-2 py-0.5 rounded-full text-xs font-medium bg-parch-200 text-parch-700">Exam Relevant</span>' : ''}</div>
+    </div>
+    <div class="text-xs text-bark-400 mt-1">Year ${s.year} · ${s.key_concepts.join(' · ')}</div>
+  `;
+
+  let rubricHtml = '';
+  if (s.rubric) {
+    rubricHtml = `<div class="mt-4 p-4 bg-parch-50 rounded-lg border border-parch-200">
+      <h4 class="font-semibold text-sm mb-2">Scoring Rubric</h4>
+      <div class="grid sm:grid-cols-2 gap-2">
+        ${Object.entries(s.rubric).map(([k, v]) => `
+          <div class="text-xs"><span class="font-semibold text-bark-600">${k.replace(/_/g, ' ')} (${v.points}pts):</span> <span class="text-bark-400">${v.criteria}</span></div>
+        `).join('')}
+      </div>
+    </div>`;
+  }
+
+  let tipsHtml = s.tips ? `<div class="mt-4 p-4 bg-sage-50 rounded-lg border border-sage-200">
+    <h4 class="font-semibold text-sm text-sage-800 mb-1">Exam Tip</h4>
+    <p class="text-sm text-sage-700">${s.tips}</p>
+  </div>` : '';
+
+  document.getElementById('scenario-body').innerHTML = `
+    <div class="mb-4">
+      <h4 class="font-semibold text-sm text-bark-500 uppercase tracking-wide mb-2">Case Scenario</h4>
+      <p class="text-[15px] leading-relaxed text-bark-700">${s.scenario}</p>
+    </div>
+    <div class="p-4 bg-bark-50 rounded-lg border border-bark-200">
+      <h4 class="font-semibold text-sm mb-2">Writing Prompt</h4>
+      <p class="text-sm leading-relaxed">${s.writing_prompt}</p>
+    </div>
+    ${rubricHtml}
+    ${tipsHtml}
+  `;
+
+  document.getElementById('writing-scenario-select').value = s.id;
+}
+
+function clearWritingScenario() {
+  state.currentScenario = null;
+  document.getElementById('writing-no-scenario').classList.remove('hidden');
+  document.getElementById('writing-scenario-display').classList.add('hidden');
+  document.getElementById('writing-scenario-select').value = '';
+}
+
+function updateWordCount() {
+  const text = document.getElementById('writing-input').value.trim();
+  const words = text ? text.split(/\s+/).length : 0;
+  document.getElementById('word-count').textContent = `${words} word${words !== 1 ? 's' : ''}`;
+}
+
+// ── Submit for evaluation ───────────────────────────────────────────
+async function submitForEvaluation() {
+  const writing = document.getElementById('writing-input').value.trim();
+  if (!writing) { alert('Please write a response before submitting for evaluation.'); return; }
+
+  showLoading(true);
+  const result = await api('/api/evaluate', {
+    method: 'POST',
+    body: JSON.stringify({
+      scenario_id: state.currentScenario?.id || '',
+      writing,
+      year_level: state.yearLevel,
+    }),
+  });
+  showLoading(false);
+  displayResult(result);
+}
+
+async function submitForFeedback() {
+  const writing = document.getElementById('writing-input').value.trim();
+  if (!writing) { alert('Please write something first.'); return; }
+
+  showLoading(true);
+  const result = await api('/api/feedback', {
+    method: 'POST',
+    body: JSON.stringify({
+      writing,
+      focus_area: state.currentScenario?.category || 'general',
+      year_level: state.yearLevel,
+    }),
+  });
+  showLoading(false);
+  displayResult(result);
+}
+
+async function generatePracticeQuestion() {
+  showLoading(true);
+  const result = await api('/api/practice-question', {
+    method: 'POST',
+    body: JSON.stringify({
+      category: state.currentScenario?.category || 'ethics',
+      difficulty: state.currentScenario?.difficulty || 'intermediate',
+      year_level: state.yearLevel,
+    }),
+  });
+  showLoading(false);
+  displayResult(result);
+}
+
+function showLoading(show) {
+  document.getElementById('loading-indicator').classList.toggle('hidden', !show);
+  document.getElementById('evaluation-results').classList.add('hidden');
+}
+
+function displayResult(result) {
+  if (!result || result.error) {
+    alert('Error: ' + (result?.error || 'Unknown error'));
+    return;
+  }
+  const el = document.getElementById('evaluation-results');
+  el.classList.remove('hidden');
+  document.getElementById('evaluation-content').innerHTML = renderMarkdown(result.response);
+
+  const badge = document.getElementById('result-badge');
+  if (result.simulated) {
+    badge.textContent = 'SIMULATED';
+    badge.className = 'text-xs font-mono px-2 py-0.5 rounded-full bg-parch-200 text-parch-700';
+  } else {
+    badge.textContent = 'LIVE API';
+    badge.className = 'text-xs font-mono px-2 py-0.5 rounded-full bg-sage-200 text-sage-700';
+  }
+
+  const costEl = document.getElementById('result-cost');
+  if (result.cost) {
+    costEl.textContent = `Cost: $${result.cost.cost_usd.toFixed(6)} | Tokens: ${result.cost.input_tokens} in / ${result.cost.output_tokens} out | ${result.cost.model}`;
+  } else {
+    costEl.textContent = '';
+  }
+
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── File upload ─────────────────────────────────────────────────────
+async function handleFileUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const statusEl = document.getElementById('upload-status');
+  statusEl.textContent = `Uploading ${file.name}...`;
+
+  const formData = new FormData();
+  formData.append('file', file);
+
+  try {
+    const res = await fetch(`${API}/api/upload`, { method: 'POST', body: formData });
+    const data = await res.json();
+    if (data.error) {
+      statusEl.textContent = `Error: ${data.error}`;
+    } else {
+      statusEl.innerHTML = `<span class="text-sage-600 font-medium">Uploaded:</span> ${data.filename} <span class="text-bark-300">•</span> <span class="text-xs text-bark-400">${data.message}</span>`;
+    }
+  } catch (e) {
+    statusEl.textContent = `Upload failed: ${e.message}`;
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════
+//  EXAM PREP PAGE
+// ══════════════════════════════════════════════════════════════════════
+async function loadExamPage() {
+  const [examInfo, scenData] = await Promise.all([
+    api('/api/exam-info'),
+    api('/api/scenarios'),
+  ]);
+  state.scenarios = scenData.scenarios || [];
+
+  // Exam cards
+  const cardsEl = document.getElementById('exam-info-cards');
+  cardsEl.innerHTML = Object.entries(examInfo || {}).map(([key, exam]) => {
+    const areasHtml = exam.content_areas.map(a => `
+      <div class="flex items-center justify-between text-xs mb-1">
+        <span class="text-bark-500 truncate mr-2">${a.area}</span>
+        <div class="flex items-center gap-2">
+          <div class="w-16 bg-parch-200 rounded-full h-1.5"><div class="h-1.5 rounded-full bg-bark-500" style="width:${a.percentage}%"></div></div>
+          <span class="text-bark-400 font-mono w-8 text-right">${a.percentage}%</span>
+        </div>
+      </div>
+    `).join('');
+    return `
+    <div class="bg-white rounded-xl border border-parch-200 p-5">
+      <h3 class="font-serif font-bold mb-1">${exam.name}</h3>
+      <p class="text-xs text-bark-400 mb-3">${exam.description}</p>
+      <div class="text-xs text-bark-300 mb-3">${exam.total_questions} questions · ${exam.time_limit_minutes} min · ${exam.scored_questions} scored</div>
+      <div class="space-y-1">${areasHtml}</div>
+    </div>`;
+  }).join('');
+
+  // Exam-relevant scenarios
+  const examScenarios = state.scenarios.filter(s => s.exam_relevant);
+  document.getElementById('exam-scenarios').innerHTML = examScenarios.map(s => {
+    const catObj = state.categories.find(c => c.id === s.category);
+    return `
+    <div class="scenario-card bg-white rounded-xl border border-parch-200 p-5 cursor-pointer" onclick="openScenario('${s.id}')">
+      <div class="flex items-center justify-between mb-2">
+        <span>${catObj ? catObj.icon : '📄'} <span class="font-semibold text-sm">${s.title}</span></span>
+        ${diffBadge(s.difficulty)}
+      </div>
+      <p class="text-xs text-bark-400 mb-2 line-clamp-2">${s.scenario.substring(0, 120)}...</p>
+      <div class="flex flex-wrap gap-1">${(s.exam_topics || []).map(t => `<span class="px-1.5 py-0.5 bg-parch-100 text-bark-500 rounded text-[10px]">${t}</span>`).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+async function fetchPracticeQuestion() {
+  const cat = document.getElementById('pq-category').value;
+  const diff = document.getElementById('pq-difficulty').value;
+  const exam = document.getElementById('pq-exam').value;
+
+  document.getElementById('pq-loading').classList.remove('hidden');
+  document.getElementById('practice-question-result').classList.add('hidden');
+
+  const result = await api('/api/practice-question', {
+    method: 'POST',
+    body: JSON.stringify({ category: cat, difficulty: diff, year_level: state.yearLevel, exam_type: exam }),
+  });
+
+  document.getElementById('pq-loading').classList.add('hidden');
+  if (result && !result.error) {
+    document.getElementById('practice-question-result').classList.remove('hidden');
+    document.getElementById('pq-content').innerHTML = renderMarkdown(result.response);
+    document.getElementById('pq-cost').textContent = result.cost ? `Cost: $${result.cost.cost_usd.toFixed(6)} | ${result.simulated ? 'Simulated' : 'Live'}` : '';
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════
+//  REFERENCE PAGE
+// ══════════════════════════════════════════════════════════════════════
+async function loadReferencePage() {
+  const [guides, ref] = await Promise.all([
+    api('/api/writing-guides'),
+    api('/api/quick-reference'),
+  ]);
+
+  // Writing guides
+  document.getElementById('writing-guides-list').innerHTML = Object.entries(guides || {}).map(([key, g]) => `
+    <div class="bg-white rounded-xl border border-parch-200 p-5">
+      <h3 class="font-semibold mb-1">${g.name}</h3>
+      <p class="text-xs text-bark-400 mb-3">${g.description}</p>
+      <div class="space-y-1">
+        ${g.sections.map((s, i) => `<div class="flex items-center gap-2 text-xs"><span class="w-5 h-5 rounded-full bg-parch-100 text-bark-500 flex items-center justify-center font-mono text-[10px]">${i + 1}</span> <span>${s}</span></div>`).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  // NASW codes
+  document.getElementById('nasw-list').innerHTML = (ref?.nasw_code_sections || []).map(n => `
+    <div class="bg-white rounded-lg border border-parch-200 p-4 flex gap-4 items-start">
+      <div class="font-mono text-sm font-bold text-bark-500 bg-parch-100 px-2 py-1 rounded shrink-0">${n.section}</div>
+      <div>
+        <div class="font-semibold text-sm">${n.topic}</div>
+        <div class="text-xs text-bark-400 mt-0.5">${n.summary}</div>
+      </div>
+    </div>
+  `).join('');
+
+  // Defense mechanisms
+  document.getElementById('defense-list').innerHTML = (ref?.defense_mechanisms || []).map(d => `
+    <div class="bg-white rounded-lg border border-parch-200 p-4">
+      <h4 class="font-semibold text-sm">${d.name}</h4>
+      <p class="text-xs text-bark-400 mt-0.5">${d.description}</p>
+      <p class="text-xs text-bark-300 mt-1 italic">Example: ${d.example}</p>
+    </div>
+  `).join('');
+}
+
+function switchRefTab(tab) {
+  document.querySelectorAll('.ref-tab-content').forEach(el => el.classList.add('hidden'));
+  document.querySelectorAll('[id^="ref-tab-"]').forEach(btn => { btn.className = btn.className.replace('tab-active', 'tab-inactive'); });
+  document.getElementById(`ref-content-${tab}`).classList.remove('hidden');
+  document.getElementById(`ref-tab-${tab}`).className = document.getElementById(`ref-tab-${tab}`).className.replace('tab-inactive', 'tab-active');
+}
+
+// ══════════════════════════════════════════════════════════════════════
+//  COSTS PAGE
+// ══════════════════════════════════════════════════════════════════════
+async function loadCosts() {
+  const data = await api('/api/costs');
+  if (!data || data.error) return;
+
+  document.getElementById('cost-total').textContent = `$${(data.total_cost_usd || 0).toFixed(6)}`;
+  document.getElementById('cost-requests').textContent = data.total_requests || 0;
+  document.getElementById('cost-mode').textContent = data.simulation_mode ? 'Simulation' : 'Live API';
+  document.getElementById('cost-mode').className = `text-2xl font-bold font-mono ${data.simulation_mode ? 'text-parch-600' : 'text-sage-600'}`;
+
+  updateSimToggle(data.simulation_mode);
+
+  const tbody = document.getElementById('cost-table-body');
+  const entries = (data.entries || []).reverse();
+  if (!entries.length) {
+    tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-bark-400 text-sm">No activity yet</td></tr>';
+    return;
+  }
+  tbody.innerHTML = entries.map(e => `
+    <tr class="hover:bg-parch-50">
+      <td class="px-4 py-2.5 font-mono text-xs text-bark-400">${new Date(e.timestamp).toLocaleTimeString()}</td>
+      <td class="px-4 py-2.5 text-xs">${e.action}</td>
+      <td class="px-4 py-2.5 text-xs text-right font-mono">${e.input_tokens}</td>
+      <td class="px-4 py-2.5 text-xs text-right font-mono">${e.output_tokens}</td>
+      <td class="px-4 py-2.5 text-xs text-right font-mono font-semibold">$${e.cost_usd.toFixed(6)}</td>
+    </tr>
+  `).join('');
+}
+
+async function resetCosts() {
+  if (!confirm('Reset all cost tracking data?')) return;
+  await api('/api/costs/reset', { method: 'POST' });
+  loadCosts();
+}
+
+async function toggleSimulation() {
+  const data = await api('/api/simulation/toggle', { method: 'POST' });
+  state.simulationMode = data.simulation_mode;
+  updateSimToggle(data.simulation_mode);
+  updateSimBadge();
+}
+
+function updateSimToggle(simMode) {
+  const btn = document.getElementById('sim-toggle-btn');
+  if (simMode) {
+    btn.textContent = 'Switch to Live API';
+    btn.className = 'px-4 py-2 bg-sage-600 hover:bg-sage-500 text-white rounded-lg text-sm font-medium transition';
+  } else {
+    btn.textContent = 'Switch to Simulation';
+    btn.className = 'px-4 py-2 bg-parch-200 hover:bg-parch-300 text-bark-700 rounded-lg text-sm font-medium transition';
+  }
+}
+
+// ── Global status badge ─────────────────────────────────────────────
+async function updateSimBadge() {
+  const data = await api('/api/health');
+  if (!data || data.error) return;
+  state.simulationMode = data.simulation_mode;
+
+  const badge = document.getElementById('sim-badge');
+  const dot = badge.querySelector('span:first-child');
+  const label = badge.querySelector('span:last-child');
+  const footer = document.getElementById('footer-mode');
+
+  if (data.simulation_mode) {
+    badge.className = 'hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono bg-parch-200/50 text-parch-600';
+    dot.className = 'w-2 h-2 rounded-full bg-parch-500 pulse-dot';
+    label.textContent = 'SIM MODE';
+    footer.textContent = 'Simulation Mode Active';
+  } else {
+    badge.className = 'hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono bg-sage-200/50 text-sage-600';
+    dot.className = 'w-2 h-2 rounded-full bg-sage-500 pulse-dot';
+    label.textContent = 'LIVE API';
+    footer.textContent = 'Live API · Key: ' + (data.api_key_set ? 'Set' : 'Missing');
+  }
+}
+
+// ── Initialize ──────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  updateSimBadge();
+  loadHomePage();
+});
+</script>
+</body>
+</html>

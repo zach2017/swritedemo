@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  # ── Main Application (API + Frontend) ────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: socialwork-platform
+    ports:
+      - "5000:5000"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-sonnet-4-20250514}
+      - SIMULATION_MODE=${SIMULATION_MODE:-true}
+      - PORT=5000
+    volumes:
+      - uploads_data:/app/uploads
+      - ./data:/app/data
+      - ./frontend:/app/frontend
+      - ./backend:/app/backend
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  uploads_data:
+    driver: local
